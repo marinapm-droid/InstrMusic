@@ -52,7 +52,8 @@
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                app:boxStrokeColor="#fff" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -94,6 +95,7 @@
             app:backgroundTint="@null" />
 
         <Button
+            android:id="@+id/goToSignUp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
