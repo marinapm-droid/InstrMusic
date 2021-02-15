@@ -1,9 +1,11 @@
 package com.example.instrmusic3;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -46,6 +48,9 @@ public class SignUp extends AppCompatActivity {
                 DatabaseReference mDatabase;
                 mDatabase = FirebaseDatabase.getInstance().getReference("users");
                 mDatabase.child(email).setValue(helperClass);
+                Toast.makeText(SignUp.this, "Sign up succeeded", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(SignUp.this, Login.class);
+                startActivity(intent);
 
             }
         });

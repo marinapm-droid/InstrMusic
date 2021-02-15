@@ -27,10 +27,6 @@ public class Login extends AppCompatActivity {
 
         regBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
-                DatabaseReference mDatabase;
-                mDatabase = FirebaseDatabase.getInstance().getReference();
-                mDatabase.child("message").setValue("Hello, World!");
-                Toast.makeText(Login.this, "Data Inserted", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Login.this, SignUp.class);
                 startActivity(intent);
             }
