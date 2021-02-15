@@ -47,7 +47,7 @@ public class SignUp extends AppCompatActivity {
 
                 DatabaseReference mDatabase;
                 mDatabase = FirebaseDatabase.getInstance().getReference("users");
-                mDatabase.child(email).setValue(helperClass);
+                mDatabase.child(nome).setValue(helperClass);
                 Toast.makeText(SignUp.this, "Sign up succeeded", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(SignUp.this, Login.class);
                 startActivity(intent);
