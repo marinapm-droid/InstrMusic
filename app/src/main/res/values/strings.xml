@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">InstrMusic 3</string>
     <string name="welcome_back">Sign in to continue</string>
-    <string name="email">Email</string>
     <string name="nome">Username</string>
     <string name="conf_pass">Confirm Password</string>
     <string name="password">Password</string>
     <string name="forget_password">Forget Password?</string>
+    <string name="email">Email</string>
 </resources>
