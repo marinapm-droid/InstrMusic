@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_horizontal"
-        android:text="@string/welcome_back"
+        android:text="Sign up to continue"
         android:textAlignment="center"
         android:textColor="#917294"
         android:textSize="30sp"
@@ -79,12 +79,13 @@
             android:layout_height="wrap_content"
             android:hint="@string/password"
             android:textSize="500sp"
-            app:boxStrokeColor="#fff">
+            app:boxStrokeColor="#fff"
+            app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:boxStrokeColor="#fff" />
+                android:inputType="textPassword"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -94,6 +95,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/conf_pass"
+            android:textSize="500sp"
             app:boxStrokeColor="#fff"
             app:passwordToggleEnabled="true">
 

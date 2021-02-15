@@ -7,21 +7,35 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class Login extends AppCompatActivity {
+
+    Button regBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); // fullscreen
         setContentView(R.layout.activity_login);
-        Button button = (Button) findViewById(R.id.goToSignUp);
-        button.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                Intent intent = new Intent(v.getContext(), SignUp.class);
-                v.getContext().startActivity(intent);
+        regBtn = findViewById(R.id.goToSignUp);
+
+
+
+        regBtn.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                DatabaseReference mDatabase;
+                mDatabase = FirebaseDatabase.getInstance().getReference();
+                mDatabase.child("message").setValue("Hello, World!");
+                Toast.makeText(Login.this, "Data Inserted", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(Login.this, SignUp.class);
+                startActivity(intent);
             }
         });
+
     }
 
 

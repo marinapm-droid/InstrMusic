@@ -2,6 +2,7 @@ package com.example.instrmusic3;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,27 +18,22 @@ public class SignUp extends AppCompatActivity {
     TextInputLayout regName, regEmail, regPassword, regConfPassword;
     Button regBtn;
 
-    FirebaseDatabase rootNode;
-    DatabaseReference reference;
-
-
     @Override
-    protected void onCreate (Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         regName = findViewById(R.id.reg_nome);
-        regEmail = findViewById(R.id.reg_nome);
+        regEmail = findViewById(R.id.reg_email);
         regPassword = findViewById(R.id.reg_password);
         regConfPassword = findViewById(R.id.reg_conf_pass);
         regBtn = findViewById(R.id.signUp);
 
-
         regBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-                    public void onClick(View view) {
-                rootNode = FirebaseDatabase.getInstance();
-                reference = rootNode.getReference("users");
+            public void onClick(View view) {
+
 
                 //Get all the values
                 String nome = regName.getEditText().getText().toString();
@@ -47,7 +43,9 @@ public class SignUp extends AppCompatActivity {
 
                 UserHelperClass helperClass = new UserHelperClass(nome, email, password, confPassword);
 
-                reference.setValue(helperClass);
+                DatabaseReference mDatabase;
+                mDatabase = FirebaseDatabase.getInstance().getReference("users");
+                mDatabase.child(email).setValue(helperClass);
 
             }
         });
