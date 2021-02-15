@@ -56,10 +56,10 @@ public class Login extends AppCompatActivity {
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         if (dataSnapshot.exists()) {
 
-                            String passFromDB = dataSnapshot.child(userID).child("nome").getValue(String.class);
+                            String passFromDB = dataSnapshot.child(userID).child("password").getValue(String.class);
 
                             if (passFromDB.equals(passID)) {
-                                String usernameFromDB = dataSnapshot.child(passID).child("password").getValue(String.class);
+                                String usernameFromDB = dataSnapshot.child(userID).child("password").getValue(String.class);
                                 Intent intent = new Intent(getApplicationContext(), HomePage.class);
                                 intent.putExtra("nome", usernameFromDB);
                                 intent.putExtra("password", passFromDB);
