@@ -59,8 +59,7 @@ public class Login extends AppCompatActivity {
                             String passFromDB = dataSnapshot.child(userID).child("nome").getValue(String.class);
 
                             if (passFromDB.equals(passID)) {
-
-                                String usernameFromDB = dataSnapshot.child(passID).child("nome").getValue(String.class);
+                                String usernameFromDB = dataSnapshot.child(passID).child("password").getValue(String.class);
                                 Intent intent = new Intent(getApplicationContext(), HomePage.class);
                                 intent.putExtra("nome", usernameFromDB);
                                 intent.putExtra("password", passFromDB);
