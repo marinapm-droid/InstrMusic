@@ -6,4 +6,36 @@
     <string name="password">Password</string>
     <string name="forget_password">Forget Password?</string>
     <string name="email">Email</string>
+    <string name="sensor_inclination">Inclination</string>
+    <string name="sensor_accelerometer">Accelerometer</string>
+    <string name="sensor_magnetic_field">Magnetic Field</string>
+    <string name="sensor_orientation">Orientation</string>
+    <string name="sensor_gyroscope">Gyroscope</string>
+    <string name="sensor_light">Light</string>
+    <string name="sensor_pressure">Pressure</string>
+    <string name="sensor_temperature">Temperature</string>
+    <string name="sensor_proximity">Proximity</string>
+    <string name="sensor_gravity">Gravity</string>
+    <string name="sensor_linear_acceleration">Linear Acceleration</string>
+    <string name="sensor_rotation_vector">Rotation Vector</string>
+    <string name="sensor_relative_humidity">Relative Humidity</string>
+    <string name="sensor_ambient_temperature">Ambient Temperature</string>
+    <string name="sensor_magnetic_field_uncalibrated">Magnetic Field (uncalibrated)</string>
+    <string name="sensor_game_rotation_vector">Game Rotation Vector (uncalibrated)</string>
+    <string name="sensor_gyroscope_uncalibrated">Gyroscope (uncalibrated)</string>
+    <string name="sensor_significant_motion">Significant Motion</string>
+    <string name="sensor_step_counter">Step Counter</string>
+    <string name="sensor_step_detector">Step Detector</string>
+    <string name="sensor_geomagnetic_rotation_vector">Geomagnetic Rotation Vector</string>
+    <string name="sensor_heartrate">Heartrate</string>
+    <string name="sensor_tilt_detector">Tilt Detector</string>
+    <string name="sensor_wake_gesture">Wake Gesture</string>
+    <string name="sensor_glance_gesture">Glance Gesture</string>
+    <string name="sensor_pick_up_gesture">Pick Up Gesture</string>
+    <string name="guide_max_range">Max range</string>
+    <string name="guide_resolution">Resolution</string>
+    <string name="guide_osc_address">OSC address</string>
+    <string name="sensor_wrist_tilt_gesture">Wrist Tilt Gesture</string>
+    <string name="sensor_nfc">Near Field Communication</string>
+
 </resources>

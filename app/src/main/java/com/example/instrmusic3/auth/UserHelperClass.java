@@ -1,4 +1,4 @@
-package com.example.instrmusic3;
+package com.example.instrmusic3.auth;
 
 public class UserHelperClass {
 

@@ -11,8 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InstrMusic3">
         <activity android:name=".HomePage"></activity>
-        <activity android:name=".Login"></activity>
-        <activity android:name=".SignUp"></activity>
+        <activity android:name=".auth.Login"></activity>
+        <activity android:name=".auth.SignUp"></activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
