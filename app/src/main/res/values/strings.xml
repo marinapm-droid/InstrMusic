@@ -37,5 +37,7 @@
     <string name="guide_osc_address">OSC address</string>
     <string name="sensor_wrist_tilt_gesture">Wrist Tilt Gesture</string>
     <string name="sensor_nfc">Near Field Communication</string>
+    <string name="about_license_javaosc">&lt;a href=&quot;http://www.illposed.com/software/javaosc.html&quot;>JavaOSC&lt;/a>, license can be found at &lt;a href=&quot;https://github.com/hoijui/JavaOSC/blob/master/LICENSE.md&quot;>https://github.com/hoijui/JavaOSC/blob/master/LICENSE.md&lt;/a>.</string>
+    <string name="about_license_sensor2osc">Sensors2OSC&lt;/a>, license can be found at &lt;a href=&quot;https://github.com/SensorApps/Sensors2OSC/blob/master/LICENSE&quot;>https://github.com/SensorApps/Sensors2OSC/blob/master/LICENSE&lt;/a>.</string>
 
 </resources>
