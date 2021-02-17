@@ -2,23 +2,24 @@ package com.example.instrmusic3.activities;
 
 import android.hardware.SensorManager;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.NavUtils;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
+import androidx.core.app.NavUtils;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-import org.sensors2.osc.R;
-import org.sensors2.osc.dispatch.Bundling;
-import org.sensors2.osc.fragments.HelpSensorFragment;
-import org.sensors2.osc.sensors.Parameters;
+import com.example.instrmusic3.R;
+import com.example.instrmusic3.dispatch.Bundling;
+import com.example.instrmusic3.fragment.HelpSensorFragment;
+import com.example.instrmusic3.sensors.Parameters;
 
 import java.util.List;
 
-/**
- * Created by thomas on 12.02.15.
- */
+import static android.content.Context.SENSOR_SERVICE;
+
+
 public class GuideActivity extends FragmentActivity {
 	private SensorManager sensorManager;
 

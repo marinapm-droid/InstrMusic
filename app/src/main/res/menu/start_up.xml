@@ -1,39 +1,20 @@
-<?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".activities.StartUpActivity"
-    >
+    tools:context=".activities.StartUpActivity">
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"
-        android:title="Settings"
+        android:title="A"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_guide"
+        android:orderInCategory="150"
+        android:title="B"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_about"
-        android:orderInCategory="150"
-        android:title="About"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_sensors"
         android:orderInCategory="200"
-        android:title="Sensors"
-        app:showAsAction="never" />
-    <item
-        android:id="@+id/action_sounds"
-        android:orderInCategory="200"
-        android:title="Sounds"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_effects"
-        android:orderInCategory="200"
-        android:title="Effects"
-        app:showAsAction="never" />
-
-    <item
-        android:id="@+id/action_logout"
-        android:orderInCategory="200"
-        android:title="Log Out"
+        android:title="C"
         app:showAsAction="never" />
 </menu>

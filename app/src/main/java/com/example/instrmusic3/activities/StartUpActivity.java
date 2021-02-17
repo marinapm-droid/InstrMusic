@@ -21,9 +21,7 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,13 +37,17 @@ import org.sensors2.common.nfc.NfcActivity;
 import org.sensors2.common.sensors.Parameters;
 import org.sensors2.common.sensors.SensorActivity;
 import org.sensors2.common.sensors.SensorCommunication;
-import org.sensors2.osc.R;
-import org.sensors2.osc.dispatch.OscConfiguration;
-import org.sensors2.osc.dispatch.OscDispatcher;
-import org.sensors2.osc.fragments.MultiTouchFragment;
-import org.sensors2.osc.fragments.SensorFragment;
-import org.sensors2.osc.fragments.StartupFragment;
-import org.sensors2.osc.sensors.Settings;
+import com.example.instrmusic3.R;
+import com.example.instrmusic3.dispatch.OscConfiguration;
+import com.example.instrmusic3.dispatch.OscDispatcher;
+import com.example.instrmusic3.fragment.MultiTouchFragment;
+import com.example.instrmusic3.fragment.SensorFragment;
+import com.example.instrmusic3.fragment.StartupFragment;
+import com.example.instrmusic3.sensors.Settings;
+
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import java.nio.charset.Charset;
 import java.util.ArrayList;
@@ -60,7 +62,6 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
     private SensorManager sensorManager;
     private PowerManager.WakeLock wakeLock;
     private boolean active;
-    private StartupFragment startupFragment;
 
     private NfcAdapter nfcAdapter;
     private PendingIntent mPendingIntent;
@@ -74,7 +75,7 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
     @SuppressLint("NewApi")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.main);
 
         this.settings = this.loadSettings();
         this.dispatcher = new OscDispatcher();
@@ -88,12 +89,12 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
             mPendingIntent = PendingIntent.getActivity(this, 0,
                     new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
             mNdefPushMessage = new NdefMessage(new NdefRecord[]{newTextRecord(
-                    "Message from NFC Reader :-)", Locale.ENGLISH, true)});
+                    "Message from NFC Reader :-)", true)});
         }
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        startupFragment = (StartupFragment) fm.findFragmentByTag("sensorlist");
+        StartupFragment startupFragment = (StartupFragment) fm.findFragmentByTag("sensorlist");
         if (startupFragment == null) {
             startupFragment = new StartupFragment();
             transaction.add(R.id.container, startupFragment, "sensorlist");
@@ -105,14 +106,12 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
         List<Parameters> parameters = new ArrayList<>();
 
         // add Nfc sensor
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD_MR1) {
-            nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-            if (nfcAdapter != null && nfcAdapter.isEnabled()) {
-                parameters.add(new org.sensors2.osc.sensors.Parameters(nfcAdapter, this.getApplicationContext()));
-            }
+        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        if (nfcAdapter != null && nfcAdapter.isEnabled()) {
+            parameters.add(new com.example.instrmusic3.sensors.Parameters(nfcAdapter, this.getApplicationContext()));
         }
         // add device sensors
-        parameters.addAll(org.sensors2.osc.sensors.Parameters.GetSensors(sensorManager, this.getApplicationContext()));
+        parameters.addAll(com.example.instrmusic3.sensors.Parameters.GetSensors(sensorManager, this.getApplicationContext()));
         return parameters;
     }
 
@@ -121,8 +120,8 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
     }
 
     @TargetApi(10)
-    private NdefRecord newTextRecord(String text, Locale locale, boolean encodeInUtf8) {
-        byte[] langBytes = locale.getLanguage().getBytes(Charset.forName("US-ASCII"));
+    private NdefRecord newTextRecord(String text, boolean encodeInUtf8) {
+        byte[] langBytes = Locale.ENGLISH.getLanguage().getBytes(Charset.forName("US-ASCII"));
 
         Charset utfEncoding = encodeInUtf8 ? Charset.forName("UTF-8") : Charset.forName("UTF-16");
         byte[] textBytes = text.getBytes(utfEncoding);
@@ -283,6 +282,7 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
 
     @Override
     public void onNewIntent(Intent intent) {
+        super.onNewIntent(intent);
         setIntent(intent);
         resolveIntent(intent);
     }
@@ -318,12 +318,12 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
         int id = item.getItemId();
         switch (id) {
             case R.id.action_settings: {
-                Intent intent = new Intent(this, org.sensors2.osc.activities.SettingsActivity.class);
+                Intent intent = new Intent(this, com.example.instrmusic3.activities.SettingsActivity.class);
                 startActivity(intent);
                 return true;
             }
             case R.id.action_guide: {
-                Intent intent = new Intent(this, org.sensors2.osc.activities.GuideActivity.class);
+                Intent intent = new Intent(this, com.example.instrmusic3.activities.GuideActivity.class);
                 startActivity(intent);
                 return true;
             }

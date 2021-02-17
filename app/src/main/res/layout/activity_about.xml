@@ -46,29 +46,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="16dp"
-            android:text="@string/about_license"
+            android:text="License"
             android:textAppearance="?android:attr/textAppearanceLarge"/>
 
-        <TextView
-            android:textColor="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:text="@string/about_mit_license_1"/>
-
-        <TextView
-            android:textColor="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:text="@string/about_mit_license_2"/>
-
-        <TextView
-            android:textColor="@color/white"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingTop="16dp"
-            android:text="@string/about_mit_license_3"/>
 
         <TextView
             android:textColor="@color/white"
@@ -86,5 +66,14 @@
             android:linksClickable="true"
             android:paddingTop="16dp"
             android:text="@string/about_license_javaosc"/>
+
+        <TextView
+            android:textColor="@color/white"
+            android:id="@+id/sensors2osc_links"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:linksClickable="true"
+            android:paddingTop="16dp"
+            android:text="@string/about_license_sensor2osc"/>
     </LinearLayout>
 </ScrollView>

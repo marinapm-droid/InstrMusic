@@ -1,4 +1,6 @@
 <resources>
+    <string name="about_buglinks">Please report bugs on too &lt;a href=&quot;mailto:marinamartins548@gmail.com">marinamartins548@gmail.com&lt;/a>. We will take a look at it.</string>
+    <string name="about_copyright" translatable="false">© Guilherme Franco &amp; Marina Martins</string>
     <string name="app_name">InstrMusic 3</string>
     <string name="welcome_back">Sign in to continue</string>
     <string name="nome">Username</string>
@@ -36,8 +38,18 @@
     <string name="guide_resolution">Resolution</string>
     <string name="guide_osc_address">OSC address</string>
     <string name="sensor_wrist_tilt_gesture">Wrist Tilt Gesture</string>
-    <string name="sensor_nfc">Near Field Communication</string>
     <string name="about_license_javaosc">&lt;a href=&quot;http://www.illposed.com/software/javaosc.html&quot;>JavaOSC&lt;/a>, license can be found at &lt;a href=&quot;https://github.com/hoijui/JavaOSC/blob/master/LICENSE.md&quot;>https://github.com/hoijui/JavaOSC/blob/master/LICENSE.md&lt;/a>.</string>
-    <string name="about_license_sensor2osc">Sensors2OSC&lt;/a>, license can be found at &lt;a href=&quot;https://github.com/SensorApps/Sensors2OSC/blob/master/LICENSE&quot;>https://github.com/SensorApps/Sensors2OSC/blob/master/LICENSE&lt;/a>.</string>
+    <string name="about_license_sensor2osc">&lt;a href=&quot;https://sensors2.org/osc/&quot;>Sensor2OSC&lt;/a>, license can be found at &lt;a href=&quot;https://github.com/SensorApps/Sensors2OSC/blob/master/LICENSE&quot;>https://github.com/SensorApps/Sensors2OSC/blob/master/LICENSE&lt;/a>.</string>
+    <string name="guide_dimensions">Number of values</string>
+    <string name="help">Help</string>
+    <string name="text_guide_floatlist">Sensor values are sent as a list of float values. Depending on the sensor, this can range from 1 to 16 values.</string>
+    <string name="text_guide">Depending on your phone, you have several sensors and values available.</string>
+    <string name="sensor_nfc">Near Field Communication</string>
+    <string name="available_sensors">Available Sensors</string>
+    <string name="text_guide_multitouch">If you enable multitouch, each touchpoint will send its coordinates via OSC. The address is in the format /touch&lt;index&gt;, where index is a 1-based. The coordinates are sent as a list of 2 float values, X and Y and range from 0 to 1.</string>
+    <string name="text_guide_multitouch_headline">Multitouch</string>
+    <string name="text_guide_nfc">If your phone can read NFC tokens, then the value of these tokens will be sent to the OSC address /nfc.</string>
+    <string name="text_guide_nfc_headline">Near Field Communication (NFC)</string>
+
 
 </resources>
