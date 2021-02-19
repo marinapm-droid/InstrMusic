@@ -13,17 +13,17 @@ import java.util.Date;
 public class OscReceiveConfig {
     protected void Receive() {
         try {
-            OSCPortIn receiver = new OSCPortIn(5679);
-            Log.d("test","test");
+            OSCPortIn testIn = new OSCPortIn(5679);
+            Log.d("Listening", "running");
             OSCListener listener = new OSCListener() {
-                public void acceptMessage(Date time, OSCMessage message) {
-                    Log.d("Message","Message received!");
+                public void acceptMessage(java.util.Date time, OSCMessage message) {
+                    Log.d("message", "ola");
                 }
             };
-            receiver.addListener("/scd", listener);
-            receiver.startListening();
+            testIn.addListener("/scd", listener);
+            testIn.startListening();
         } catch (SocketException e) {
-            Log.d("OSCSendInitalisation", "Socket exception error!");
+            e.printStackTrace();
         }
 
 

@@ -84,12 +84,12 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
         setContentView(R.layout.main);
 
 
-        try {
-            OSCPortIn testIn = new OSCPortIn(57110);
+        /*try {
+            OSCPortIn testIn = new OSCPortIn(5679);
             Log.d("Listening", "running");
             OSCListener listener = new OSCListener() {
                 public void acceptMessage(java.util.Date time, OSCMessage message) {
-                    Log.d("msg", "running");
+                    Log.d("message", "ola");
                 }
             };
             testIn.addListener("/scd", listener);
@@ -97,22 +97,7 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
         } catch (SocketException e) {
             e.printStackTrace();
         }
-
-      /*  try {
-            OSCPortIn receiver = new OSCPortIn(7000);
-            Log.d("ola1","ola received!");
-            OSCListener listener = new OSCListener() {
-                public void acceptMessage(Date time, OSCMessage message) {
-                    Log.d("ola2","ola received!");
-                    Log.d("msg","Message received!");
-                }
-            };
-            receiver.addListener("/scd", listener);
-            receiver.startListening();
-            receiver.stopListening();
-        } catch (SocketException e) {
-            Log.d("OSCSendInitalisation", "Socket exception error!");
-        }*/
+        */
 
         this.settings = this.loadSettings();
         this.dispatcher = new OscDispatcher();
