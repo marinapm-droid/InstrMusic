@@ -16,18 +16,19 @@ import org.sensors2.common.sensors.Parameters;
 import com.example.instrmusic3.activities.StartUpActivity;
 import com.example.instrmusic3.dispatch.Bundling;
 
+import java.util.Objects;
+
 
 public class StartupFragment extends Fragment {
-
-    private CompoundButton activeButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_start_up, container, false);
 
-        activeButton = (CompoundButton) v.findViewById(R.id.active);
+        CompoundButton activeButton = v.findViewById(R.id.active);
         StartUpActivity activity = (StartUpActivity) getActivity();
         activeButton.setOnCheckedChangeListener(activity);
+        assert activity != null;
         for (Parameters parameters : activity.getSensors()) {
             createSensorFragments((com.example.instrmusic3.sensors.Parameters) parameters);
         }
@@ -36,7 +37,7 @@ public class StartupFragment extends Fragment {
     }
 
     public void createSensorFragments(com.example.instrmusic3.sensors.Parameters parameters) {
-        FragmentManager manager = getActivity().getSupportFragmentManager();
+        FragmentManager manager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
         SensorFragment groupFragment = (SensorFragment) manager.findFragmentByTag(parameters.getName());
 
         if (groupFragment == null) {

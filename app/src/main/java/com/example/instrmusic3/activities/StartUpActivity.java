@@ -105,14 +105,12 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
         this.dispatcher.setSensorManager();
         this.sensorCommunication = new SensorCommunication(this);
         this.wakeLock = ((PowerManager) getSystemService(POWER_SERVICE)).newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, this.getLocalClassName());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD_MR1) {
-            resolveIntent(getIntent());
-            nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-            mPendingIntent = PendingIntent.getActivity(this, 0,
-                    new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-            mNdefPushMessage = new NdefMessage(new NdefRecord[]{newTextRecord(
-                    true)});
-        }
+        resolveIntent(getIntent());
+        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        mPendingIntent = PendingIntent.getActivity(this, 0,
+                new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
+        mNdefPushMessage = new NdefMessage(new NdefRecord[]{newTextRecord(
+                true)});
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
@@ -337,17 +335,27 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
         int id = item.getItemId();
         switch (id) {
             case R.id.action_settings: {
-                Intent intent = new Intent(this, com.example.instrmusic3.activities.SettingsActivity.class);
+                Intent intent = new Intent(this, SettingsActivity.class);
                 startActivity(intent);
                 return true;
             }
             case R.id.action_guide: {
-                Intent intent = new Intent(this, com.example.instrmusic3.activities.GuideActivity.class);
+                Intent intent = new Intent(this, GuideActivity.class);
                 startActivity(intent);
                 return true;
             }
             case R.id.action_about: {
                 Intent intent = new Intent(this, AboutActivity.class);
+                startActivity(intent);
+                return true;
+            }
+            case R.id.action_sound: {
+                Intent intent = new Intent(this, SoundActivity.class);
+                startActivity(intent);
+                return true;
+            }
+            case R.id.action_effect: {
+                Intent intent = new Intent(this, EffectActivity.class);
                 startActivity(intent);
                 return true;
             }

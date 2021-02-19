@@ -13,4 +13,7 @@ public final class Bundling {
     public static final String VALUES = "values";
     public static final String STRING_VALUE = "string_value";
     public static final String OSC_PARAMETER = "oscParameter";
+    public static final String SOUND_NAME= "soundName";
+    public static final String EFFECT_NAME= "effectName";
+
 }

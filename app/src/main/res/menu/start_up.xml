@@ -17,4 +17,16 @@
         android:orderInCategory="200"
         android:title="C"
         app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_effect"
+        android:orderInCategory="200"
+        android:title="Effects"
+        app:showAsAction="never" />
+
+    <item
+        android:id="@+id/action_sound"
+        android:orderInCategory="200"
+        android:title="Sounds"
+        app:showAsAction="never" />
 </menu>

@@ -17,8 +17,6 @@ import com.example.instrmusic3.sensors.Parameters;
 
 import java.util.List;
 
-import static android.content.Context.SENSOR_SERVICE;
-
 
 public class GuideActivity extends FragmentActivity {
 	private SensorManager sensorManager;
@@ -28,7 +26,7 @@ public class GuideActivity extends FragmentActivity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_guide);
 
-		TextView availableSensorsHeadline = (TextView) findViewById(R.id.availSensorsHeadline);
+		TextView availableSensorsHeadline = findViewById(R.id.availSensorsHeadline);
 		this.sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 		List<Parameters> sensors = Parameters.GetSensors(sensorManager, this.getApplicationContext());
 		availableSensorsHeadline.setText(sensors.size() + " " + availableSensorsHeadline.getText());
