@@ -22,6 +22,7 @@ import android.os.Parcelable;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
 
+import android.util.Log;
 import android.view.Display;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -44,13 +45,18 @@ import com.example.instrmusic3.fragment.MultiTouchFragment;
 import com.example.instrmusic3.fragment.SensorFragment;
 import com.example.instrmusic3.fragment.StartupFragment;
 import com.example.instrmusic3.sensors.Settings;
+import com.illposed.osc.OSCListener;
+import com.illposed.osc.OSCMessage;
+import com.illposed.osc.OSCPortIn;
 
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import java.net.SocketException;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -77,10 +83,41 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+
+        try {
+            OSCPortIn testIn = new OSCPortIn(57110);
+            Log.d("Listening", "running");
+            OSCListener listener = new OSCListener() {
+                public void acceptMessage(java.util.Date time, OSCMessage message) {
+                    Log.d("msg", "running");
+                }
+            };
+            testIn.addListener("/scd", listener);
+            testIn.startListening();
+        } catch (SocketException e) {
+            e.printStackTrace();
+        }
+
+      /*  try {
+            OSCPortIn receiver = new OSCPortIn(7000);
+            Log.d("ola1","ola received!");
+            OSCListener listener = new OSCListener() {
+                public void acceptMessage(Date time, OSCMessage message) {
+                    Log.d("ola2","ola received!");
+                    Log.d("msg","Message received!");
+                }
+            };
+            receiver.addListener("/scd", listener);
+            receiver.startListening();
+            receiver.stopListening();
+        } catch (SocketException e) {
+            Log.d("OSCSendInitalisation", "Socket exception error!");
+        }*/
+
         this.settings = this.loadSettings();
         this.dispatcher = new OscDispatcher();
         this.sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        this.dispatcher.setSensorManager(this.sensorManager);
+        this.dispatcher.setSensorManager();
         this.sensorCommunication = new SensorCommunication(this);
         this.wakeLock = ((PowerManager) getSystemService(POWER_SERVICE)).newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, this.getLocalClassName());
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.GINGERBREAD_MR1) {
@@ -89,7 +126,7 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
             mPendingIntent = PendingIntent.getActivity(this, 0,
                     new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
             mNdefPushMessage = new NdefMessage(new NdefRecord[]{newTextRecord(
-                    "Message from NFC Reader :-)", true)});
+                    true)});
         }
 
         FragmentManager fm = getSupportFragmentManager();
@@ -120,11 +157,11 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
     }
 
     @TargetApi(10)
-    private NdefRecord newTextRecord(String text, boolean encodeInUtf8) {
+    private NdefRecord newTextRecord(boolean encodeInUtf8) {
         byte[] langBytes = Locale.ENGLISH.getLanguage().getBytes(Charset.forName("US-ASCII"));
 
         Charset utfEncoding = encodeInUtf8 ? Charset.forName("UTF-8") : Charset.forName("UTF-16");
-        byte[] textBytes = text.getBytes(utfEncoding);
+        byte[] textBytes = "Message from NFC Reader :-)".getBytes(utfEncoding);
 
         int utfBit = encodeInUtf8 ? 0 : (1 << 7);
         char status = (char) (utfBit + langBytes.length);
@@ -152,10 +189,6 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
                 NdefRecord record = new NdefRecord(NdefRecord.TNF_UNKNOWN, empty, id, payload);
                 NdefMessage msg = new NdefMessage(new NdefRecord[]{record});
                 msgs = new NdefMessage[]{msg};
-//                msgs = new NdefMessage[rawMsgs.length];
-//                for (int i = 1; i <= rawMsgs.length; i++) {
-//                    msgs[i] = (NdefMessage) rawMsgs[i-1];
-//                }
             } else {
                 // Unknown tag type
                 byte[] empty = new byte[0];
@@ -309,6 +342,7 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
+
         getMenuInflater().inflate(R.menu.start_up, menu);
         return true;
     }

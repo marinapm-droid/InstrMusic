@@ -7,7 +7,7 @@ public class SensorConfiguration {
     private boolean send;
     private int sensorType;
     private String oscParam;
-    private float[] currentValues = new float[Parameters.MAX_DIMENSIONS];
+    private final float[] currentValues = new float[Parameters.MAX_DIMENSIONS];
     private boolean sendDuplicates;
 
     public SensorConfiguration() {

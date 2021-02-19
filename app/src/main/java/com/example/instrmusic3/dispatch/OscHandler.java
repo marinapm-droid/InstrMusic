@@ -29,7 +29,7 @@ public class OscHandler extends Handler {
         if (configuration == null || configuration.getOscPort() == null) {
             return;
         }
-        List<Object> changes = new ArrayList<Object>();
+        List<Object> changes = new ArrayList<>();
         if (values != null) {
             for (float value : values) {
                 changes.add(value);

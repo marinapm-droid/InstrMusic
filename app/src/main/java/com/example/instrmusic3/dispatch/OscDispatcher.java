@@ -14,11 +14,10 @@ import java.util.List;
 
 
 public class OscDispatcher implements DataDispatcher {
-    private List<SensorConfiguration> sensorConfigurations = new ArrayList<SensorConfiguration>();
-    private OscCommunication communication;
+    private final List<SensorConfiguration> sensorConfigurations = new ArrayList<>();
+    private final OscCommunication communication;
     private float[] gravity;
     private float[] geomagnetic;
-    private SensorManager sensorManager;
 
     public OscDispatcher() {
         communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
@@ -52,19 +51,19 @@ public class OscDispatcher implements DataDispatcher {
                     this.geomagnetic = sensorData.getValues();
                 }
                 if (this.gravity != null && this.geomagnetic != null) {
-                    float rotationMatrix[] = new float[9];
-                    float inclinationMatrix[] = new float[9];
+                    float[] rotationMatrix = new float[9];
+                    float[] inclinationMatrix = new float[9];
 
-                    boolean success = this.sensorManager.getRotationMatrix(rotationMatrix, inclinationMatrix, this.gravity, this.geomagnetic);
+                    boolean success = SensorManager.getRotationMatrix(rotationMatrix, inclinationMatrix, this.gravity, this.geomagnetic);
                     if (success) {
                         if (sensorConfiguration.getSensorType() == Parameters.FAKE_ORIENTATION) {
-                            float orientation[] = new float[3];
-                            this.sensorManager.getOrientation(rotationMatrix, orientation);
+                            float[] orientation = new float[3];
+                            SensorManager.getOrientation(rotationMatrix, orientation);
                             this.trySend(sensorConfiguration, orientation);
                         }
                         if (sensorConfiguration.getSensorType() == Parameters.INCLINATION) {
-                            float inclination[] = new float[1];
-                            inclination[0] = this.sensorManager.getInclination(inclinationMatrix);
+                            float[] inclination = new float[1];
+                            inclination[0] = SensorManager.getInclination(inclinationMatrix);
                             this.trySend(sensorConfiguration, inclination);
                         }
                     }
@@ -99,7 +98,6 @@ public class OscDispatcher implements DataDispatcher {
         handler.sendMessage(message);
     }
 
-    public void setSensorManager(SensorManager sensorManager) {
-        this.sensorManager = sensorManager;
+    public void setSensorManager() {
     }
 }

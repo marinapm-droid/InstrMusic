@@ -6,10 +6,6 @@ import android.os.HandlerThread;
 public class OscCommunication extends HandlerThread {
     private OscHandler handler;
 
-    public OscCommunication(String name) {
-        super(name);
-    }
-
     public OscCommunication(String name, int priority) {
         super(name, priority);
     }
