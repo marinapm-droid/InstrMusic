@@ -19,9 +19,11 @@ public class EffectsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Bundle args = this.getArguments();
         assert args != null;
-
+        String name = args.getString(Bundling.SOUND_NAME);
         View v = inflater.inflate(R.layout.effects, null);
         TextView groupName = v.findViewById(R.id.group_name);
+
+        groupName.setText(name);
 
         CompoundButton activeButton = v.findViewById(R.id.active);
         return v;
