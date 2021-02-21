@@ -12,6 +12,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.instrmusic3.R;
+import com.example.instrmusic3.activities.EffectActivity;
+import com.example.instrmusic3.activities.StartUpActivity;
 import com.example.instrmusic3.dispatch.Bundling;
 import com.example.instrmusic3.sensors.Parameters;
 
@@ -26,6 +28,9 @@ public class EffectsFragment extends Fragment {
         groupName.setText(name);
 
         CompoundButton activeButton = v.findViewById(R.id.active);
+        EffectActivity activity = (EffectActivity) getActivity();
+        activeButton.setOnCheckedChangeListener((CompoundButton.OnCheckedChangeListener) activity);
+
         return v;
     }
 

@@ -13,49 +13,46 @@ import com.example.instrmusic3.R;
 import com.example.instrmusic3.dispatch.Bundling;
 import com.example.instrmusic3.dispatch.OscReceiveConfig;
 import com.example.instrmusic3.fragment.EffectsFragment;
-import com.example.instrmusic3.fragment.HelpSensorFragment;
+import com.example.instrmusic3.Effects.ParametersEffects;
+import com.example.instrmusic3.fragment.StartupFragment;
 import com.example.instrmusic3.sensors.Parameters;
-import com.example.instrmusic3.dispatch.OscReceiveConfig;
 
+import java.util.List;
 
 
 public class EffectActivity extends FragmentActivity {
-    OscReceiveConfig oscReceiveConfig;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_effects);
+        TextView availableSensorsHeadline = findViewById(R.id.effectsHeadline);
+        List<String> effectList = ParametersEffects.getEffectList();
+        for (String effect : effectList) {
+            this.CreateFragment(effect);
+        }
+        if (android.os.Build.VERSION.SDK_INT >= 11) {
+            getActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
-        TextView availableEffectsHeadline = findViewById(R.id.effectsHeadline);
     }
 
-    public void CreateFragment (OscReceiveConfig receive) {
+    public void CreateFragment (String effect) {
         FragmentManager manager = getSupportFragmentManager();
-        HelpSensorFragment groupFragment = (HelpSensorFragment) manager.findFragmentByTag(receive.getMessage());
+        FragmentTransaction transaction = manager.beginTransaction();
+        EffectsFragment groupFragment = (EffectsFragment) manager.findFragmentByTag(effect);
         if (groupFragment == null) {
-            this.CreateFragment(receive, manager);
+            groupFragment = new EffectsFragment();
+            transaction.add(R.id.container, groupFragment, effect);
+            transaction.commit();
         }
     }
 
-    public void CreateFragment(OscReceiveConfig receive, FragmentManager manager) {
-        FragmentTransaction transaction = manager.beginTransaction();
-        EffectsFragment groupFragment = new EffectsFragment();
-        Bundle args = new Bundle();
-        receive.receive();
-        args.putString(Bundling.EFFECT_NAME, receive.getMessage());
-
-        groupFragment.setArguments(args);
-        transaction.add(R.id.sensor_group, groupFragment, receive.getMessage());
-        transaction.commit();
-    }
-
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            // Respond to the action bar's Up/Home button
-            case android.R.id.home:
-                NavUtils.navigateUpFromSameTask(this);
-                return true;
+        // Respond to the action bar's Up/Home button
+        if (item.getItemId() == android.R.id.home) {
+            NavUtils.navigateUpFromSameTask(this);
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }
