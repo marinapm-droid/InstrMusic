@@ -20,8 +20,7 @@ import com.example.instrmusic3.sensors.Parameters;
 public class EffectsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Bundle args = this.getArguments();
-        assert args != null;
-        String name = args.getString(Bundling.SOUND_NAME);
+        String name = args.getString(Bundling.EFFECT_NAME);
         View v = inflater.inflate(R.layout.effects, null);
         TextView groupName = v.findViewById(R.id.group_name);
 
@@ -29,9 +28,9 @@ public class EffectsFragment extends Fragment {
 
         CompoundButton activeButton = v.findViewById(R.id.active);
         EffectActivity activity = (EffectActivity) getActivity();
-        activeButton.setOnCheckedChangeListener((CompoundButton.OnCheckedChangeListener) activity);
+        activeButton.setOnCheckedChangeListener(activity);
+        assert activity != null;
 
         return v;
     }
-
 }

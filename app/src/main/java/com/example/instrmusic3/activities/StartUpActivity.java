@@ -41,6 +41,7 @@ import org.sensors2.common.sensors.SensorCommunication;
 import com.example.instrmusic3.R;
 import com.example.instrmusic3.dispatch.OscConfiguration;
 import com.example.instrmusic3.dispatch.OscDispatcher;
+import com.example.instrmusic3.dispatch.OscReceiveConfig;
 import com.example.instrmusic3.fragment.MultiTouchFragment;
 import com.example.instrmusic3.fragment.SensorFragment;
 import com.example.instrmusic3.fragment.StartupFragment;
@@ -82,6 +83,8 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
+        OscReceiveConfig oscReceiveConfig = new OscReceiveConfig();
+        oscReceiveConfig.receive();
 
 
         /*try {

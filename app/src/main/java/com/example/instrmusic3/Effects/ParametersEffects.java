@@ -7,18 +7,16 @@ import java.util.List;
 import com.example.instrmusic3.dispatch.OscReceiveConfig;
 
 public class ParametersEffects extends OscReceiveConfig {
-    static OscReceiveConfig oscReceiveConfig;
-    static private final String effectMessage = oscReceiveConfig.getMessage();
-    String effectName;
-
-    private ParametersEffects(String effectName) {
-        this.effectName = effectName;
+    public static List<String> getEffects() {
+        OscReceiveConfig oscReceiveConfig = new OscReceiveConfig();
+        oscReceiveConfig.receive();
+        System.out.println("Parameters Effects" + OscReceiveConfig.getMessage());
+        String effectMessage = oscReceiveConfig.getMessage();
+        return new ArrayList<>(Arrays.asList(effectMessage.split(", ")));
     }
 
-    static List<String> effectsList = new ArrayList<>(Arrays.asList(effectMessage.split(", ")));
 
-    public static List<String> getEffectList() {
-        return effectsList;
+    public ParametersEffects(){
     }
 
 }

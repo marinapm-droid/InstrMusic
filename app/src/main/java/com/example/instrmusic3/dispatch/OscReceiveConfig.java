@@ -9,15 +9,15 @@ import com.illposed.osc.OSCPortIn;
 import java.net.SocketException;
 
 public class OscReceiveConfig {
-    String message;
+    private static String message;
 
     public void receive() {
         try {
             OSCPortIn testIn = new OSCPortIn(5679);
-            Log.d("Listening", "running");
+            Log.d("Listening", "A Correr");
             OSCListener listener = new OSCListener() {
                 public void acceptMessage(java.util.Date time, OSCMessage message) {
-                    Log.d("message", "ola");
+                    System.out.println("oscReceiveConfig" + message.getArguments().toString());
                     setMessage(message.getArguments().toString());
                 }
             };
@@ -28,10 +28,12 @@ public class OscReceiveConfig {
         }
     }
 
-    public void setMessage(String message) {
-         this.message=message;
+    public void setMessage(String message1) {
+         message = message1;
     }
-    public String getMessage(){
-        return this.message;
+    public static String getMessage(){
+        System.out.println("Get Message" + message);
+        message = message.replace("]", "").replace("[", "");
+        return message;
     }
 }

@@ -15,7 +15,6 @@ public class HelpSensorFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         Bundle args = this.getArguments();
-
         assert args != null;
         String name = args.getString(Bundling.NAME);
         String sensorName = args.getString(Bundling.SENSOR_NAME);
