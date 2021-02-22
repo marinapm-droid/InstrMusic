@@ -41,6 +41,7 @@ import org.sensors2.common.sensors.SensorCommunication;
 import com.example.instrmusic3.R;
 import com.example.instrmusic3.dispatch.OscConfiguration;
 import com.example.instrmusic3.dispatch.OscDispatcher;
+import com.example.instrmusic3.dispatch.OscDispatcherEffects;
 import com.example.instrmusic3.dispatch.OscReceiveConfig;
 import com.example.instrmusic3.fragment.MultiTouchFragment;
 import com.example.instrmusic3.fragment.SensorFragment;
@@ -66,6 +67,8 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
     private Settings settings;
     private SensorCommunication sensorCommunication;
     private OscDispatcher dispatcher;
+   // private OscDispatcherEffects dispatcherEffect;
+
     private SensorManager sensorManager;
     private PowerManager.WakeLock wakeLock;
     private boolean active;
@@ -101,7 +104,7 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
             e.printStackTrace();
         }
         */
-
+        //this.dispatcherEffect = new OscDispatcherEffects();
         this.settings = this.loadSettings();
         this.dispatcher = new OscDispatcher();
         this.sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -311,6 +314,7 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
         return this.dispatcher;
     }
 
+
     @Override
     public SensorManager getSensorManager() {
         return this.sensorManager;
@@ -374,7 +378,7 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
         this.loadSettings();
         this.sensorCommunication.onResume();
         if (active && !this.wakeLock.isHeld()) {
-            this.wakeLock.acquire();
+            this.wakeLock.acquire(10*60*1000L /*10 minutes*/);
         }
 
         if (nfcAdapter != null) {

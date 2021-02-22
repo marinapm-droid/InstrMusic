@@ -5,6 +5,7 @@ import android.os.HandlerThread;
 
 public class OscCommunication extends HandlerThread {
     private OscHandler handler;
+    private OscHandlerEffects handlerEffects;
 
     public OscCommunication(String name, int priority) {
         super(name, priority);
@@ -23,5 +24,9 @@ public class OscCommunication extends HandlerThread {
 
     public OscHandler getOscHandler() {
         return handler;
+    }
+
+    public OscHandlerEffects getOscHandlerEffects() {
+        return handlerEffects;
     }
 }

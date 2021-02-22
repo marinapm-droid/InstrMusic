@@ -43,7 +43,7 @@ public class SensorFragment extends Fragment {
 		groupName.setText(name);
 		((TextView) v.findViewById(R.id.osc_prefix)).setText("/" + args.getString(Bundling.OSC_PREFIX));
 
-		CompoundButton activeButton = v.findViewById(R.id.active);
+		CompoundButton activeButton = v.findViewById(R.id.active); // on and off sensor
 		activeButton.setOnCheckedChangeListener((compoundButton, checked) -> sensorConfiguration.setSend(checked));
 		return v;
 	}
