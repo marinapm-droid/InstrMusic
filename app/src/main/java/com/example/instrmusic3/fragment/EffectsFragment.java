@@ -18,10 +18,9 @@ import com.example.instrmusic3.dispatch.EffectConfiguration;
 public class EffectsFragment extends Fragment {
     EffectConfiguration effectConfiguration;
 
-    public EffectsFragment(EffectConfiguration effectConfiguration) {
-        this.effectConfiguration = effectConfiguration;
+    public EffectsFragment() {
+        this.effectConfiguration = new EffectConfiguration();
     }
-    public EffectsFragment(){};
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
