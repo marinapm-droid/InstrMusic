@@ -43,6 +43,7 @@ import com.example.instrmusic3.dispatch.OscConfiguration;
 import com.example.instrmusic3.dispatch.OscDispatcher;
 import com.example.instrmusic3.dispatch.OscDispatcherEffects;
 import com.example.instrmusic3.dispatch.OscReceiveConfig;
+import com.example.instrmusic3.fragment.EffectsFragment;
 import com.example.instrmusic3.fragment.MultiTouchFragment;
 import com.example.instrmusic3.fragment.SensorFragment;
 import com.example.instrmusic3.fragment.StartupFragment;
@@ -62,20 +63,20 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class StartUpActivity extends FragmentActivity implements SensorActivity, NfcActivity, CompoundButton.OnCheckedChangeListener, View.OnTouchListener {
+public class StartUpEffectActivity extends FragmentActivity implements CompoundButton.OnCheckedChangeListener, View.OnTouchListener {
 
     private Settings settings;
     private SensorCommunication sensorCommunication;
-    private OscDispatcher dispatcher;
-   // private OscDispatcherEffects dispatcherEffect;
+    private OscDispatcherEffects dispatcher;
+    // private OscDispatcherEffects dispatcherEffect;
 
     private SensorManager sensorManager;
     private PowerManager.WakeLock wakeLock;
     private boolean active;
 
-    private NfcAdapter nfcAdapter;
+    //private NfcAdapter nfcAdapter;
     private PendingIntent mPendingIntent;
-    private NdefMessage mNdefPushMessage;
+    //private NdefMessage mNdefPushMessage;
 
     public Settings getSettings() {
         return this.settings;
@@ -85,7 +86,7 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
     @SuppressLint("NewApi")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.activity_effects);
         OscReceiveConfig oscReceiveConfig = new OscReceiveConfig();
         oscReceiveConfig.receive();
 
@@ -105,17 +106,17 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
         }
         */
         this.settings = this.loadSettings();
-        this.dispatcher = new OscDispatcher();
+        this.dispatcher = new OscDispatcherEffects();
         this.sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        this.dispatcher.setSensorManager();
-        this.sensorCommunication = new SensorCommunication(this);
+        this.dispatcher.setEffectManager();
+        //this.sensorCommunication = new SensorCommunication(this);
         this.wakeLock = ((PowerManager) getSystemService(POWER_SERVICE)).newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, this.getLocalClassName());
         resolveIntent(getIntent());
-        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        //nfcAdapter = NfcAdapter.getDefaultAdapter(this);
         mPendingIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
-        mNdefPushMessage = new NdefMessage(new NdefRecord[]{newTextRecord(
-                true)});
+       // mNdefPushMessage = new NdefMessage(new NdefRecord[]{newTextRecord(
+             //   true)});
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
@@ -131,18 +132,19 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
         List<Parameters> parameters = new ArrayList<>();
 
         // add Nfc sensor
-        nfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        if (nfcAdapter != null && nfcAdapter.isEnabled()) {
-            parameters.add(new com.example.instrmusic3.sensors.Parameters(nfcAdapter, this.getApplicationContext()));
-        }
+       // nfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        //if (nfcAdapter != null && nfcAdapter.isEnabled()) {
+       //     parameters.add(new com.example.instrmusic3.sensors.Parameters(nfcAdapter, this.getApplicationContext()));
+      //  }
+
         // add device sensors
         parameters.addAll(com.example.instrmusic3.sensors.Parameters.GetSensors(sensorManager, this.getApplicationContext()));
         return parameters;
     }
 
-    public NfcAdapter getNfcAdapter() {
-        return this.nfcAdapter;
-    }
+    //public NfcAdapter getNfcAdapter() {
+     //   return this.nfcAdapter;
+   // }
 
     @TargetApi(10)
     private NdefRecord newTextRecord(boolean encodeInUtf8) {
@@ -308,16 +310,16 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
         resolveIntent(intent);
     }
 
-    @Override
-    public DataDispatcher getDispatcher() {
-        return this.dispatcher;
-    }
+   // @Override
+   // public DataDispatcher getDispatcher() {
+    //    return this.dispatcher;
+   // }
 
 
-    @Override
-    public SensorManager getSensorManager() {
-        return this.sensorManager;
-    }
+    //@Override
+    //public SensorManager getSensorManager() {
+      //  return this.sensorManager;
+    //}
 
     private Settings loadSettings() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
@@ -336,39 +338,6 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.action_settings: {
-                Intent intent = new Intent(this, SettingsActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            case R.id.action_guide: {
-                Intent intent = new Intent(this, GuideActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            case R.id.action_about: {
-                Intent intent = new Intent(this, AboutActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            case R.id.action_sound: {
-                Intent intent = new Intent(this, SoundActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            case R.id.action_effect: {
-                Intent intent = new Intent(this, StartUpEffectActivity.class);
-                startActivity(intent);
-                return true;
-            }
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 
     @Override
     @SuppressLint("NewApi")
@@ -380,13 +349,6 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
             this.wakeLock.acquire(10*60*1000L /*10 minutes*/);
         }
 
-        if (nfcAdapter != null) {
-            if (nfcAdapter.isEnabled()) {
-                nfcAdapter.enableForegroundDispatch(this, mPendingIntent, null, null);
-                nfcAdapter.enableForegroundNdefPush(this, mNdefPushMessage);
-            }
-
-        }
     }
 
     @Override
@@ -398,27 +360,23 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
             this.wakeLock.release();
         }
 
-        if (nfcAdapter != null) {
-            nfcAdapter.disableForegroundDispatch(this);
-            nfcAdapter.disableForegroundNdefPush(this);
-        }
     }
 
-    public void addSensorFragment(SensorFragment sensorFragment) {
-        this.dispatcher.addSensorConfiguration(sensorFragment.getSensorConfiguration());
+    public void addEfectsFragment(EffectsFragment effectsFragment) {
+        this.dispatcher.addEffectConfiguration(effectsFragment.getEffectConfiguration());
     }
 
-    @Override
-    public void onSensorChanged(SensorEvent sensorEvent) {
-        if (active) {
-            this.sensorCommunication.dispatch(sensorEvent);
-        }
-    }
+    //@Override
+    //public void onSensorChanged(SensorEvent sensorEvent) {
+      //  if (active) {
+        //    this.sensorCommunication.dispatch(sensorEvent);
+        //}
+    //}
 
-    @Override
-    public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    //@Override
+    //public void onAccuracyChanged(Sensor sensor, int accuracy) {
         // We do not care about that
-    }
+   // }
 
     @Override
     public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
@@ -451,11 +409,7 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
     @Override
     public boolean onTouch(View v, MotionEvent event) {
         if (active) {
-            int width = v.getWidth();
-            int height = v.getHeight();
-            for (Measurement measurement : Measurement.measurements(event, width, height)) {
-                dispatcher.dispatch(measurement);
-            }
+                dispatcher.dispatch();
         }
 
         return false;

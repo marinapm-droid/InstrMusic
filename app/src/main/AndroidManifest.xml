@@ -27,7 +27,7 @@
                 android:value=".activities.StartUpActivity"/>
         </activity>
 
-        <activity android:name=".activities.EffectActivity">
+        <activity android:name=".activities.StartUpEffectActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.StartUpActivity"/>

@@ -51,6 +51,7 @@
     <string name="text_guide_nfc">If your phone can read NFC tokens, then the value of these tokens will be sent to the OSC address /nfc.</string>
     <string name="text_guide_nfc_headline">Near Field Communication (NFC)</string>
     <string name="available_sounds">Available Sounds</string>
+    <string name="send_data">Send data</string>
 
 
 </resources>

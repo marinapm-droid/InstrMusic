@@ -23,7 +23,7 @@ public class OscDispatcherEffects {
         communication.start();
     }
 
-    public void addSensorConfiguration(EffectConfiguration effectConfigurations) {
+    public void addEffectConfiguration(EffectConfiguration effectConfigurations) {
         this.effectConfigurations.add(effectConfigurations);
     }
 
@@ -40,10 +40,13 @@ public class OscDispatcherEffects {
         //}
         Message message = new Message();
         Bundle data = new Bundle();
-            data.putString(Bundling.EFFECT_NAME, effectConfigurations.getEffectName());
+        data.putString(Bundling.EFFECT_NAME, effectConfigurations.getEffectName());
         message.setData(data);
         OscHandlerEffects handler = communication.getOscHandlerEffects();
         handler.sendMessage(message);
+    }
+
+    public void setEffectManager() {
     }
 
 }

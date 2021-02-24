@@ -150,9 +150,11 @@ public class EffectActivity extends FragmentActivity implements CompoundButton.O
     protected void onResume() {
         super.onResume();
         if (active && !this.wakeLock.isHeld()) {
-            this.wakeLock.acquire();
+            this.wakeLock.acquire(10*60*1000L /*10 minutes*/);
         }
     }
+
+
     protected void onPause() {
         super.onPause();
         if (this.wakeLock.isHeld()) {

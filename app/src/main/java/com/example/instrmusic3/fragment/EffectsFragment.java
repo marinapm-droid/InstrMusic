@@ -19,6 +19,7 @@ public class EffectsFragment extends Fragment {
     EffectConfiguration effectConfiguration;
 
     public EffectsFragment() {
+        super();
         this.effectConfiguration = new EffectConfiguration();
     }
 
@@ -34,11 +35,11 @@ public class EffectsFragment extends Fragment {
         groupName.setText(name);
 
         CompoundButton activeButton = v.findViewById(R.id.active);
-        EffectActivity activity = (EffectActivity) getActivity();
+       // EffectActivity activity = (EffectActivity) getActivity();
+
         activeButton.setOnCheckedChangeListener((compoundButton, checked) -> effectConfiguration.setSend(checked));
 
        // activeButton.setOnCheckedChangeListener(activity);
-        assert activity != null;
 
         return v;
     }
@@ -49,7 +50,7 @@ public class EffectsFragment extends Fragment {
 
     }
 
-    public EffectConfiguration getSensorConfiguration() {
+    public EffectConfiguration getEffectConfiguration() {
         return effectConfiguration;
     }
 }
