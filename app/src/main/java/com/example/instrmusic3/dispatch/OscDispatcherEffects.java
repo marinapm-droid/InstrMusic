@@ -14,39 +14,48 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class OscDispatcherEffects {
-    private final OscCommunication communication;
-    private final List<EffectConfiguration> effectConfigurations = new ArrayList<>();
+    private final OscCommunicationEffects communication;
+    private final List<String> effectConfigurations = new ArrayList<>();
 
 
     public OscDispatcherEffects() {
-        communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
+        communication = new OscCommunicationEffects("OSC dispatcher thread", Thread.MIN_PRIORITY);
         communication.start();
     }
 
-    public void addEffectConfiguration(EffectConfiguration effectConfigurations) {
+    public void addEffectConfiguration(String effectConfigurations) {
         this.effectConfigurations.add(effectConfigurations);
+        System.out.println("Effect configurations " + this.effectConfigurations);
+        for (String effectConfigurations1 : this.effectConfigurations) {
+            System.out.println("2:" + effectConfigurations1);
+            trySend(effectConfigurations1);
+        }
     }
 
 
     public void dispatch() {
-        for (EffectConfiguration effectConfigurations : this.effectConfigurations) {
+        for (String effectConfigurations : this.effectConfigurations) {
+            System.out.println("2:" + effectConfigurations);
             trySend(effectConfigurations);
         }
     }
 
-    private void trySend(EffectConfiguration effectConfigurations) {
+    private void trySend(String effectConfigurations) {
       //  if (!effectConfiguration.sendingNeeded(new float[0])) {
         //    return;
         //}
         Message message = new Message();
         Bundle data = new Bundle();
-        data.putString(Bundling.EFFECT_NAME, effectConfigurations.getEffectName());
+        data.putString("", effectConfigurations);
+        System.out.println("top" + effectConfigurations);
+        System.out.println("cócó" + data);
         message.setData(data);
-        OscHandlerEffects handler = communication.getOscHandlerEffects();
+        OscHandlerEffects handler = communication.getOscHandler();
         handler.sendMessage(message);
     }
 
     public void setEffectManager() {
+
     }
 
 }

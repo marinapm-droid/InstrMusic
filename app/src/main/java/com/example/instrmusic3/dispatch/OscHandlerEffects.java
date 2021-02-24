@@ -22,13 +22,18 @@ public class OscHandlerEffects extends Handler {
     public void handleMessage(Message message) {
         Bundle data = message.getData();
         String oscEffectName = data.getString(Bundling.EFFECT_NAME);
+        String stringValue = data.getString(Bundling.STRING_VALUE);
         OscConfiguration configuration = OscConfiguration.getInstance();
 
         if (configuration == null || configuration.getOscPort() == null) {
             return;
         }
+        System.out.println("3: " + oscEffectName);
+        System.out.println("\n");
+        System.out.println("4: " + message);
+        System.out.println("bundle" + Bundling.EFFECT_NAME);
+        System.out.println("data" + data);
         OSCMessage oscMessage = new OSCMessage("/" + oscEffectName);
-
         try {
             configuration.getOscPort().send(oscMessage);
         } catch (IOException e) {

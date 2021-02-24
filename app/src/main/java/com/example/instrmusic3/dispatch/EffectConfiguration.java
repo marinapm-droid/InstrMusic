@@ -28,6 +28,7 @@ public class EffectConfiguration {
 
     public void setSend(boolean send) {
         this.send = send;
+        System.out.println("1");
     }
 
     public void setEffectName(String effectName) {

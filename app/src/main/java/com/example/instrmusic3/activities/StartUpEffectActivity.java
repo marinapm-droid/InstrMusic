@@ -345,7 +345,6 @@ public class StartUpEffectActivity extends FragmentActivity implements CompoundB
     protected void onResume() {
         super.onResume();
         this.loadSettings();
-        this.sensorCommunication.onResume();
         if (active && !this.wakeLock.isHeld()) {
             this.wakeLock.acquire(10*60*1000L /*10 minutes*/);
         }
@@ -356,7 +355,6 @@ public class StartUpEffectActivity extends FragmentActivity implements CompoundB
     @SuppressLint("NewApi")
     protected void onPause() {
         super.onPause();
-        this.sensorCommunication.onPause();
         if (this.wakeLock.isHeld()) {
             this.wakeLock.release();
         }
@@ -364,7 +362,9 @@ public class StartUpEffectActivity extends FragmentActivity implements CompoundB
     }
 
     public void addEfectsFragment(EffectsFragment effectsFragment) {
-        this.dispatcher.addEffectConfiguration(effectsFragment.getEffectConfiguration());
+        System.out.println("effectsFragment" + effectsFragment.getArguments());
+        effectsFragment.setName(effectsFragment.getArguments().toString());
+        this.dispatcher.addEffectConfiguration(effectsFragment.getName());
     }
 
     //@Override
@@ -409,6 +409,7 @@ public class StartUpEffectActivity extends FragmentActivity implements CompoundB
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        //System.out.println("OnTouch");
         if (active) {
                 dispatcher.dispatch();
         }

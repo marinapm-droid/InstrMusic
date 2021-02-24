@@ -450,6 +450,7 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
+        System.out.println("OnTouch");
         if (active) {
             int width = v.getWidth();
             int height = v.getHeight();

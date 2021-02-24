@@ -25,6 +25,7 @@ public class OscHandler extends Handler {
         String stringValue = data.getString(Bundling.STRING_VALUE);
         String oscParameter = data.getString(Bundling.OSC_PARAMETER);
         OscConfiguration configuration = OscConfiguration.getInstance();
+        System.out.println("OSC parameter" + oscParameter);
 
         if (configuration == null || configuration.getOscPort() == null) {
             return;
@@ -38,6 +39,7 @@ public class OscHandler extends Handler {
         if (stringValue != null) {
             changes.add(stringValue);
         }
+        System.out.println("OSCHANDLER");
         OSCMessage oscMessage = new OSCMessage("/" + oscParameter, changes);
 
         try {

@@ -31,7 +31,7 @@ import org.sensors2.common.dispatch.Measurement;
 import java.util.List;
 
 
-public class EffectActivity extends FragmentActivity implements CompoundButton.OnCheckedChangeListener, View.OnTouchListener{
+public class EffectActivity extends FragmentActivity implements CompoundButton.OnCheckedChangeListener{
     private PowerManager.WakeLock wakeLock;
     private boolean active;
     private OscDispatcherEffects dispatcher;
@@ -162,13 +162,5 @@ public class EffectActivity extends FragmentActivity implements CompoundButton.O
         }
     }
 
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        if (active) {
-                dispatcher.dispatch();
-        }
-
-        return false;
-    }
 
 }

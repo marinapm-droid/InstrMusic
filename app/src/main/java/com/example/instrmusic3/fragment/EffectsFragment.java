@@ -17,7 +17,7 @@ import com.example.instrmusic3.dispatch.EffectConfiguration;
 
 public class EffectsFragment extends Fragment {
     EffectConfiguration effectConfiguration;
-
+    String name;
     public EffectsFragment() {
         super();
         this.effectConfiguration = new EffectConfiguration();
@@ -27,10 +27,11 @@ public class EffectsFragment extends Fragment {
 
         Bundle args = this.getArguments();
         assert args != null;
-        String name = args.getString(Bundling.EFFECT_NAME);
+        this.name = args.getString(Bundling.EFFECT_NAME);
         this.effectConfiguration.setEffectName(args.getString(Bundling.EFFECT_NAME));
         View v = inflater.inflate(R.layout.effects, null);
         TextView groupName = v.findViewById(R.id.group_name);
+        setName(this.name);
 
         groupName.setText(name);
 
@@ -52,5 +53,14 @@ public class EffectsFragment extends Fragment {
 
     public EffectConfiguration getEffectConfiguration() {
         return effectConfiguration;
+    }
+
+
+    public void setName(String name1){
+    this.name = name1;
+
+    }
+    public String getName (){
+    return this.name;
     }
 }

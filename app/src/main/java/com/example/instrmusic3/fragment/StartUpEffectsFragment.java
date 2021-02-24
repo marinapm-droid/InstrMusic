@@ -1,5 +1,6 @@
 package com.example.instrmusic3.fragment;
 
+import android.media.effect.Effect;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -32,19 +33,18 @@ public class StartUpEffectsFragment extends Fragment {
         View v = inflater.inflate(R.layout.activity_effects, container, false);
 
         CompoundButton activeButton = v.findViewById(R.id.active);
-        EffectActivity activity = (EffectActivity) getActivity();
+        StartUpEffectActivity activity = (StartUpEffectActivity) getActivity();
         activeButton.setOnCheckedChangeListener(activity);
         assert activity != null;
        // TextView availableSensorsHeadline = findViewById(R.id.effectsHeadline);
         ParametersEffects parametersEffects = new ParametersEffects();
         List<String> effectList = parametersEffects.getEffects();
-        System.out.println("effect list" + effectList.get(2));
         Bundle args = new Bundle();
         for (String effect : effectList) {
+            //System.out.println("Nome:" + effect);
             args.putString(Bundling.EFFECT_NAME, effect);
             this.CreateEffectFragments(effect);
         }
-
         return v;
     }
 
@@ -55,18 +55,17 @@ public class StartUpEffectsFragment extends Fragment {
             groupFragment = createFragment(effects, manager);
 
             FragmentTransaction transaction = manager.beginTransaction();
-            transaction.add(R.id.sensor_group, groupFragment, effects);
+            transaction.add(R.id.effects_group, groupFragment, effects);
             transaction.commit();
 
         }
         addEffectToDispatcher(groupFragment);
     }
 
-
-
     private void addEffectToDispatcher(EffectsFragment groupFragment) {
         StartUpEffectActivity activity = (StartUpEffectActivity) this.getActivity();
         assert activity != null;
+        System.out.println(groupFragment.getArguments());
         activity.addEfectsFragment(groupFragment);
     }
 
