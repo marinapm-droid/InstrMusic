@@ -46,6 +46,7 @@ import com.example.instrmusic3.dispatch.OscReceiveConfig;
 import com.example.instrmusic3.fragment.EffectsFragment;
 import com.example.instrmusic3.fragment.MultiTouchFragment;
 import com.example.instrmusic3.fragment.SensorFragment;
+import com.example.instrmusic3.fragment.StartUpEffectsFragment;
 import com.example.instrmusic3.fragment.StartupFragment;
 import com.example.instrmusic3.sensors.Settings;
 import com.illposed.osc.OSCListener;
@@ -120,10 +121,10 @@ public class StartUpEffectActivity extends FragmentActivity implements CompoundB
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        StartupFragment startupFragment = (StartupFragment) fm.findFragmentByTag("sensorlist");
+        StartUpEffectsFragment startupFragment = (StartUpEffectsFragment) fm.findFragmentByTag("effectlist");
         if (startupFragment == null) {
-            startupFragment = new StartupFragment();
-            transaction.add(R.id.container, startupFragment, "sensorlist");
+            startupFragment = new StartUpEffectsFragment();
+            transaction.add(R.id.container, startupFragment, "effectlist");
             transaction.commit();
         }
     }
