@@ -86,7 +86,7 @@ public class StartUpEffectActivity extends FragmentActivity implements CompoundB
     @SuppressLint("NewApi")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_effects);
+        setContentView(R.layout.maineffects);
         OscReceiveConfig oscReceiveConfig = new OscReceiveConfig();
         oscReceiveConfig.receive();
 
