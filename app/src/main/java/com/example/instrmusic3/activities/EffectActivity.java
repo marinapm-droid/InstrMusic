@@ -7,9 +7,7 @@ import android.os.Bundle;
 import android.os.PowerManager;
 import android.view.Display;
 import android.view.MenuItem;
-import android.view.MotionEvent;
 import android.view.Surface;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.TextView;
@@ -21,12 +19,8 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.example.instrmusic3.R;
 import com.example.instrmusic3.dispatch.Bundling;
-import com.example.instrmusic3.dispatch.OscDispatcher;
-import com.example.instrmusic3.dispatch.OscDispatcherEffects;
 import com.example.instrmusic3.fragment.EffectsFragment;
 import com.example.instrmusic3.Effects.ParametersEffects;
-
-import org.sensors2.common.dispatch.Measurement;
 
 import java.util.List;
 
@@ -34,7 +28,6 @@ import java.util.List;
 public class EffectActivity extends FragmentActivity implements CompoundButton.OnCheckedChangeListener{
     private PowerManager.WakeLock wakeLock;
     private boolean active;
-    private OscDispatcherEffects dispatcher;
 
 
     @Override

@@ -1,28 +1,20 @@
 package com.example.instrmusic3.fragment;
 
-import android.content.DialogInterface;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Message;
 import android.os.StrictMode;
-import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.instrmusic3.R;
-import com.example.instrmusic3.activities.EffectActivity;
-import com.example.instrmusic3.activities.StartUpActivity;
 import com.example.instrmusic3.activities.StartUpEffectActivity;
 import com.example.instrmusic3.dispatch.Bundling;
-import com.example.instrmusic3.dispatch.EffectConfiguration;
 import com.example.instrmusic3.dispatch.OscCommunicationEffects;
 import com.example.instrmusic3.dispatch.OscConfiguration;
 import com.example.instrmusic3.dispatch.OscHandlerEffects;
@@ -30,14 +22,10 @@ import com.example.instrmusic3.sensors.Settings;
 import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPortOut;
 
-import org.w3c.dom.ls.LSOutput;
-
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class EffectsFragment extends Fragment {
-    EffectConfiguration effectConfiguration;
     String name;
     private Handler handler = new Handler();
     private Settings settings;
@@ -49,7 +37,6 @@ public class EffectsFragment extends Fragment {
 
     public EffectsFragment() {
         super();
-        this.effectConfiguration = new EffectConfiguration();
     }
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -62,7 +49,6 @@ public class EffectsFragment extends Fragment {
         assert args != null;
         name = args.getString(Bundling.EFFECT_NAME);
         this.name = args.getString(Bundling.EFFECT_NAME);
-        this.effectConfiguration.setEffectName(args.getString(Bundling.EFFECT_NAME));
         View v = inflater.inflate(R.layout.effects, null);
         TextView groupName = v.findViewById(R.id.group_name);
         setName(this.name);
@@ -109,11 +95,6 @@ public class EffectsFragment extends Fragment {
         super.onSaveInstanceState(outState);
 
     }
-
-    public EffectConfiguration getEffectConfiguration() {
-        return effectConfiguration;
-    }
-
 
     public void setName(String name1) {
         this.name = name1;
