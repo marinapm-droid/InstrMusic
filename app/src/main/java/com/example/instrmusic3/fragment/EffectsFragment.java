@@ -41,6 +41,7 @@ public class EffectsFragment extends Fragment {
     String name;
     private Handler handler = new Handler();
     private Settings settings;
+    int onOff = 0;
     public Settings getSettings() {
         return this.settings;
     }
@@ -74,20 +75,25 @@ public class EffectsFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                OscCommunicationEffects communication = new OscCommunicationEffects("OSC dispatcher thread", Thread.MIN_PRIORITY);
-                communication.start();
-                OscHandlerEffects handler = communication.getOscHandler();
-                OscConfiguration oscConfiguration = OscConfiguration.getInstance();
-                List<Object> args = new ArrayList<Object>(1);
-                args.add(name);
-                OSCPortOut sender = oscConfiguration.getOscPort();
-                OSCMessage msg = new OSCMessage("/", args);
-                try {
-                    sender.send(msg);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                if (onOff == 0) {
+                    onOff = 1;
+                    OscCommunicationEffects communication = new OscCommunicationEffects("OSC dispatcher thread", Thread.MIN_PRIORITY);
+                    communication.start();
+                    OscHandlerEffects handler = communication.getOscHandler();
+                    OscConfiguration oscConfiguration = OscConfiguration.getInstance();
+                    List<Object> args = new ArrayList<Object>(1);
+                    args.add(name);
+                    OSCPortOut sender = oscConfiguration.getOscPort();
+                    OSCMessage msg = new OSCMessage("/", args);
+                    try {
+                        sender.send(msg);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
 
+                } else {
+                    onOff = 0;
+                }
             }
         });
         //activeButton.setOnCheckedChangeListener((compoundButton, checked) -> effectConfiguration.setSend(checked));
