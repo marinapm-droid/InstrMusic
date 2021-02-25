@@ -44,6 +44,7 @@ public class EffectActivity extends FragmentActivity implements CompoundButton.O
             this.CreateEffectFragments(effect);
         }
 
+
         if (android.os.Build.VERSION.SDK_INT >= 11) {
             getActionBar().setDisplayHomeAsUpEnabled(true);
         }
