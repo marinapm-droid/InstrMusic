@@ -45,7 +45,6 @@ public class EffectActivity extends FragmentActivity implements CompoundButton.O
         TextView availableSensorsHeadline = findViewById(R.id.effectsHeadline);
         ParametersEffects parametersEffects = new ParametersEffects();
         List<String> effectList = parametersEffects.getEffects();
-        System.out.println("effect list" + effectList.get(2));
         Bundle args = new Bundle();
         for (String effect : effectList) {
             args.putString(Bundling.EFFECT_NAME, effect);

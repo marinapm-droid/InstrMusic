@@ -15,7 +15,7 @@ import java.util.List;
 
 public class OscDispatcherEffects {
     private final OscCommunicationEffects communication;
-    private final List<String> effectConfigurations = new ArrayList<>();
+    private final List<EffectConfiguration> effectConfigurations = new ArrayList<>();
 
 
     public OscDispatcherEffects() {
@@ -23,32 +23,13 @@ public class OscDispatcherEffects {
         communication.start();
     }
 
-    public void addEffectConfiguration(String effectConfigurations) {
-        this.effectConfigurations.add(effectConfigurations);
-        System.out.println("Effect configurations " + this.effectConfigurations);
-        for (String effectConfigurations1 : this.effectConfigurations) {
-            System.out.println("2:" + effectConfigurations1);
-            trySend(effectConfigurations1);
-        }
-    }
-
-
-    public void dispatch() {
-        for (String effectConfigurations : this.effectConfigurations) {
-            System.out.println("2:" + effectConfigurations);
-            trySend(effectConfigurations);
-        }
-    }
-
-    private void trySend(String effectConfigurations) {
+    private void trySend(EffectConfiguration effectConfigurations) {
       //  if (!effectConfiguration.sendingNeeded(new float[0])) {
         //    return;
         //}
         Message message = new Message();
         Bundle data = new Bundle();
-        data.putString("", effectConfigurations);
-        System.out.println("top" + effectConfigurations);
-        System.out.println("cócó" + data);
+        data.putString(Bundling.EFFECT_NAME, effectConfigurations.getEffectName());
         message.setData(data);
         OscHandlerEffects handler = communication.getOscHandler();
         handler.sendMessage(message);

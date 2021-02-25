@@ -32,6 +32,7 @@ public class EffectConfiguration {
     }
 
     public void setEffectName(String effectName) {
+        System.out.println("Nome Efeito: " + effectName);
         this.effectName=effectName;
     }
 

@@ -39,10 +39,8 @@ public class StartUpEffectsFragment extends Fragment {
        // TextView availableSensorsHeadline = findViewById(R.id.effectsHeadline);
         ParametersEffects parametersEffects = new ParametersEffects();
         List<String> effectList = parametersEffects.getEffects();
-        Bundle args = new Bundle();
         for (String effect : effectList) {
             //System.out.println("Nome:" + effect);
-            args.putString(Bundling.EFFECT_NAME, effect);
             this.CreateEffectFragments(effect);
         }
         return v;
@@ -59,15 +57,8 @@ public class StartUpEffectsFragment extends Fragment {
             transaction.commit();
 
         }
-        addEffectToDispatcher(groupFragment);
     }
 
-    private void addEffectToDispatcher(EffectsFragment groupFragment) {
-        StartUpEffectActivity activity = (StartUpEffectActivity) this.getActivity();
-        assert activity != null;
-        System.out.println(groupFragment.getArguments());
-        activity.addEfectsFragment(groupFragment);
-    }
 
     public EffectsFragment createFragment(String effects, FragmentManager manager) {
         EffectsFragment groupFragment = new EffectsFragment();

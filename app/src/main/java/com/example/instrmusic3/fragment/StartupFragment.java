@@ -62,6 +62,7 @@ public class StartupFragment extends Fragment {
         args.putInt(Bundling.SENSOR_TYPE, parameters.getSensorType());
         args.putString(Bundling.OSC_PREFIX, parameters.getOscPrefix());
         args.putString(Bundling.NAME, parameters.getName());
+        System.out.println("args2:" + args);
         groupFragment.setArguments(args);
 
         return groupFragment;

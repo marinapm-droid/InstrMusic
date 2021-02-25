@@ -25,6 +25,7 @@ public class OscDispatcher implements DataDispatcher {
     }
 
     public void addSensorConfiguration(SensorConfiguration sensorConfiguration) {
+        System.out.println("presente!");
         this.sensorConfigurations.add(sensorConfiguration);
     }
 

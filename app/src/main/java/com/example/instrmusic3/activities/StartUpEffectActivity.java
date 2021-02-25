@@ -64,7 +64,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-public class StartUpEffectActivity extends FragmentActivity implements CompoundButton.OnCheckedChangeListener, View.OnTouchListener {
+public class StartUpEffectActivity extends FragmentActivity implements CompoundButton.OnCheckedChangeListener {
 
     private Settings settings;
     private SensorCommunication sensorCommunication;
@@ -322,7 +322,8 @@ public class StartUpEffectActivity extends FragmentActivity implements CompoundB
       //  return this.sensorManager;
     //}
 
-    private Settings loadSettings() {
+    public Settings loadSettings() {
+        System.out.println("pipipoopoocheck");
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         Settings settings = new Settings(preferences);
         OscConfiguration oscConfiguration = OscConfiguration.getInstance();
@@ -334,7 +335,6 @@ public class StartUpEffectActivity extends FragmentActivity implements CompoundB
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-
         getMenuInflater().inflate(R.menu.start_up, menu);
         return true;
     }
@@ -361,11 +361,6 @@ public class StartUpEffectActivity extends FragmentActivity implements CompoundB
 
     }
 
-    public void addEfectsFragment(EffectsFragment effectsFragment) {
-        System.out.println("effectsFragment" + effectsFragment.getArguments());
-        effectsFragment.setName(effectsFragment.getArguments().toString());
-        this.dispatcher.addEffectConfiguration(effectsFragment.getName());
-    }
 
     //@Override
     //public void onSensorChanged(SensorEvent sensorEvent) {
@@ -393,28 +388,6 @@ public class StartUpEffectActivity extends FragmentActivity implements CompoundB
             this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         }
         active = isChecked;
-    }
-
-    public List<Parameters> getSensors() {
-        return sensorCommunication.getSensors();
-    }
-
-    public void onStartMultiTouch(View view) {
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        transaction.add(R.id.container, new MultiTouchFragment());
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
-
-    @Override
-    public boolean onTouch(View v, MotionEvent event) {
-        //System.out.println("OnTouch");
-        if (active) {
-                dispatcher.dispatch();
-        }
-
-        return false;
     }
 
     public int getCurrentOrientation() {

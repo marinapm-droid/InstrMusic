@@ -319,7 +319,7 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
         return this.sensorManager;
     }
 
-    private Settings loadSettings() {
+    public Settings loadSettings() {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         Settings settings = new Settings(preferences);
         OscConfiguration oscConfiguration = OscConfiguration.getInstance();

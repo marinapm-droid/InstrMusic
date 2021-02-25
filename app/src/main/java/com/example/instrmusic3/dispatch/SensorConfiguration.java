@@ -51,6 +51,7 @@ public class SensorConfiguration {
     }
 
     public void setSensorType(int sensorType) {
+        System.out.println("sensor type: " + this.sensorType);
         this.sensorType = sensorType;
     }
 }
