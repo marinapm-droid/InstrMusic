@@ -21,10 +21,7 @@
                 android:value=".activities.StartUpActivity"/>
         </activity>
 
-        <activity android:name=".activities.SoundActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.StartUpActivity"/>
+        <activity android:name=".activities.StartUpSoundActivity">
         </activity>
 
         <activity android:name=".activities.StartUpEffectActivity">

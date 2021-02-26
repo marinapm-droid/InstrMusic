@@ -25,10 +25,7 @@ public class StartUpEffectsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_effects, container, false);
-
-        CompoundButton activeButton = v.findViewById(R.id.active);
         StartUpEffectActivity activity = (StartUpEffectActivity) getActivity();
-        activeButton.setOnCheckedChangeListener(activity);
         assert activity != null;
         //ParametersEffects parametersEffects = new ParametersEffects();
         List<String> effectList = ParametersEffects.getEffects();

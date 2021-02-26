@@ -17,8 +17,9 @@ import android.view.WindowManager;
 import android.widget.CompoundButton;
 import com.example.instrmusic3.R;
 import com.example.instrmusic3.dispatch.OscConfiguration;
-import com.example.instrmusic3.dispatch.OscReceiveConfig;
-import com.example.instrmusic3.fragment.StartUpEffectsFragment;
+
+import com.example.instrmusic3.dispatch.OscReceiveConfigSound;
+import com.example.instrmusic3.fragment.StartUpSoundsFragment;
 import com.example.instrmusic3.sensors.Settings;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -39,8 +40,8 @@ public class StartUpSoundActivity extends FragmentActivity implements CompoundBu
     @SuppressLint("NewApi")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.maineffects);
-        OscReceiveConfig oscReceiveConfig = new OscReceiveConfig();
+        setContentView(R.layout.mainsounds);
+        OscReceiveConfigSound oscReceiveConfig = new OscReceiveConfigSound();
         oscReceiveConfig.receive();
 
         this.settings = this.loadSettings();
@@ -51,10 +52,10 @@ public class StartUpSoundActivity extends FragmentActivity implements CompoundBu
 
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        StartUpEffectsFragment startupFragment = (StartUpEffectsFragment) fm.findFragmentByTag("effectlist");
+        StartUpSoundsFragment startupFragment = (StartUpSoundsFragment) fm.findFragmentByTag("soundlist");
         if (startupFragment == null) {
-            startupFragment = new StartUpEffectsFragment();
-            transaction.add(R.id.container, startupFragment, "effectlist");
+            startupFragment = new StartUpSoundsFragment();
+            transaction.add(R.id.container, startupFragment, "soundlist");
             transaction.commit();
         }
     }

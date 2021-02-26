@@ -6,7 +6,7 @@ import java.util.List;
 
 import com.example.instrmusic3.dispatch.OscReceiveConfig;
 
-public class ParametersEffects extends OscReceiveConfig {
+public class ParametersEffects {
     public static List<String> getEffects() {
         OscReceiveConfig oscReceiveConfig = new OscReceiveConfig();
         oscReceiveConfig.receive();

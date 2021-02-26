@@ -13,11 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.instrmusic3.R;
-import com.example.instrmusic3.activities.StartUpEffectActivity;
+import com.example.instrmusic3.activities.StartUpSoundActivity;
 import com.example.instrmusic3.dispatch.Bundling;
-import com.example.instrmusic3.dispatch.OscCommunicationEffects;
+import com.example.instrmusic3.dispatch.OscCommunication;
 import com.example.instrmusic3.dispatch.OscConfiguration;
-import com.example.instrmusic3.dispatch.OscHandlerEffects;
+import com.example.instrmusic3.dispatch.OscHandler;
 import com.example.instrmusic3.sensors.Settings;
 import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPortOut;
@@ -42,14 +42,14 @@ public class SoundFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        StartUpEffectActivity startUpActivity = (StartUpEffectActivity) getActivity();
+        StartUpSoundActivity startUpActivity = (StartUpSoundActivity) getActivity();
         startUpActivity.getSettings();
         this.settings = startUpActivity.loadSettings();
         Bundle args = this.getArguments();
         assert args != null;
-        name = args.getString(Bundling.EFFECT_NAME);
-        this.name = args.getString(Bundling.EFFECT_NAME);
-        View v = inflater.inflate(R.layout.effects, null);
+        name = args.getString(Bundling.SOUND_NAME);
+        this.name = args.getString(Bundling.SOUND_NAME);
+        View v = inflater.inflate(R.layout.sounds, null);
         TextView groupName = v.findViewById(R.id.group_name);
         setName(this.name);
 
@@ -61,14 +61,14 @@ public class SoundFragment extends Fragment {
             public void onClick(View v) {
                 if (onOff == 0) {
                     onOff = 1;
-                    OscCommunicationEffects communication = new OscCommunicationEffects("OSC dispatcher thread", Thread.MIN_PRIORITY);
+                    OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
                     communication.start();
-                    OscHandlerEffects handler = communication.getOscHandler();
+                    OscHandler handler = communication.getOscHandler();
                     OscConfiguration oscConfiguration = OscConfiguration.getInstance();
                     List<Object> args = new ArrayList<Object>(1);
                     args.add(name);
                     OSCPortOut sender = oscConfiguration.getOscPort();
-                    OSCMessage msg = new OSCMessage("/", args);
+                    OSCMessage msg = new OSCMessage("/sound", args);
                     try {
                         sender.send(msg);
                     } catch (Exception e) {
