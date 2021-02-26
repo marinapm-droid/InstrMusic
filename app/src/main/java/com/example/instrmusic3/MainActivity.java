@@ -17,7 +17,6 @@ import com.example.instrmusic3.auth.Login;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static int SPLASH_SCREEN= 5000; //5 sec
     Animation topAnim, bottomAnim;
     ImageView nome, barras;
 
@@ -38,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
         barras.setAnimation(topAnim);
         nome.setAnimation(bottomAnim);
 
+        //5 sec
+        int SPLASH_SCREEN = 5000;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

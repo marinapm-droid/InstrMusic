@@ -16,7 +16,6 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class SignUp extends AppCompatActivity {
 
-    //variables
 
     TextInputLayout regName, regEmail, regPassword, regConfPassword;
     Button regBtn;

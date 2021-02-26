@@ -14,10 +14,8 @@ public class OscReceiveConfig {
     public void receive() {
         try {
             OSCPortIn testIn = new OSCPortIn(5679);
-            Log.d("Listening", "A Correr");
             OSCListener listener = new OSCListener() {
                 public void acceptMessage(java.util.Date time, OSCMessage message) {
-                    System.out.println("oscReceiveConfig" + message.getArguments().toString());
                     setMessage(message.getArguments().toString());
                 }
             };
@@ -32,7 +30,6 @@ public class OscReceiveConfig {
          message = message1;
     }
     public static String getMessage(){
-        System.out.println("Get Message" + message);
         message = message.replace("]", "").replace("[", "");
         return message;
     }

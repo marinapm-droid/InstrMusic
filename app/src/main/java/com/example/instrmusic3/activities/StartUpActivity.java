@@ -60,12 +60,9 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
     private Settings settings;
     private SensorCommunication sensorCommunication;
     private OscDispatcher dispatcher;
-   // private OscDispatcherEffects dispatcherEffect;
-
     private SensorManager sensorManager;
     private PowerManager.WakeLock wakeLock;
     private boolean active;
-
     private NfcAdapter nfcAdapter;
     private PendingIntent mPendingIntent;
     private NdefMessage mNdefPushMessage;
@@ -81,22 +78,6 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
         setContentView(R.layout.main);
         OscReceiveConfig oscReceiveConfig = new OscReceiveConfig();
         oscReceiveConfig.receive();
-
-
-        /*try {
-            OSCPortIn testIn = new OSCPortIn(5679);
-            Log.d("Listening", "running");
-            OSCListener listener = new OSCListener() {
-                public void acceptMessage(java.util.Date time, OSCMessage message) {
-                    Log.d("message", "ola");
-                }
-            };
-            testIn.addListener("/scd", listener);
-            testIn.startListening();
-        } catch (SocketException e) {
-            e.printStackTrace();
-        }
-        */
         this.settings = this.loadSettings();
         this.dispatcher = new OscDispatcher();
         this.sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -306,7 +287,6 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
         return this.dispatcher;
     }
 
-
     @Override
     public SensorManager getSensorManager() {
         return this.sensorManager;
@@ -324,11 +304,11 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-
         getMenuInflater().inflate(R.menu.start_up, menu);
         return true;
     }
 
+    @SuppressLint("NonConstantResourceId")
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
@@ -361,7 +341,6 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
         }
         return super.onOptionsItemSelected(item);
     }
-
 
     @Override
     @SuppressLint("NewApi")

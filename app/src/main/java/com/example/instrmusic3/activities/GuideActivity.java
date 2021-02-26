@@ -5,21 +5,17 @@ import android.os.Bundle;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
-
 import androidx.core.app.NavUtils;
 import android.view.MenuItem;
 import android.widget.TextView;
-
 import com.example.instrmusic3.R;
 import com.example.instrmusic3.dispatch.Bundling;
 import com.example.instrmusic3.fragment.HelpSensorFragment;
 import com.example.instrmusic3.sensors.Parameters;
-
 import java.util.List;
 
 
 public class GuideActivity extends FragmentActivity {
-	private SensorManager sensorManager;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -27,7 +23,7 @@ public class GuideActivity extends FragmentActivity {
 		setContentView(R.layout.activity_guide);
 
 		TextView availableSensorsHeadline = findViewById(R.id.availSensorsHeadline);
-		this.sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
+		SensorManager sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
 		List<Parameters> sensors = Parameters.GetSensors(sensorManager, this.getApplicationContext());
 		availableSensorsHeadline.setText(sensors.size() + " " + availableSensorsHeadline.getText());
 		for (Parameters parameters : sensors) {
@@ -64,11 +60,10 @@ public class GuideActivity extends FragmentActivity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		switch (item.getItemId()) {
-			// Respond to the action bar's Up/Home button
-			case android.R.id.home:
-				NavUtils.navigateUpFromSameTask(this);
-				return true;
+		// Respond to the action bar's Up/Home button
+		if (item.getItemId() == android.R.id.home) {
+			NavUtils.navigateUpFromSameTask(this);
+			return true;
 		}
 		return super.onOptionsItemSelected(item);
 	}

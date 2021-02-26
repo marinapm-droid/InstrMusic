@@ -4,8 +4,6 @@ public class UserHelperClass {
 
     String nome, email, password, confPassword;
 
-    public UserHelperClass() {
-    }
 
     public UserHelperClass(String nome, String email, String password, String confPassword) {
         this.nome = nome;

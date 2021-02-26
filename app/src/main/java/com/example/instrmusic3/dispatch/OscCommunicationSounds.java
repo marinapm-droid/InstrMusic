@@ -3,10 +3,10 @@ package com.example.instrmusic3.dispatch;
 import android.os.HandlerThread;
 
 
-public class OscCommunication extends HandlerThread {
-    private OscHandler handler;
+public class OscCommunicationSounds extends HandlerThread {
+    private OscHandlerEffects handler;
 
-    public OscCommunication(String name, int priority) {
+    public OscCommunicationSounds(String name, int priority) {
         super(name, priority);
     }
 
@@ -18,10 +18,10 @@ public class OscCommunication extends HandlerThread {
 
     @Override
     protected void onLooperPrepared() {
-        handler = new OscHandler(this.getLooper());
+        handler = new OscHandlerEffects(this.getLooper());
     }
 
-    public OscHandler getOscHandler() {
+    public OscHandlerEffects getOscHandler() {
         return handler;
     }
 

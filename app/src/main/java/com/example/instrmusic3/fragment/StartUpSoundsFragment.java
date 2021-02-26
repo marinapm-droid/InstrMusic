@@ -20,7 +20,7 @@ import java.util.List;
 import java.util.Objects;
 
 
-public class StartUpEffectsFragment extends Fragment {
+public class StartUpSoundsFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {

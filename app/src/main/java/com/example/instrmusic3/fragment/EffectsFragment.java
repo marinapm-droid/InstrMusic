@@ -55,8 +55,6 @@ public class EffectsFragment extends Fragment {
 
         groupName.setText(name);
 
-        //CompoundButton activeButton = v.findViewById(R.id.active);
-        // EffectActivity activity = (EffectActivity) getActivity();
         Button button = v.findViewById(R.id.active);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,10 +80,6 @@ public class EffectsFragment extends Fragment {
                 }
             }
         });
-        //activeButton.setOnCheckedChangeListener((compoundButton, checked) -> effectConfiguration.setSend(checked));
-
-        // activeButton.setOnCheckedChangeListener(activity);
-
         return v;
     }
 

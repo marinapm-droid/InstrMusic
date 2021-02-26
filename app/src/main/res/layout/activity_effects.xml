@@ -9,7 +9,6 @@
     android:paddingRight="16dp">
 
 
-
     <ScrollView
         android:id="@+id/scrollView1"
         android:layout_width="fill_parent"
@@ -23,17 +22,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:orientation="vertical">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:text="@string/send_data" />
 
-            <ToggleButton
-                android:id="@+id/active"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"/>
             <TextView
                 android:id="@+id/effectsHeadline"
                 android:layout_width="fill_parent"

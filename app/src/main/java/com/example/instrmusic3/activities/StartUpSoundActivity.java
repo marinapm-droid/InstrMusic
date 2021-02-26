@@ -1,87 +1,104 @@
 package com.example.instrmusic3.activities;
 
+import android.annotation.SuppressLint;
+import android.app.PendingIntent;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.graphics.Point;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.PowerManager;
+import android.preference.PreferenceManager;
 import android.view.Display;
-import android.view.MenuItem;
+import android.view.Menu;
 import android.view.Surface;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
-import android.widget.TextView;
-
-import androidx.core.app.NavUtils;
+import com.example.instrmusic3.R;
+import com.example.instrmusic3.dispatch.OscConfiguration;
+import com.example.instrmusic3.dispatch.OscReceiveConfig;
+import com.example.instrmusic3.fragment.StartUpEffectsFragment;
+import com.example.instrmusic3.sensors.Settings;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.example.instrmusic3.R;
-import com.example.instrmusic3.dispatch.Bundling;
-import com.example.instrmusic3.fragment.EffectsFragment;
-import com.example.instrmusic3.Effects.ParametersEffects;
 
-import java.util.List;
+public class StartUpSoundActivity extends FragmentActivity implements CompoundButton.OnCheckedChangeListener {
 
-
-public class EffectActivity extends FragmentActivity implements CompoundButton.OnCheckedChangeListener{
+    private Settings settings;
     private PowerManager.WakeLock wakeLock;
     private boolean active;
 
+    public Settings getSettings() {
+        return this.settings;
+    }
 
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    @SuppressLint("NewApi")
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_effects);
+        setContentView(R.layout.maineffects);
+        OscReceiveConfig oscReceiveConfig = new OscReceiveConfig();
+        oscReceiveConfig.receive();
+
+        this.settings = this.loadSettings();
         this.wakeLock = ((PowerManager) getSystemService(POWER_SERVICE)).newWakeLock(PowerManager.SCREEN_DIM_WAKE_LOCK, this.getLocalClassName());
-        TextView availableSensorsHeadline = findViewById(R.id.effectsHeadline);
-        ParametersEffects parametersEffects = new ParametersEffects();
-        List<String> effectList = parametersEffects.getEffects();
-        Bundle args = new Bundle();
-        for (String effect : effectList) {
-            args.putString(Bundling.EFFECT_NAME, effect);
-            this.CreateEffectFragments(effect);
-        }
+        PendingIntent mPendingIntent = PendingIntent.getActivity(this, 0,
+                new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
 
 
-        if (android.os.Build.VERSION.SDK_INT >= 11) {
-            getActionBar().setDisplayHomeAsUpEnabled(true);
-        }
-
-
-
-    }
-    public void CreateEffectFragments(String effects) {
-        FragmentManager manager = getSupportFragmentManager();
-        EffectsFragment groupFragment = (EffectsFragment) manager.findFragmentByTag(effects);
-        if (groupFragment == null) {
-            this.CreateFragment(effects, manager);
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        StartUpEffectsFragment startupFragment = (StartUpEffectsFragment) fm.findFragmentByTag("effectlist");
+        if (startupFragment == null) {
+            startupFragment = new StartUpEffectsFragment();
+            transaction.add(R.id.container, startupFragment, "effectlist");
+            transaction.commit();
         }
     }
 
-    public void CreateFragment(String effects, FragmentManager manager) {
-        FragmentTransaction transaction = manager.beginTransaction();
-        EffectsFragment groupFragment = new EffectsFragment();
-        Bundle args = new Bundle();
-        args.putString(Bundling.EFFECT_NAME, effects);
-        groupFragment.setArguments(args);
-        transaction.add(R.id.effects_group, groupFragment, effects);
-        transaction.commit();
-    }
-
-
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Respond to the action bar's Up/Home button
-        if (item.getItemId() == android.R.id.home) {
-            NavUtils.navigateUpFromSameTask(this);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
+    public Settings loadSettings() {
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        Settings settings = new Settings(preferences);
+        OscConfiguration oscConfiguration = OscConfiguration.getInstance();
+        oscConfiguration.setHost(settings.getHost());
+        oscConfiguration.setPort(settings.getPort());
+        return settings;
     }
 
     @Override
-    public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.start_up, menu);
+        return true;
+    }
+
+
+    @Override
+    @SuppressLint("NewApi")
+    protected void onResume() {
+        super.onResume();
+        this.loadSettings();
+        if (active && !this.wakeLock.isHeld()) {
+            this.wakeLock.acquire(10*60*1000L /*10 minutes*/);
+        }
+
+    }
+
+    @Override
+    @SuppressLint("NewApi")
+    protected void onPause() {
+        super.onPause();
+        if (this.wakeLock.isHeld()) {
+            this.wakeLock.release();
+        }
+
+    }
+
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
         if (isChecked) {
             if (!this.wakeLock.isHeld()) {
                 this.wakeLock.acquire();
@@ -95,6 +112,7 @@ public class EffectActivity extends FragmentActivity implements CompoundButton.O
         }
         active = isChecked;
     }
+
     public int getCurrentOrientation() {
 
         final Display display = this.getWindowManager().getDefaultDisplay();
@@ -140,20 +158,4 @@ public class EffectActivity extends FragmentActivity implements CompoundButton.O
                 }
         }
     }
-    protected void onResume() {
-        super.onResume();
-        if (active && !this.wakeLock.isHeld()) {
-            this.wakeLock.acquire(10*60*1000L /*10 minutes*/);
-        }
-    }
-
-
-    protected void onPause() {
-        super.onPause();
-        if (this.wakeLock.isHeld()) {
-            this.wakeLock.release();
-        }
-    }
-
-
 }

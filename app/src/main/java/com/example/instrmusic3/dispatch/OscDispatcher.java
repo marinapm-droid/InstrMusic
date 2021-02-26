@@ -25,13 +25,11 @@ public class OscDispatcher implements DataDispatcher {
     }
 
     public void addSensorConfiguration(SensorConfiguration sensorConfiguration) {
-        System.out.println("presente!");
         this.sensorConfigurations.add(sensorConfiguration);
     }
 
     @Override
     public void dispatch(Measurement sensorData) {
-        System.out.println("DISPATCH");
         for (SensorConfiguration sensorConfiguration : this.sensorConfigurations) {
             if (sensorConfiguration.getSensorType() == sensorData.getSensorType()) {
                 if (sensorData.getValues() != null) {
@@ -75,7 +73,6 @@ public class OscDispatcher implements DataDispatcher {
     }
 
     private void trySend(SensorConfiguration sensorConfiguration, float[] values) {
-        System.out.println("try send 1");
         if (!sensorConfiguration.sendingNeeded(values)) {
             return;
         }
@@ -89,7 +86,6 @@ public class OscDispatcher implements DataDispatcher {
     }
 
     private void trySend(SensorConfiguration sensorConfiguration, String value) {
-        System.out.println("try send 2");
         if (!sensorConfiguration.sendingNeeded(new float[0])) {
             return;
         }
