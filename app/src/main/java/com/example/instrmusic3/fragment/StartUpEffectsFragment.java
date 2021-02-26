@@ -1,12 +1,10 @@
 package com.example.instrmusic3.fragment;
 
-import android.media.effect.Effect;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
-import android.widget.TextView;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -15,10 +13,6 @@ import androidx.fragment.app.FragmentTransaction;
 import com.example.instrmusic3.Effects.ParametersEffects;
 import com.example.instrmusic3.R;
 
-import org.sensors2.common.sensors.Parameters;
-
-import com.example.instrmusic3.activities.EffectActivity;
-import com.example.instrmusic3.activities.StartUpActivity;
 import com.example.instrmusic3.activities.StartUpEffectActivity;
 import com.example.instrmusic3.dispatch.Bundling;
 
