@@ -41,6 +41,7 @@ import com.example.instrmusic3.R;
 import com.example.instrmusic3.dispatch.OscConfiguration;
 import com.example.instrmusic3.dispatch.OscDispatcher;
 import com.example.instrmusic3.dispatch.OscReceiveConfig;
+import com.example.instrmusic3.dispatch.OscReceiveConfigSound;
 import com.example.instrmusic3.fragment.MultiTouchFragment;
 import com.example.instrmusic3.fragment.SensorFragment;
 import com.example.instrmusic3.fragment.StartupFragment;
@@ -76,8 +77,10 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        OscReceiveConfig oscReceiveConfig = new OscReceiveConfig();
-        oscReceiveConfig.receive();
+        OscReceiveConfig oscReceiveConfigEffect = new OscReceiveConfig();
+        OscReceiveConfigSound oscReceiveConfigSound = new OscReceiveConfigSound();
+        oscReceiveConfigEffect.receive();
+        oscReceiveConfigSound.receive();
         this.settings = this.loadSettings();
         this.dispatcher = new OscDispatcher();
         this.sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
@@ -329,7 +332,7 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
                 return true;
             }
             case R.id.action_sound: {
-                Intent intent = new Intent(this, SoundActivity.class);
+                Intent intent = new Intent(this, StartUpSoundActivity.class);
                 startActivity(intent);
                 return true;
             }
