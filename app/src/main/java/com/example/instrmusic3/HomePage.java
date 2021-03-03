@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -41,6 +42,14 @@ public class HomePage extends Activity {
         soundBtn = findViewById(R.id.soundsImg);
         settingsBtn = findViewById(R.id.settingsImg);
         logOutBtn = findViewById(R.id.logOutImg);
+
+        CompoundButton activeButton = findViewById(R.id.active);
+
+        activeButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+               startService(new Intent(HomePage.this, StartUpService.class));
+            }
+        });
 
 
         sensorBtn.setOnClickListener(new View.OnClickListener() {

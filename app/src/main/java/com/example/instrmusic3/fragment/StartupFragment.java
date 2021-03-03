@@ -26,11 +26,11 @@ public class StartupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_start_up, container, false);
 
-        //CompoundButton activeButton = v.findViewById(R.id.active);
+        CompoundButton activeButton = v.findViewById(R.id.active);
         StartUpActivity activity = (StartUpActivity) getActivity();
-        //activeButton.setOnCheckedChangeListener(activity);
-        Intent intent = new Intent(getActivity(), StartUpActivity.class);
-        startActivity(intent);
+        activeButton.setOnCheckedChangeListener(activity);
+
+
 
         assert activity != null;
         for (Parameters parameters : activity.getSensors()) {
