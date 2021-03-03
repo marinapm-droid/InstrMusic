@@ -1,9 +1,156 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#5d515e"
-    />
+    android:background="#5d515e">
+
+
+
+    <TextView
+        android:id="@+id/menu"
+        android:layout_width="396dp"
+        android:layout_height="282dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="503dp"
+        android:layout_marginBottom="0dp"
+        android:background="@drawable/square"
+        android:baselineAligned="false"/>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/menu"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginTop="31dp"
+        android:layout_marginEnd="260dp"
+        android:layout_marginRight="260dp"
+        android:layout_marginBottom="130dp"
+        android:background="@drawable/round" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/menu"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginStart="135dp"
+        android:layout_marginLeft="135dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="138dp"
+        android:layout_marginRight="138dp"
+        android:layout_marginBottom="127dp"
+        android:background="@drawable/round" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/menu"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="259dp"
+        android:layout_marginLeft="259dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="14dp"
+        android:layout_marginRight="14dp"
+        android:layout_marginBottom="127dp"
+        android:background="@drawable/round" />
+
+
+    <TextView
+        android:id="@+id/imageView9"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="54dp"
+        android:layout_marginBottom="664dp"
+        android:background="@drawable/baseline_sensors_24" />
+
+    <TextView
+        android:id="@+id/imageView13"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="21dp"
+        android:layout_marginLeft="21dp"
+        android:layout_marginTop="68dp"
+        android:layout_marginBottom="661dp"
+        android:layout_toEndOf="@+id/imageView9"
+        android:layout_toRightOf="@+id/imageView9"
+        android:background="@drawable/baseline_sensors_24" />
+
+    <TextView
+        android:id="@+id/imageView16"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginBottom="664dp"
+        android:layout_toEndOf="@+id/imageView13"
+        android:layout_toRightOf="@+id/imageView13"
+        android:background="@drawable/baseline_sensors_24" />
+
+    <TextView
+        android:id="@+id/imageView17"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="19dp"
+        android:layout_marginLeft="19dp"
+        android:layout_marginTop="66dp"
+        android:layout_marginBottom="663dp"
+        android:layout_toEndOf="@+id/imageView16"
+        android:layout_toRightOf="@+id/imageView16"
+        android:background="@drawable/baseline_sensors_24" />
+
+    <TextView
+        android:id="@+id/imageView18"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="65dp"
+        android:layout_marginBottom="664dp"
+        android:layout_toEndOf="@+id/imageView17"
+        android:layout_toRightOf="@+id/imageView17"
+        android:background="@drawable/baseline_sensors_24" />
+
+
+</RelativeLayout>
 

@@ -3,59 +3,58 @@
     package="com.example.instrmusic3">
 
     <application
-        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.InstrMusic3">
+        android:theme="@style/Theme.InstrMusic3"
+        android:usesCleartextTraffic="true">
         <activity android:name=".activities.AboutActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.StartUpActivity"/>
+                android:value=".activities.StartUpActivity" />
         </activity>
         <activity android:name=".activities.GuideActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.StartUpActivity"/>
+                android:value=".activities.StartUpActivity" />
         </activity>
 
         <activity android:name=".activities.SoundActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.StartUpActivity"/>
+                android:value=".activities.StartUpActivity" />
         </activity>
 
-        <activity android:name=".activities.StartUpEffectActivity">
-        </activity>
+        <activity android:name=".activities.StartUpEffectActivity"></activity>
 
         <activity android:name=".activities.SettingsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".activities.StartUpActivity"/>
+                android:value=".activities.StartUpActivity" />
         </activity>
-        <activity android:name=".activities.StartUpActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+        <activity android:name=".activities.StartUpActivity" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+
+        <activity android:name=".HomePage">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.nfc.action.TAG_DISCOVERED" />
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <activity android:name=".HomePage"></activity>
-        <activity android:name=".auth.Login"></activity>
-        <activity android:name=".auth.SignUp"></activity>
-        <activity android:name=".MainActivity">
-        </activity>
+        <activity android:name=".auth.Login" />
+        <activity android:name=".auth.SignUp" />
+        <activity android:name=".MainActivity" />
     </application>
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.NFC" />
 
     <uses-feature
