@@ -25,8 +25,8 @@ public class StartUpEffectsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_effects, container, false);
-        StartUpEffectActivity activity = (StartUpEffectActivity) getActivity();
-        assert activity != null;
+//        StartUpEffectActivity activity = (StartUpEffectActivity) getActivity();
+      //  assert activity != null;
         ParametersEffects parametersEffects = new ParametersEffects();
         List<String> effectList = ParametersEffects.getEffects();
         for (String effect : effectList) {
@@ -38,14 +38,10 @@ public class StartUpEffectsFragment extends Fragment {
     public void CreateEffectFragments(String effects) {
         FragmentManager manager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
         EffectsFragment groupFragment = (EffectsFragment) manager.findFragmentByTag(effects);
-        if (groupFragment == null) {
             groupFragment = createFragment(effects);
-
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.add(R.id.effects_group, groupFragment, effects);
             transaction.commit();
-
-        }
     }
 
 

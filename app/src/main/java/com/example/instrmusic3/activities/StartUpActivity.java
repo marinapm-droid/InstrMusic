@@ -37,6 +37,8 @@ import org.sensors2.common.nfc.NfcActivity;
 import org.sensors2.common.sensors.Parameters;
 import org.sensors2.common.sensors.SensorActivity;
 import org.sensors2.common.sensors.SensorCommunication;
+
+import com.example.instrmusic3.Effects.ParametersEffects;
 import com.example.instrmusic3.R;
 import com.example.instrmusic3.dispatch.OscConfiguration;
 import com.example.instrmusic3.dispatch.OscDispatcher;
@@ -472,6 +474,7 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
                 else {
                     return ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE;
                 }
+
             case Surface.ROTATION_270:
                 if (width > height) {
                     return ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE;

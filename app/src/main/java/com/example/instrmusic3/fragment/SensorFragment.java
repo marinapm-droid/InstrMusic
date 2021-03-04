@@ -32,7 +32,6 @@ public class SensorFragment extends Fragment {
 		Bundle args = this.getArguments();
 		assert args != null;
 		this.sensorConfiguration.setSensorType(args.getInt(Bundling.SENSOR_TYPE));
-		System.out.println("TIPO SENSOR:");
 		this.sensorConfiguration.setOscParam(args.getString(Bundling.OSC_PREFIX));
 		String name = args.getString(Bundling.NAME);
 
