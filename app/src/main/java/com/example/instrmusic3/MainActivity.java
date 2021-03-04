@@ -14,6 +14,8 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.example.instrmusic3.auth.Login;
+import com.example.instrmusic3.dispatch.OscReceiveConfig;
+import com.example.instrmusic3.dispatch.OscReceiveConfigSound;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,7 +27,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_main);
-
+        OscReceiveConfig oscReceiveConfigEffect = new OscReceiveConfig();
+        OscReceiveConfigSound oscReceiveConfigSound = new OscReceiveConfigSound();
+        oscReceiveConfigEffect.receive();
+        oscReceiveConfigSound.receive();
         //Animations
         topAnim= AnimationUtils.loadAnimation(this,R.anim.top_animation);
         bottomAnim= AnimationUtils.loadAnimation(this,R.anim.bottom_animation);

@@ -77,10 +77,7 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
-        OscReceiveConfig oscReceiveConfigEffect = new OscReceiveConfig();
-        OscReceiveConfigSound oscReceiveConfigSound = new OscReceiveConfigSound();
-        oscReceiveConfigEffect.receive();
-        oscReceiveConfigSound.receive();
+
         this.settings = this.loadSettings();
         this.dispatcher = new OscDispatcher();
         this.sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
