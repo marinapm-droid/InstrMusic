@@ -38,7 +38,7 @@ public class OscHandler extends Handler {
         if (stringValue != null) {
             changes.add(stringValue);
         }
-        OSCMessage oscMessage = new OSCMessage("/" + oscParameter, changes);
+        OSCMessage oscMessage = new OSCMessage("/"  + oscParameter, changes);
 
         try {
             configuration.getOscPort().send(oscMessage);

@@ -43,38 +43,28 @@ public class HomePage extends Activity {
         settingsBtn = findViewById(R.id.settingsImg);
         logOutBtn = findViewById(R.id.logOutImg);
 
-        sensorBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent intent = new Intent(HomePage.this, StartUpActivity.class);
-                startActivity(intent);
-            }
+        sensorBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(HomePage.this, StartUpActivity.class);
+            startActivity(intent);
         });
 
-        settingsBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent intent = new Intent(HomePage.this, SettingsActivity.class);
-                startActivity(intent);
-            }
+        settingsBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(HomePage.this, SettingsActivity.class);
+            startActivity(intent);
         });
 
-        soundBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent intent = new Intent(HomePage.this, StartUpSoundActivity.class);
-                startActivity(intent);
-            }
+        soundBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(HomePage.this, StartUpSoundActivity.class);
+            startActivity(intent);
         });
 
-        effectBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent intent = new Intent(HomePage.this, StartUpEffectActivity.class);
-                startActivity(intent);
-            }
+        effectBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(HomePage.this, StartUpEffectActivity.class);
+            startActivity(intent);
         });
-        logOutBtn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-                Intent intent = new Intent(HomePage.this, MainActivity.class);
-                startActivity(intent);
-            }
+        logOutBtn.setOnClickListener(view -> {
+            Intent intent = new Intent(HomePage.this, MainActivity.class);
+            startActivity(intent);
         });
     }
 
