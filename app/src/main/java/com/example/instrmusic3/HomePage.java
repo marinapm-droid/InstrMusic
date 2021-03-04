@@ -22,6 +22,8 @@ import com.example.instrmusic3.activities.StartUpEffectActivity;
 import com.example.instrmusic3.activities.StartUpSoundActivity;
 import com.example.instrmusic3.auth.Login;
 import com.example.instrmusic3.auth.SignUp;
+import com.example.instrmusic3.dispatch.OscReceiveConfig;
+import com.example.instrmusic3.dispatch.OscReceiveConfigSound;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,6 +39,10 @@ public class HomePage extends Activity {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); // fullscreen
         setContentView(R.layout.activity_home);
+        OscReceiveConfig oscReceiveConfigEffect = new OscReceiveConfig();
+        OscReceiveConfigSound oscReceiveConfigSound = new OscReceiveConfigSound();
+        oscReceiveConfigEffect.receive();
+        oscReceiveConfigSound.receive();
         sensorBtn = findViewById(R.id.sensorImg);
         effectBtn = findViewById(R.id.effectsImg);
         soundBtn = findViewById(R.id.soundsImg);
