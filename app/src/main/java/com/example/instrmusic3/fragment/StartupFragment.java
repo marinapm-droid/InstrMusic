@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
 
 import org.sensors2.common.sensors.Parameters;
@@ -27,7 +28,7 @@ public class StartupFragment extends Fragment {
         View v = inflater.inflate(R.layout.activity_start_up, container, false);
 
         CompoundButton activeButton = v.findViewById(R.id.active);
-        StartUpActivity activity = (StartUpActivity) getActivity();
+        HomePage activity = (HomePage) getActivity();
         activeButton.setOnCheckedChangeListener(activity);
 
 
@@ -44,18 +45,17 @@ public class StartupFragment extends Fragment {
         FragmentManager manager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
         SensorFragment groupFragment = (SensorFragment) manager.findFragmentByTag(parameters.getName());
 
-        if (groupFragment == null) {
             groupFragment = createFragment(parameters, manager);
 
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.add(R.id.sensor_group, groupFragment, parameters.getName());
             transaction.commit();
-        }
+
         addSensorToDispatcher(groupFragment);
     }
 
     private void addSensorToDispatcher(SensorFragment groupFragment) {
-        StartUpActivity activity = (StartUpActivity) this.getActivity();
+        HomePage activity = (HomePage) this.getActivity();
         activity.addSensorFragment(groupFragment);
     }
 

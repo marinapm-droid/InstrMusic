@@ -94,14 +94,14 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
         mNdefPushMessage = new NdefMessage(new NdefRecord[]{newTextRecord(
                 true)});
 
-        FragmentManager fm = getSupportFragmentManager();
+        /*FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         StartupFragment startupFragment = (StartupFragment) fm.findFragmentByTag("sensorlist");
         if (startupFragment == null) {
             startupFragment = new StartupFragment();
             transaction.add(R.id.container, startupFragment, "sensorlist");
             transaction.commit();
-        }
+        }*/
     }
 
     public List<Parameters> GetSensors(SensorManager sensorManager) {
