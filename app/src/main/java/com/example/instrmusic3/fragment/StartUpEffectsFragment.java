@@ -27,7 +27,7 @@ public class StartUpEffectsFragment extends Fragment {
         View v = inflater.inflate(R.layout.activity_effects, container, false);
         StartUpEffectActivity activity = (StartUpEffectActivity) getActivity();
         assert activity != null;
-        //ParametersEffects parametersEffects = new ParametersEffects();
+        ParametersEffects parametersEffects = new ParametersEffects();
         List<String> effectList = ParametersEffects.getEffects();
         for (String effect : effectList) {
             this.CreateEffectFragments(effect);

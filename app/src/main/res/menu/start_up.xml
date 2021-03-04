@@ -22,11 +22,13 @@
         android:id="@+id/action_effect"
         android:orderInCategory="200"
         android:title="Effects"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        />
 
     <item
         android:id="@+id/action_sound"
         android:orderInCategory="200"
         android:title="Sounds"
-        app:showAsAction="never" />
+        app:showAsAction="never"
+        />
 </menu>

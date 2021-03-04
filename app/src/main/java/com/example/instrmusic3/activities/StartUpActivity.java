@@ -44,6 +44,7 @@ import com.example.instrmusic3.dispatch.OscReceiveConfig;
 import com.example.instrmusic3.dispatch.OscReceiveConfigSound;
 import com.example.instrmusic3.fragment.MultiTouchFragment;
 import com.example.instrmusic3.fragment.SensorFragment;
+import com.example.instrmusic3.fragment.StartUpEffectsFragment;
 import com.example.instrmusic3.fragment.StartupFragment;
 import com.example.instrmusic3.sensors.Settings;
 
@@ -416,6 +417,14 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         transaction.add(R.id.container, new MultiTouchFragment());
+        transaction.addToBackStack(null);
+        transaction.commit();
+    }
+
+    public void onStartEffects(View view) {
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        transaction.add(R.id.container, new StartUpEffectsFragment());
         transaction.addToBackStack(null);
         transaction.commit();
     }

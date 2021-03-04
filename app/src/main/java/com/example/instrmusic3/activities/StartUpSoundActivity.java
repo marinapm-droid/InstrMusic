@@ -12,6 +12,7 @@ import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.view.Display;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.Surface;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
@@ -159,4 +160,5 @@ public class StartUpSoundActivity extends FragmentActivity implements CompoundBu
                 }
         }
     }
+
 }
