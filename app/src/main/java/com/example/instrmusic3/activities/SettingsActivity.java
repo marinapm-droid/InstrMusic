@@ -12,9 +12,9 @@ public class SettingsActivity extends PreferenceActivity {
 		super.onCreate(savedInstanceState);
 		addPreferencesFromResource(com.example.instrmusic3.R.xml.preferences);
 		addPreferencesFromResource(org.sensors2.common.R.xml.common_preferences);
-		if (android.os.Build.VERSION.SDK_INT >= 11) {
-			getActionBar().setDisplayHomeAsUpEnabled(true);
-		}
+		//if (android.os.Build.VERSION.SDK_INT >= 11) {
+		//	getActionBar().setDisplayHomeAsUpEnabled(true);
+		//}
 	}
 
 	@Override

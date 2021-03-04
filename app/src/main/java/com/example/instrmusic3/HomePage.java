@@ -43,15 +43,6 @@ public class HomePage extends Activity {
         settingsBtn = findViewById(R.id.settingsImg);
         logOutBtn = findViewById(R.id.logOutImg);
 
-        CompoundButton activeButton = findViewById(R.id.active);
-
-        activeButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View view) {
-               startService(new Intent(HomePage.this, StartUpService.class));
-            }
-        });
-
-
         sensorBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 Intent intent = new Intent(HomePage.this, StartUpActivity.class);
