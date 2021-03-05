@@ -446,13 +446,13 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     }
 
     public void onStartSounds(View view) {
-        if (count == 0) {
+        if (manager.findFragmentByTag("C") != null) {
             StartUpSoundsFragment f4 = new StartUpSoundsFragment();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.add(R.id.container, f4, "C");
             transaction.addToBackStack("addC");
             transaction.commit();
-            count++;
+
         } else {
             Fragment fragment = manager.findFragmentByTag("C");
             FragmentTransaction transaction = manager.beginTransaction();
@@ -462,13 +462,13 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     }
 
     public void onStartEffects(View view) {
-        if (count == 0) {
+        if (manager.findFragmentByTag("D") != null) {
             StartUpEffectsFragment f5 = new StartUpEffectsFragment();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.add(R.id.container, f5, "D");
             transaction.addToBackStack("addD");
             transaction.commit();
-            count++;
+
         } else {
             Fragment fragment = manager.findFragmentByTag("D");
             FragmentTransaction transaction = manager.beginTransaction();
@@ -488,13 +488,12 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     }
 
     public void onStartSensors(View view) {
-        if (count == 0) {
+        if (manager.findFragmentByTag("B") == null) {
             StartupFragment f2 = new StartupFragment();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.add(R.id.container, f2, "B");
             transaction.addToBackStack("addB");
             transaction.commit();
-            count++;
         } else {
             Fragment fragment = manager.findFragmentByTag("B");
             FragmentTransaction transaction = manager.beginTransaction();
