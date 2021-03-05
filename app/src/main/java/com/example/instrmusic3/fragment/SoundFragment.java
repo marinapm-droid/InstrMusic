@@ -12,8 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
-import com.example.instrmusic3.activities.StartUpSoundActivity;
 import com.example.instrmusic3.dispatch.Bundling;
 import com.example.instrmusic3.dispatch.OscCommunication;
 import com.example.instrmusic3.dispatch.OscConfiguration;
@@ -42,7 +42,7 @@ public class SoundFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        StartUpSoundActivity startUpActivity = (StartUpSoundActivity) getActivity();
+        HomePage startUpActivity = (HomePage) getActivity();
         startUpActivity.getSettings();
         this.settings = startUpActivity.loadSettings();
         Bundle args = this.getArguments();

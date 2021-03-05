@@ -21,16 +21,11 @@
                 android:value=".activities.StartUpActivity" />
         </activity>
 
-        <activity android:name=".activities.StartUpSoundActivity" />
-
-        <activity android:name=".activities.StartUpEffectActivity" />
-
         <activity android:name=".activities.SettingsActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activities.StartUpActivity" />
         </activity>
-        <activity android:name=".activities.StartUpActivity" />
 
 
         <activity android:name=".HomePage">

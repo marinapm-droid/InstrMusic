@@ -1,11 +1,9 @@
 package com.example.instrmusic3.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -15,7 +13,7 @@ import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
 
 import org.sensors2.common.sensors.Parameters;
-import com.example.instrmusic3.activities.StartUpActivity;
+
 import com.example.instrmusic3.dispatch.Bundling;
 
 import java.util.Objects;

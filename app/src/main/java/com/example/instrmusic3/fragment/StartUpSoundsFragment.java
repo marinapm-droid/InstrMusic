@@ -4,17 +4,14 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
 
-import com.example.instrmusic3.activities.StartUpActivity;
-import com.example.instrmusic3.activities.StartUpEffectActivity;
-import com.example.instrmusic3.activities.StartUpSoundActivity;
 import com.example.instrmusic3.dispatch.Bundling;
 import com.example.instrmusic3.sounds.ParametersSounds;
 
@@ -27,7 +24,7 @@ public class StartUpSoundsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_sounds, container, false);
-        StartUpSoundActivity activity = (StartUpSoundActivity) getActivity();
+        HomePage activity = (HomePage) getActivity();
         assert activity != null;
         //ParametersEffects parametersEffects = new ParametersEffects();
         List<String> soundList = ParametersSounds.getSounds();

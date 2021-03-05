@@ -14,8 +14,6 @@ import androidx.fragment.app.Fragment;
 
 import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
-import com.example.instrmusic3.activities.StartUpActivity;
-import com.example.instrmusic3.activities.StartUpEffectActivity;
 import com.example.instrmusic3.dispatch.Bundling;
 import com.example.instrmusic3.dispatch.OscCommunication;
 import com.example.instrmusic3.dispatch.OscConfiguration;
@@ -55,7 +53,6 @@ public class EffectsFragment extends Fragment {
         setName(this.name);
 
         groupName.setText(name);
-
         Button button = v.findViewById(R.id.active);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,7 +78,7 @@ public class EffectsFragment extends Fragment {
                 }
             }
         });
-        return v;
+      return v;
     }
 
 

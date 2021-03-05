@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -14,7 +13,6 @@ import com.example.instrmusic3.Effects.ParametersEffects;
 import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
 
-import com.example.instrmusic3.activities.StartUpEffectActivity;
 import com.example.instrmusic3.dispatch.Bundling;
 
 import java.util.List;

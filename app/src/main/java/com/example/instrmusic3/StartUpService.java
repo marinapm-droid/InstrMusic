@@ -23,7 +23,6 @@ import android.os.PowerManager;
 import android.preference.PreferenceManager;
 
 import android.view.Display;
-import android.view.Menu;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.Surface;
@@ -37,12 +36,11 @@ import org.sensors2.common.nfc.NfcActivity;
 import org.sensors2.common.sensors.Parameters;
 import org.sensors2.common.sensors.SensorActivity;
 import org.sensors2.common.sensors.SensorCommunication;
-import com.example.instrmusic3.R;
+
 import com.example.instrmusic3.dispatch.OscConfiguration;
 import com.example.instrmusic3.dispatch.OscDispatcher;
 import com.example.instrmusic3.dispatch.OscReceiveConfig;
 import com.example.instrmusic3.dispatch.OscReceiveConfigSound;
-import com.example.instrmusic3.fragment.MultiTouchFragment;
 import com.example.instrmusic3.fragment.SensorFragment;
 import com.example.instrmusic3.fragment.StartupFragment;
 import com.example.instrmusic3.sensors.Settings;
@@ -62,8 +60,6 @@ import androidx.annotation.Nullable;
 import com.example.instrmusic3.activities.AboutActivity;
 import com.example.instrmusic3.activities.GuideActivity;
 import com.example.instrmusic3.activities.SettingsActivity;
-import com.example.instrmusic3.activities.StartUpEffectActivity;
-import com.example.instrmusic3.activities.StartUpSoundActivity;
 
 
 public class StartUpService extends Service {
@@ -341,39 +337,7 @@ public class StartUpService extends Service {
         // return true;
         //}
 
-        @SuppressLint("NonConstantResourceId")
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-            int id = item.getItemId();
-            switch (id) {
-                case R.id.action_settings: {
-                    Intent intent = new Intent(this, SettingsActivity.class);
-                    startActivity(intent);
-                    return true;
-                }
-                case R.id.action_guide: {
-                    Intent intent = new Intent(this, GuideActivity.class);
-                    startActivity(intent);
-                    return true;
-                }
-                case R.id.action_about: {
-                    Intent intent = new Intent(this, AboutActivity.class);
-                    startActivity(intent);
-                    return true;
-                }
-                case R.id.action_sound: {
-                    Intent intent = new Intent(this, StartUpSoundActivity.class);
-                    startActivity(intent);
-                    return true;
-                }
-                case R.id.action_effect: {
-                    Intent intent = new Intent(this, StartUpEffectActivity.class);
-                    startActivity(intent);
-                    return true;
-                }
-            }
-            return super.onOptionsItemSelected(item);
-        }
+
 
         @Override
         @SuppressLint("NewApi")

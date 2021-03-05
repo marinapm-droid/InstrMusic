@@ -38,15 +38,11 @@ import android.widget.TextView;
 import com.example.instrmusic3.activities.AboutActivity;
 import com.example.instrmusic3.activities.GuideActivity;
 import com.example.instrmusic3.activities.SettingsActivity;
-import com.example.instrmusic3.activities.StartUpActivity;
-import com.example.instrmusic3.activities.StartUpEffectActivity;
-import com.example.instrmusic3.activities.StartUpSoundActivity;
 import com.example.instrmusic3.dispatch.OscConfiguration;
 import com.example.instrmusic3.dispatch.OscDispatcher;
 import com.example.instrmusic3.dispatch.OscReceiveConfig;
 import com.example.instrmusic3.dispatch.OscReceiveConfigSound;
 import com.example.instrmusic3.fragment.HomeFragment;
-import com.example.instrmusic3.fragment.MultiTouchFragment;
 import com.example.instrmusic3.fragment.SensorFragment;
 import com.example.instrmusic3.fragment.StartUpEffectsFragment;
 import com.example.instrmusic3.fragment.StartUpSoundsFragment;
@@ -336,39 +332,6 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     // return true;
     //}
 
-    @SuppressLint("NonConstantResourceId")
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        switch (id) {
-            case R.id.action_settings: {
-                Intent intent = new Intent(this, SettingsActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            case R.id.action_guide: {
-                Intent intent = new Intent(this, GuideActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            case R.id.action_about: {
-                Intent intent = new Intent(this, AboutActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            case R.id.action_sound: {
-                Intent intent = new Intent(this, StartUpSoundActivity.class);
-                startActivity(intent);
-                return true;
-            }
-            case R.id.action_effect: {
-                Intent intent = new Intent(this, StartUpEffectActivity.class);
-                startActivity(intent);
-                return true;
-            }
-        }
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     @SuppressLint("NewApi")
@@ -446,7 +409,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     }
 
     public void onStartSounds(View view) {
-        if (manager.findFragmentByTag("C") != null) {
+        if (manager.findFragmentByTag("C") == null) {
             StartUpSoundsFragment f4 = new StartUpSoundsFragment();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.add(R.id.container, f4, "C");
@@ -462,13 +425,12 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     }
 
     public void onStartEffects(View view) {
-        if (manager.findFragmentByTag("D") != null) {
+        if (manager.findFragmentByTag("D") == null) {
             StartUpEffectsFragment f5 = new StartUpEffectsFragment();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.add(R.id.container, f5, "D");
             transaction.addToBackStack("addD");
             transaction.commit();
-
         } else {
             Fragment fragment = manager.findFragmentByTag("D");
             FragmentTransaction transaction = manager.beginTransaction();
@@ -506,18 +468,22 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     @Override
     public void onBackPressed() {
         FragmentTransaction transaction = manager.beginTransaction();
+        FragmentTransaction transaction1 = manager.beginTransaction();
+        FragmentTransaction transaction2 = manager.beginTransaction();
         if (manager.findFragmentByTag("B") != null) {
             Fragment fragment = manager.findFragmentByTag("B");
             transaction.hide(fragment);
             transaction.commit();
-        } else if (manager.findFragmentByTag("C") != null) {
+        }
+        if (manager.findFragmentByTag("C") != null) {
             Fragment fragment = manager.findFragmentByTag("C");
             transaction.hide(fragment);
-            transaction.commit();
-        } else if (manager.findFragmentByTag("D") != null) {
+            transaction1.commit();
+        }
+        if (manager.findFragmentByTag("D") != null) {
             Fragment fragment = manager.findFragmentByTag("D");
             transaction.hide(fragment);
-            transaction.commit();
+            transaction2.commit();
         }
     }
 
