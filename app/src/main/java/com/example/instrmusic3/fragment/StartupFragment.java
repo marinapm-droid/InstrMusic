@@ -27,9 +27,7 @@ public class StartupFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_start_up, container, false);
 
-        CompoundButton activeButton = v.findViewById(R.id.active);
         HomePage activity = (HomePage) getActivity();
-        activeButton.setOnCheckedChangeListener(activity);
 
 
 
@@ -56,6 +54,7 @@ public class StartupFragment extends Fragment {
 
     private void addSensorToDispatcher(SensorFragment groupFragment) {
         HomePage activity = (HomePage) this.getActivity();
+        assert activity != null;
         activity.addSensorFragment(groupFragment);
     }
 
@@ -66,7 +65,6 @@ public class StartupFragment extends Fragment {
         args.putInt(Bundling.SENSOR_TYPE, parameters.getSensorType());
         args.putString(Bundling.OSC_PREFIX, parameters.getOscPrefix());
         args.putString(Bundling.NAME, parameters.getName());
-        System.out.println("args2:" + args);
         groupFragment.setArguments(args);
 
         return groupFragment;

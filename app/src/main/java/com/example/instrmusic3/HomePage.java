@@ -1,13 +1,11 @@
 package com.example.instrmusic3;
 
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -26,55 +24,35 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.os.PowerManager;
-import android.os.TestLooperManager;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.Display;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.example.instrmusic3.activities.AboutActivity;
 import com.example.instrmusic3.activities.GuideActivity;
 import com.example.instrmusic3.activities.SettingsActivity;
-import com.example.instrmusic3.activities.StartUpActivity;
 import com.example.instrmusic3.activities.StartUpEffectActivity;
 import com.example.instrmusic3.activities.StartUpSoundActivity;
-import com.example.instrmusic3.auth.Login;
-import com.example.instrmusic3.auth.SignUp;
-import com.example.instrmusic3.dispatch.Bundling;
 import com.example.instrmusic3.dispatch.OscConfiguration;
 import com.example.instrmusic3.dispatch.OscDispatcher;
 import com.example.instrmusic3.dispatch.OscReceiveConfig;
 import com.example.instrmusic3.dispatch.OscReceiveConfigSound;
-import com.example.instrmusic3.dispatch.SensorConfiguration;
-import com.example.instrmusic3.fragment.EffectsFragment;
 import com.example.instrmusic3.fragment.MultiTouchFragment;
 import com.example.instrmusic3.fragment.SensorFragment;
 import com.example.instrmusic3.fragment.StartUpEffectsFragment;
 import com.example.instrmusic3.fragment.StartupFragment;
 import com.example.instrmusic3.sensors.Settings;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-
 import org.sensors2.common.dispatch.DataDispatcher;
 import org.sensors2.common.dispatch.Measurement;
 import org.sensors2.common.nfc.NfcActivity;
 import org.sensors2.common.sensors.Parameters;
 import org.sensors2.common.sensors.SensorActivity;
 import org.sensors2.common.sensors.SensorCommunication;
-
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -104,6 +82,9 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); // fullscreen
         setContentView(R.layout.activity_home);
+        CompoundButton activeButton = findViewById(R.id.active);
+        activeButton.setOnCheckedChangeListener(this);
+
         OscReceiveConfig oscReceiveConfigEffect = new OscReceiveConfig();
         OscReceiveConfigSound oscReceiveConfigSound = new OscReceiveConfigSound();
         oscReceiveConfigEffect.receive();
@@ -480,14 +461,21 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     }
 
     public void onStartSensors(View view) {
+        FragmentManager fm = getSupportFragmentManager();
         if(count > 0){
-            getSupportFragmentManager().popBackStack();
+            StartupFragment f1= (StartupFragment) fm.findFragmentByTag("A");
+            FragmentTransaction transaction=fm.beginTransaction();
+            if( f1 != null) {
+                transaction.attach(f1);
+                transaction.addToBackStack("sensors");
+                transaction.commit();
+            }
         }
         else{
-            FragmentManager fm = getSupportFragmentManager();
+            StartupFragment f1=new StartupFragment();
             FragmentTransaction transaction = fm.beginTransaction();
-            transaction.add(R.id.container, new StartupFragment());
-            transaction.addToBackStack(null);
+            transaction.add(R.id.container, f1, "A");
+            transaction.addToBackStack("sensors");
             transaction.commit();
             count++;
         }
