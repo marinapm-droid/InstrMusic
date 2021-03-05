@@ -126,19 +126,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
             transaction.commit();
         }*/
 
-        settingsBtn = findViewById(R.id.settingsImg);
-        logOutBtn = findViewById(R.id.logOutImg);
 
-
-        settingsBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(HomePage.this, SettingsActivity.class);
-            startActivity(intent);
-        });
-
-        logOutBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(HomePage.this, MainActivity.class);
-            startActivity(intent);
-        });
     }
 
     public List<Parameters> GetSensors(SensorManager sensorManager) {
@@ -489,6 +477,16 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         }
     }
 
+    public void onStartLogOut(View view) {
+        Intent intent = new Intent(HomePage.this, MainActivity.class);
+        startActivity(intent);
+    }
+
+    public void onStartLSettings(View view) {
+        Intent intent = new Intent(HomePage.this, Settings.class);
+        startActivity(intent);
+    }
+
     public void onStartSensors(View view) {
         if (count == 0) {
             StartupFragment f2 = new StartupFragment();
@@ -513,11 +511,11 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
             Fragment fragment = manager.findFragmentByTag("B");
             transaction.hide(fragment);
             transaction.commit();
-        } else if (manager.findFragmentByTag("C") != null){
+        } else if (manager.findFragmentByTag("C") != null) {
             Fragment fragment = manager.findFragmentByTag("C");
             transaction.hide(fragment);
             transaction.commit();
-        } else if (manager.findFragmentByTag("D") != null){
+        } else if (manager.findFragmentByTag("D") != null) {
             Fragment fragment = manager.findFragmentByTag("D");
             transaction.hide(fragment);
             transaction.commit();
