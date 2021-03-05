@@ -7,8 +7,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+
 
 import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
@@ -21,8 +20,6 @@ public class HomeFragment extends Fragment {
         CompoundButton activeButton = v.findViewById(R.id.active);
         HomePage activity = (HomePage) getActivity();
         activeButton.setOnCheckedChangeListener(activity);
-
-
         return v;
     }
 

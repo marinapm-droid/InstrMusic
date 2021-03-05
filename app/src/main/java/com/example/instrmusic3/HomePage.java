@@ -1,5 +1,6 @@
 package com.example.instrmusic3;
 
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -78,7 +79,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     public Settings getSettings() {
         return this.settings;
     }
-
+    FragmentManager manager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -103,15 +104,21 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
                 true)});
 
 
+        manager=getSupportFragmentManager();
+        HomeFragment f1=new HomeFragment();
+        FragmentTransaction transaction=manager.beginTransaction();
+        transaction.add(R.id.container,f1,"A");
+        transaction.addToBackStack("addA");
+        transaction.commit();
 
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        HomeFragment startupFragment = (HomeFragment) fm.findFragmentByTag("home");
+
+        /*FragmentTransaction transaction = manager.beginTransaction();
+        HomeFragment startupFragment = (HomeFragment) manager.findFragmentByTag("home");
         if (startupFragment == null) {
             startupFragment = new HomeFragment();
             transaction.add(R.id.container, startupFragment, "home");
             transaction.commit();
-        }
+        }*/
 
       /*sensorBtn = findViewById(R.id.sensorImg);
         effectBtn = findViewById(R.id.effectsImg);
@@ -473,7 +480,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     }
 
     public void onStartSensors(View view) {
-        FragmentManager fm = getSupportFragmentManager();
+       /* FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
         StartupFragment startupFragment = (StartupFragment) fm.findFragmentByTag("effectlist");
         if (startupFragment == null) {
@@ -481,8 +488,31 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
             transaction.add(R.id.container, startupFragment, "effectlist");
             transaction.addToBackStack("sensor");
             transaction.commit();
+        }*/
+        if(count==0) {
+            StartupFragment f2 = new StartupFragment();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.add(R.id.container, f2, "B");
+            transaction.addToBackStack("addB");
+            transaction.commit();
+            count++;
+        } else {
+            manager.popBackStack("addB",0);
         }
     }
+
+
+    @Override public void onBackPressed() {
+        Fragment fragment = getSupportFragmentManager().findFragmentByTag("B");
+        if(fragment!=null){
+            StartupFragment f2 = new StartupFragment();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.add(R.id.container, f2, "B");
+            transaction.addToBackStack("addB");
+            transaction.commit();
+        }
+    }
+
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
