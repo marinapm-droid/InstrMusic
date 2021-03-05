@@ -12,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
 import com.example.instrmusic3.activities.StartUpActivity;
 import com.example.instrmusic3.activities.StartUpEffectActivity;
@@ -42,7 +43,7 @@ public class EffectsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
-        StartUpActivity startUpActivity = (StartUpActivity) getActivity();
+        HomePage startUpActivity = (HomePage) getActivity();
         startUpActivity.getSettings();
         this.settings = startUpActivity.loadSettings();
         Bundle args = this.getArguments();

@@ -122,11 +122,12 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
             Intent intent = new Intent(HomePage.this, StartUpSoundActivity.class);
             startActivity(intent);
         });
-
+    /*
         effectBtn.setOnClickListener(view -> {
             Intent intent = new Intent(HomePage.this, StartUpEffectActivity.class);
             startActivity(intent);
         });
+        */
         logOutBtn.setOnClickListener(view -> {
             Intent intent = new Intent(HomePage.this, MainActivity.class);
             startActivity(intent);
@@ -455,9 +456,12 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     public void onStartEffects(View view) {
         FragmentManager fm = getSupportFragmentManager();
         FragmentTransaction transaction = fm.beginTransaction();
-        transaction.add(R.id.container, new StartUpEffectsFragment());
-        transaction.addToBackStack(null);
-        transaction.commit();
+        StartUpEffectsFragment startupFragment = (StartUpEffectsFragment) fm.findFragmentByTag("effectlist");
+        if (startupFragment == null) {
+            startupFragment = new StartUpEffectsFragment();
+            transaction.add(R.id.container, startupFragment, "effectlist");
+            transaction.commit();
+        }
     }
 
     public void onStartSensors(View view) {

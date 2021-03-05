@@ -11,6 +11,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.instrmusic3.Effects.ParametersEffects;
+import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
 
 import com.example.instrmusic3.activities.StartUpEffectActivity;
@@ -25,8 +26,8 @@ public class StartUpEffectsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_effects, container, false);
-//        StartUpEffectActivity activity = (StartUpEffectActivity) getActivity();
-      //  assert activity != null;
+        HomePage activity = (HomePage) getActivity();
+        assert activity != null;
         ParametersEffects parametersEffects = new ParametersEffects();
         List<String> effectList = ParametersEffects.getEffects();
         for (String effect : effectList) {

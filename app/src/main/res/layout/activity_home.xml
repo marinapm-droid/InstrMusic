@@ -196,7 +196,8 @@
         app:layout_constraintBottom_toBottomOf="@+id/effects"
         app:layout_constraintEnd_toEndOf="@+id/effects"
         app:layout_constraintStart_toStartOf="@+id/effects"
-        app:layout_constraintTop_toTopOf="@+id/imageView2" />
+        app:layout_constraintTop_toTopOf="@+id/imageView2"
+        android:onClick="onStartEffects"/>
 
     <TextView
         android:id="@+id/favorite"

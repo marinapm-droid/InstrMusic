@@ -67,14 +67,7 @@ public class StartUpEffectActivity extends FragmentActivity implements CompoundB
                 new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
 
 
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        StartUpEffectsFragment startupFragment = (StartUpEffectsFragment) fm.findFragmentByTag("effectlist");
-        if (startupFragment == null) {
-            startupFragment = new StartUpEffectsFragment();
-            transaction.add(R.id.container, startupFragment, "effectlist");
-            transaction.commit();
-        }
+
     }
 
     public Settings loadSettings() {
