@@ -92,6 +92,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     private NfcAdapter nfcAdapter;
     private PendingIntent mPendingIntent;
     private NdefMessage mNdefPushMessage;
+    public int count = 0;
 
 
     public Settings getSettings() {
@@ -479,11 +480,17 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     }
 
     public void onStartSensors(View view) {
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        transaction.add(R.id.container, new StartupFragment());
-        transaction.addToBackStack(null);
-        transaction.commit();
+        if(count > 0){
+            getSupportFragmentManager().popBackStack();
+        }
+        else{
+            FragmentManager fm = getSupportFragmentManager();
+            FragmentTransaction transaction = fm.beginTransaction();
+            transaction.add(R.id.container, new StartupFragment());
+            transaction.addToBackStack(null);
+            transaction.commit();
+            count++;
+        }
     }
 
     @Override
