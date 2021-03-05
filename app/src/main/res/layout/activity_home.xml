@@ -171,7 +171,8 @@
         app:layout_constraintEnd_toEndOf="@+id/sounds"
         app:layout_constraintStart_toStartOf="@+id/sounds"
         app:layout_constraintTop_toTopOf="@+id/sounds"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:onClick="onStartSounds"/>
 
     <TextView
         android:id="@+id/effects"

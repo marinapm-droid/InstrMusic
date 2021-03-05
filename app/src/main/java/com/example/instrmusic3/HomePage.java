@@ -34,6 +34,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+
 import com.example.instrmusic3.activities.AboutActivity;
 import com.example.instrmusic3.activities.GuideActivity;
 import com.example.instrmusic3.activities.SettingsActivity;
@@ -48,14 +49,17 @@ import com.example.instrmusic3.fragment.HomeFragment;
 import com.example.instrmusic3.fragment.MultiTouchFragment;
 import com.example.instrmusic3.fragment.SensorFragment;
 import com.example.instrmusic3.fragment.StartUpEffectsFragment;
+import com.example.instrmusic3.fragment.StartUpSoundsFragment;
 import com.example.instrmusic3.fragment.StartupFragment;
 import com.example.instrmusic3.sensors.Settings;
+
 import org.sensors2.common.dispatch.DataDispatcher;
 import org.sensors2.common.dispatch.Measurement;
 import org.sensors2.common.nfc.NfcActivity;
 import org.sensors2.common.sensors.Parameters;
 import org.sensors2.common.sensors.SensorActivity;
 import org.sensors2.common.sensors.SensorCommunication;
+
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
@@ -79,7 +83,9 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     public Settings getSettings() {
         return this.settings;
     }
+
     FragmentManager manager;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -104,10 +110,10 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
                 true)});
 
 
-        manager=getSupportFragmentManager();
-        HomeFragment f1=new HomeFragment();
-        FragmentTransaction transaction=manager.beginTransaction();
-        transaction.add(R.id.container,f1,"A");
+        manager = getSupportFragmentManager();
+        HomeFragment f1 = new HomeFragment();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.add(R.id.container, f1, "A");
         transaction.addToBackStack("addA");
         transaction.commit();
 
@@ -400,7 +406,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         this.loadSettings();
         this.sensorCommunication.onResume();
         if (active && !this.wakeLock.isHeld()) {
-            this.wakeLock.acquire(10*60*1000L /*10 minutes*/);
+            this.wakeLock.acquire(10 * 60 * 1000L /*10 minutes*/);
         }
 
         if (nfcAdapter != null) {
@@ -468,28 +474,40 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         startActivity(intent);
     }
 
+    public void onStartSounds(View view) {
+        if (count == 0) {
+            StartUpSoundsFragment f4 = new StartUpSoundsFragment();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.add(R.id.container, f4, "C");
+            transaction.addToBackStack("addC");
+            transaction.commit();
+            count++;
+        } else {
+            Fragment fragment = manager.findFragmentByTag("C");
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.show(fragment);
+            transaction.commit();
+        }
+    }
+
     public void onStartEffects(View view) {
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        StartUpEffectsFragment startupFragment = (StartUpEffectsFragment) fm.findFragmentByTag("effectlist");
-        if (startupFragment == null) {
-            startupFragment = new StartUpEffectsFragment();
-            transaction.add(R.id.container, startupFragment, "effectlist");
+        if (count == 0) {
+            StartUpEffectsFragment f5 = new StartUpEffectsFragment();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.add(R.id.container, f5, "D");
+            transaction.addToBackStack("addD");
+            transaction.commit();
+            count++;
+        } else {
+            Fragment fragment = manager.findFragmentByTag("D");
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.show(fragment);
             transaction.commit();
         }
     }
 
     public void onStartSensors(View view) {
-       /* FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        StartupFragment startupFragment = (StartupFragment) fm.findFragmentByTag("effectlist");
-        if (startupFragment == null) {
-            startupFragment = new StartupFragment();
-            transaction.add(R.id.container, startupFragment, "effectlist");
-            transaction.addToBackStack("sensor");
-            transaction.commit();
-        }*/
-        if(count==0) {
+        if (count == 0) {
             StartupFragment f2 = new StartupFragment();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.add(R.id.container, f2, "B");
@@ -505,10 +523,19 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     }
 
 
-    @Override public void onBackPressed() {
-        FragmentTransaction transaction=manager.beginTransaction();
-        if(manager.findFragmentByTag("B")!=null){
+    @Override
+    public void onBackPressed() {
+        FragmentTransaction transaction = manager.beginTransaction();
+        if (manager.findFragmentByTag("B") != null) {
             Fragment fragment = manager.findFragmentByTag("B");
+            transaction.hide(fragment);
+            transaction.commit();
+        } else if (manager.findFragmentByTag("C") != null){
+            Fragment fragment = manager.findFragmentByTag("C");
+            transaction.hide(fragment);
+            transaction.commit();
+        } else if (manager.findFragmentByTag("D") != null){
+            Fragment fragment = manager.findFragmentByTag("D");
             transaction.hide(fragment);
             transaction.commit();
         }
@@ -538,39 +565,34 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
             display.getSize(size);
             width = size.x;
             height = size.y;
-        }
-        else {
+        } else {
             width = display.getWidth();
             height = display.getHeight();
         }
-        switch(display.getRotation()){
+        switch (display.getRotation()) {
             case Surface.ROTATION_90:
                 if (width > height) {
                     return ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
-                }
-                else {
+                } else {
                     return ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
                 }
             case Surface.ROTATION_180:
                 if (height > width) {
                     return ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT;
-                }
-                else {
+                } else {
                     return ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE;
                 }
 
             case Surface.ROTATION_270:
                 if (width > height) {
                     return ActivityInfo.SCREEN_ORIENTATION_REVERSE_LANDSCAPE;
-                }
-                else {
+                } else {
                     return ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
                 }
             default:
                 if (height > width) {
                     return ActivityInfo.SCREEN_ORIENTATION_PORTRAIT;
-                }
-                else {
+                } else {
                     return ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
                 }
         }
