@@ -497,18 +497,19 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
             transaction.commit();
             count++;
         } else {
-            manager.popBackStack("addB",0);
+            Fragment fragment = manager.findFragmentByTag("B");
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.show(fragment);
+            transaction.commit();
         }
     }
 
 
     @Override public void onBackPressed() {
-        Fragment fragment = getSupportFragmentManager().findFragmentByTag("B");
-        if(fragment!=null){
-            StartupFragment f2 = new StartupFragment();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.add(R.id.container, f2, "B");
-            transaction.addToBackStack("addB");
+        FragmentTransaction transaction=manager.beginTransaction();
+        if(manager.findFragmentByTag("B")!=null){
+            Fragment fragment = manager.findFragmentByTag("B");
+            transaction.hide(fragment);
             transaction.commit();
         }
     }
