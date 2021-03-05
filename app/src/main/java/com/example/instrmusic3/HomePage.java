@@ -126,36 +126,19 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
             transaction.commit();
         }*/
 
-      /*sensorBtn = findViewById(R.id.sensorImg);
-        effectBtn = findViewById(R.id.effectsImg);
-        soundBtn = findViewById(R.id.soundsImg);
         settingsBtn = findViewById(R.id.settingsImg);
         logOutBtn = findViewById(R.id.logOutImg);
 
-        sensorBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(HomePage.this, StartUpActivity.class);
-            startActivity(intent);
-        });
 
         settingsBtn.setOnClickListener(view -> {
             Intent intent = new Intent(HomePage.this, SettingsActivity.class);
             startActivity(intent);
         });
 
-        soundBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(HomePage.this, StartUpSoundActivity.class);
-            startActivity(intent);
-        });
-
-        effectBtn.setOnClickListener(view -> {
-            Intent intent = new Intent(HomePage.this, StartUpEffectActivity.class);
-            startActivity(intent);
-        });
-
         logOutBtn.setOnClickListener(view -> {
             Intent intent = new Intent(HomePage.this, MainActivity.class);
             startActivity(intent);
-        });*/
+        });
     }
 
     public List<Parameters> GetSensors(SensorManager sensorManager) {
