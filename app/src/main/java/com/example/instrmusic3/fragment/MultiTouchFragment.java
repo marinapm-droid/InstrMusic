@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import org.sensors2.common.dispatch.Measurement;
+
+import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
 import com.example.instrmusic3.activities.StartUpActivity;
 import com.example.instrmusic3.dispatch.OscDispatcher;
@@ -22,7 +24,7 @@ public class MultiTouchFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_multi_touch, container, false);
 
-        StartUpActivity activity = (StartUpActivity) getActivity();
+        HomePage activity = (HomePage) getActivity();
         v.findViewById(R.id.multi_touch_view).setOnTouchListener(activity);
 
         OscDispatcher dispatcher = (OscDispatcher) activity.getDispatcher();

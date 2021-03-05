@@ -39,7 +39,9 @@ import org.sensors2.common.sensors.SensorActivity;
 import org.sensors2.common.sensors.SensorCommunication;
 
 import com.example.instrmusic3.Effects.ParametersEffects;
+import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
+import com.example.instrmusic3.StartUpService;
 import com.example.instrmusic3.dispatch.OscConfiguration;
 import com.example.instrmusic3.dispatch.OscDispatcher;
 import com.example.instrmusic3.dispatch.OscReceiveConfig;
@@ -416,11 +418,8 @@ public class StartUpActivity extends FragmentActivity implements SensorActivity,
     }
 
     public void onStartMultiTouch(View view) {
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        transaction.add(R.id.container, new MultiTouchFragment());
-        transaction.addToBackStack(null);
-        transaction.commit();
+        Intent intent = new Intent(StartUpActivity.this, HomePage.class);
+        startActivity(intent);
     }
 
     public void onStartEffects(View view) {

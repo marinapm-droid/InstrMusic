@@ -446,11 +446,8 @@ public class StartUpService extends Service {
         }
 
         public void onStartMultiTouch(View view) {
-            FragmentManager fm = getSupportFragmentManager();
-            FragmentTransaction transaction = fm.beginTransaction();
-            transaction.add(R.id.container, new MultiTouchFragment());
-            transaction.addToBackStack(null);
-            transaction.commit();
+            Intent intent = new Intent(StartUpService.this, HomePage.class);
+            startActivity(intent);
         }
 
         @Override

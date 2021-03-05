@@ -36,12 +36,14 @@ import android.widget.TextView;
 import com.example.instrmusic3.activities.AboutActivity;
 import com.example.instrmusic3.activities.GuideActivity;
 import com.example.instrmusic3.activities.SettingsActivity;
+import com.example.instrmusic3.activities.StartUpActivity;
 import com.example.instrmusic3.activities.StartUpEffectActivity;
 import com.example.instrmusic3.activities.StartUpSoundActivity;
 import com.example.instrmusic3.dispatch.OscConfiguration;
 import com.example.instrmusic3.dispatch.OscDispatcher;
 import com.example.instrmusic3.dispatch.OscReceiveConfig;
 import com.example.instrmusic3.dispatch.OscReceiveConfigSound;
+import com.example.instrmusic3.fragment.HomeFragment;
 import com.example.instrmusic3.fragment.MultiTouchFragment;
 import com.example.instrmusic3.fragment.SensorFragment;
 import com.example.instrmusic3.fragment.StartUpEffectsFragment;
@@ -81,9 +83,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); // fullscreen
-        setContentView(R.layout.activity_home);
-        CompoundButton activeButton = findViewById(R.id.active);
-        activeButton.setOnCheckedChangeListener(this);
+        setContentView(R.layout.main);
 
         OscReceiveConfig oscReceiveConfigEffect = new OscReceiveConfig();
         OscReceiveConfigSound oscReceiveConfigSound = new OscReceiveConfigSound();
@@ -102,16 +102,27 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         mNdefPushMessage = new NdefMessage(new NdefRecord[]{newTextRecord(
                 true)});
 
-        sensorBtn = findViewById(R.id.sensorImg);
+
+
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction transaction = fm.beginTransaction();
+        HomeFragment startupFragment = (HomeFragment) fm.findFragmentByTag("home");
+        if (startupFragment == null) {
+            startupFragment = new HomeFragment();
+            transaction.add(R.id.container, startupFragment, "home");
+            transaction.commit();
+        }
+
+      /*sensorBtn = findViewById(R.id.sensorImg);
         effectBtn = findViewById(R.id.effectsImg);
         soundBtn = findViewById(R.id.soundsImg);
         settingsBtn = findViewById(R.id.settingsImg);
         logOutBtn = findViewById(R.id.logOutImg);
 
-        /*sensorBtn.setOnClickListener(view -> {
+        sensorBtn.setOnClickListener(view -> {
             Intent intent = new Intent(HomePage.this, StartUpActivity.class);
             startActivity(intent);
-        });*/
+        });
 
         settingsBtn.setOnClickListener(view -> {
             Intent intent = new Intent(HomePage.this, SettingsActivity.class);
@@ -122,16 +133,16 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
             Intent intent = new Intent(HomePage.this, StartUpSoundActivity.class);
             startActivity(intent);
         });
-    /*
+
         effectBtn.setOnClickListener(view -> {
             Intent intent = new Intent(HomePage.this, StartUpEffectActivity.class);
             startActivity(intent);
         });
-        */
+
         logOutBtn.setOnClickListener(view -> {
             Intent intent = new Intent(HomePage.this, MainActivity.class);
             startActivity(intent);
-        });
+        });*/
     }
 
     public List<Parameters> GetSensors(SensorManager sensorManager) {
@@ -446,11 +457,8 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     }
 
     public void onStartMultiTouch(View view) {
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction transaction = fm.beginTransaction();
-        transaction.add(R.id.container, new MultiTouchFragment());
-        transaction.addToBackStack(null);
-        transaction.commit();
+        Intent intent = new Intent(HomePage.this, HomePage.class);
+        startActivity(intent);
     }
 
     public void onStartEffects(View view) {
@@ -466,22 +474,13 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
 
     public void onStartSensors(View view) {
         FragmentManager fm = getSupportFragmentManager();
-        if(count > 0){
-            StartupFragment f1= (StartupFragment) fm.findFragmentByTag("A");
-            FragmentTransaction transaction=fm.beginTransaction();
-            if( f1 != null) {
-                transaction.attach(f1);
-                transaction.addToBackStack("sensors");
-                transaction.commit();
-            }
-        }
-        else{
-            StartupFragment f1=new StartupFragment();
-            FragmentTransaction transaction = fm.beginTransaction();
-            transaction.add(R.id.container, f1, "A");
-            transaction.addToBackStack("sensors");
+        FragmentTransaction transaction = fm.beginTransaction();
+        StartupFragment startupFragment = (StartupFragment) fm.findFragmentByTag("effectlist");
+        if (startupFragment == null) {
+            startupFragment = new StartupFragment();
+            transaction.add(R.id.container, startupFragment, "effectlist");
+            transaction.addToBackStack("sensor");
             transaction.commit();
-            count++;
         }
     }
 
