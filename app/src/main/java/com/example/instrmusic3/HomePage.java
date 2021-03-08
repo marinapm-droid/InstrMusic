@@ -34,6 +34,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.instrmusic3.activities.AboutActivity;
 import com.example.instrmusic3.activities.GuideActivity;

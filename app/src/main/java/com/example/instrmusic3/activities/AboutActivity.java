@@ -7,6 +7,7 @@ import androidx.core.app.NavUtils;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.view.MenuItem;
+import android.view.WindowManager;
 import android.widget.TextView;
 import com.example.instrmusic3.R;
 
@@ -16,6 +17,7 @@ public class AboutActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_about);
 		String versionString = getResources().getString(R.string.app_name);
 		try {

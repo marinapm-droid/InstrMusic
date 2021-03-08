@@ -9,38 +9,29 @@
     >
 
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:paddingBottom="8dp"
-        tools:ignore="MissingConstraints">
+    <ToggleButton
+        android:id="@+id/active"
+        android:layout_width="144dp"
+        android:layout_height="144dp"
+        android:layout_gravity="right"
+        android:background="@drawable/toggle_selector"
+        android:textOff=" "
+        android:textOn=" "
+        app:layout_constraintBottom_toBottomOf="@+id/lottie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/lottie" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:text="Send data" />
-
-        <ToggleButton
-            android:id="@+id/active"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right" />
-
-    </LinearLayout>
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottie"
-        android:layout_width="match_parent"
-        android:layout_height="493dp"
+        android:layout_width="435dp"
+        android:layout_height="527dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.031"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/background" />
@@ -63,9 +54,10 @@
         android:text="Effects"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/favorite"
+        app:layout_constraintEnd_toEndOf="@+id/effects"
+        app:layout_constraintStart_toStartOf="@+id/effects"
         app:layout_constraintTop_toBottomOf="@+id/effects"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="127dp" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView2"
@@ -74,9 +66,10 @@
         android:text="Sounds"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/recordings"
+        app:layout_constraintEnd_toEndOf="@+id/sounds"
+        app:layout_constraintStart_toStartOf="@+id/sounds"
         app:layout_constraintTop_toBottomOf="@+id/sounds"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="224dp" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView3"
@@ -88,6 +81,8 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/logOut"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/settings"
         app:layout_constraintTop_toBottomOf="@+id/settings"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -98,9 +93,10 @@
         android:text="Sensor"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/profile"
+        app:layout_constraintEnd_toEndOf="@+id/sensor"
+        app:layout_constraintStart_toStartOf="@+id/sensor"
         app:layout_constraintTop_toBottomOf="@+id/sensor"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="27dp" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView4"
@@ -109,9 +105,10 @@
         android:text="Favorites"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/favorite"
+        app:layout_constraintStart_toStartOf="@+id/favorite"
         app:layout_constraintTop_toBottomOf="@+id/favorite"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="122dp" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView6"
@@ -123,6 +120,8 @@
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.937"
+        app:layout_constraintStart_toStartOf="@+id/logOut"
         app:layout_constraintTop_toBottomOf="@+id/logOut"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -133,9 +132,10 @@
         android:text="Recordings"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/recordings"
+        app:layout_constraintStart_toStartOf="@+id/recordings"
         app:layout_constraintTop_toBottomOf="@+id/recordings"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="214dp" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/textView5"
@@ -144,18 +144,11 @@
         android:text="Profile"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/profile"
+        app:layout_constraintStart_toStartOf="@+id/profile"
         app:layout_constraintTop_toBottomOf="@+id/profile"
-        app:layout_constraintVertical_bias="0.0"
-        tools:layout_editor_absoluteX="27dp" />
+        app:layout_constraintVertical_bias="0.0" />
 
-    <TextView
-        android:textColor="@color/white"
-        android:id="@+id/sensors2osc_links"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:linksClickable="true"
-        android:paddingTop="16dp"
-        android:text="Effects"/>
 
     <TextView
         android:id="@+id/settings"

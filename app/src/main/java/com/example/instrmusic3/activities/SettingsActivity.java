@@ -4,12 +4,14 @@ import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import androidx.core.app.NavUtils;
 import android.view.MenuItem;
+import android.view.WindowManager;
 
 
 public class SettingsActivity extends PreferenceActivity {
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		addPreferencesFromResource(com.example.instrmusic3.R.xml.preferences);
 		addPreferencesFromResource(org.sensors2.common.R.xml.common_preferences);
 		//if (android.os.Build.VERSION.SDK_INT >= 11) {
