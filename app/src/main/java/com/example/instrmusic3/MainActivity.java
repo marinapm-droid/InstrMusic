@@ -14,8 +14,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
 import com.example.instrmusic3.auth.Login;
-import com.example.instrmusic3.dispatch.OscReceiveConfig;
-import com.example.instrmusic3.dispatch.OscReceiveConfigSound;
+
 
 public class MainActivity extends AppCompatActivity {
 
@@ -41,24 +40,21 @@ public class MainActivity extends AppCompatActivity {
 
         //5 sec
         int SPLASH_SCREEN = 5000;
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent=new Intent(MainActivity.this, Login.class);
+        new Handler().postDelayed(() -> {
+            Intent intent=new Intent(MainActivity.this, Login.class);
 
-                Pair[] pairs= new Pair[2];
-                pairs[0]=new Pair<View, String>(nome, "logo_nome");
-                pairs[1]=new Pair<View, String>(barras, "logo_barras");
+            Pair[] pairs= new Pair[2];
+            pairs[0]=new Pair<View, String>(nome, "logo_nome");
+            pairs[1]=new Pair<View, String>(barras, "logo_barras");
 
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-                    ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,pairs);
-                    startActivity(intent, options.toBundle());
-                    finish();
-                } else {
-                    startActivity(intent);
-                    finish();
-                    overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
-                }
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation(MainActivity.this,pairs);
+                startActivity(intent, options.toBundle());
+                finish();
+            } else {
+                startActivity(intent);
+                finish();
+                overridePendingTransition(R.anim.fade_in, R.anim.fade_out);
             }
         }, SPLASH_SCREEN);
 

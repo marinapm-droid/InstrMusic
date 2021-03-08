@@ -17,13 +17,21 @@ public class OscHandler extends Handler {
     public OscHandler(Looper myLooper) {
         super(myLooper);
     }
+    public OscHandler( ) {
+
+    }
+    String oscParameter;
+
+    public String getParameter(){
+        return oscParameter;
+    }
 
     @Override
     public void handleMessage(Message message) {
         Bundle data = message.getData();
         float[] values = data.getFloatArray(Bundling.VALUES);
         String stringValue = data.getString(Bundling.STRING_VALUE);
-        String oscParameter = data.getString(Bundling.OSC_PARAMETER);
+        oscParameter = data.getString(Bundling.OSC_PARAMETER);
         OscConfiguration configuration = OscConfiguration.getInstance();
 
         if (configuration == null || configuration.getOscPort() == null) {

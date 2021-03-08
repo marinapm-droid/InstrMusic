@@ -27,23 +27,21 @@ import android.os.Parcelable;
 import android.os.PowerManager;
 import android.preference.PreferenceManager;
 import android.view.Display;
-import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.instrmusic3.activities.AboutActivity;
-import com.example.instrmusic3.activities.GuideActivity;
 import com.example.instrmusic3.activities.SettingsActivity;
+import com.example.instrmusic3.dispatch.Bundling;
 import com.example.instrmusic3.dispatch.OscConfiguration;
 import com.example.instrmusic3.dispatch.OscDispatcher;
+import com.example.instrmusic3.dispatch.OscHandler;
 import com.example.instrmusic3.dispatch.OscReceiveConfig;
 import com.example.instrmusic3.dispatch.OscReceiveConfigSound;
 import com.example.instrmusic3.fragment.HomeFragment;
+import com.example.instrmusic3.fragment.MultiTouchFragment;
 import com.example.instrmusic3.fragment.SensorFragment;
 import com.example.instrmusic3.fragment.StartUpEffectsFragment;
 import com.example.instrmusic3.fragment.StartUpSoundsFragment;
@@ -64,7 +62,6 @@ import java.util.Locale;
 
 public class HomePage extends FragmentActivity implements SensorActivity, NfcActivity, CompoundButton.OnCheckedChangeListener, View.OnTouchListener {
 
-    TextView sensorBtn, effectBtn, soundBtn, settingsBtn, logOutBtn;
     private Settings settings;
     private SensorCommunication sensorCommunication;
     private OscDispatcher dispatcher;
@@ -104,7 +101,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         mPendingIntent = PendingIntent.getActivity(this, 0,
                 new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP), 0);
         mNdefPushMessage = new NdefMessage(new NdefRecord[]{newTextRecord(
-                true)});
+        )});
 
 
         manager = getSupportFragmentManager();
@@ -113,17 +110,6 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         transaction.add(R.id.container, f1, "A");
         transaction.addToBackStack("addA");
         transaction.commit();
-
-
-        /*FragmentTransaction transaction = manager.beginTransaction();
-        HomeFragment startupFragment = (HomeFragment) manager.findFragmentByTag("home");
-        if (startupFragment == null) {
-            startupFragment = new HomeFragment();
-            transaction.add(R.id.container, startupFragment, "home");
-            transaction.commit();
-        }*/
-
-
     }
 
     public List<Parameters> GetSensors(SensorManager sensorManager) {
@@ -144,13 +130,13 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     }
 
     @TargetApi(10)
-    private NdefRecord newTextRecord(boolean encodeInUtf8) {
+    private NdefRecord newTextRecord() {
         byte[] langBytes = Locale.ENGLISH.getLanguage().getBytes(Charset.forName("US-ASCII"));
 
-        Charset utfEncoding = encodeInUtf8 ? Charset.forName("UTF-8") : Charset.forName("UTF-16");
+        Charset utfEncoding = Charset.forName("UTF-8");
         byte[] textBytes = "Message from NFC Reader :-)".getBytes(utfEncoding);
 
-        int utfBit = encodeInUtf8 ? 0 : (1 << 7);
+        int utfBit = 0;
         char status = (char) (utfBit + langBytes.length);
 
         byte[] data = new byte[1 + langBytes.length + textBytes.length];
@@ -169,17 +155,15 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
                 || NfcAdapter.ACTION_NDEF_DISCOVERED.equals(action)) {
             Parcelable[] rawMsgs = intent.getParcelableArrayExtra(NfcAdapter.EXTRA_NDEF_MESSAGES);
             NdefMessage[] msgs;
+            byte[] empty = new byte[0];
+            byte[] id = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID);
             if (rawMsgs != null) {
-                byte[] empty = new byte[0];
-                byte[] id = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID);
                 byte[] payload = new byte[0];
                 NdefRecord record = new NdefRecord(NdefRecord.TNF_UNKNOWN, empty, id, payload);
                 NdefMessage msg = new NdefMessage(new NdefRecord[]{record});
                 msgs = new NdefMessage[]{msg};
             } else {
                 // Unknown tag type
-                byte[] empty = new byte[0];
-                byte[] id = intent.getByteArrayExtra(NfcAdapter.EXTRA_ID);
                 Parcelable tag = intent.getParcelableExtra(NfcAdapter.EXTRA_TAG);
                 byte[] payload = dumpTagData(tag).getBytes();
                 NdefRecord record = new NdefRecord(NdefRecord.TNF_UNKNOWN, empty, id, payload);
@@ -281,10 +265,10 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     private long getDec(byte[] bytes) {
         long result = 0;
         long factor = 1;
-        for (int i = 0; i < bytes.length; ++i) {
-            long value = bytes[i] & 0xffl;
+        for (byte aByte : bytes) {
+            long value = aByte & 0xffL;
             result += value * factor;
-            factor *= 256l;
+            factor *= 256L;
         }
         return result;
     }
@@ -293,9 +277,9 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         long result = 0;
         long factor = 1;
         for (int i = bytes.length - 1; i >= 0; --i) {
-            long value = bytes[i] & 0xffl;
+            long value = bytes[i] & 0xffL;
             result += value * factor;
-            factor *= 256l;
+            factor *= 256L;
         }
         return result;
     }
@@ -388,7 +372,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     public void onCheckedChanged(CompoundButton compoundButton, boolean isChecked) {
         if (isChecked) {
             if (!this.wakeLock.isHeld()) {
-                this.wakeLock.acquire();
+                this.wakeLock.acquire(10 * 60 * 1000L /*10 minutes*/);
             }
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             this.setRequestedOrientation(this.getCurrentOrientation());
@@ -405,8 +389,19 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     }
 
     public void onStartMultiTouch(View view) {
-        Intent intent = new Intent(HomePage.this, HomePage.class);
-        startActivity(intent);
+        if (manager.findFragmentByTag("F") == null) {
+            MultiTouchFragment f8 = new MultiTouchFragment();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.add(R.id.container, f8, "F");
+            transaction.addToBackStack("addF");
+            transaction.commit();
+        } else {
+            Fragment fragment = manager.findFragmentByTag("F");
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.show(fragment);
+            transaction.commit();
+        }
+        count++;
     }
 
     public void onStartSounds(View view) {
@@ -445,7 +440,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         startActivity(intent);
     }
 
-    public void onStartLSettings(View view) {
+    public void onStartSettings(View view) {
         Intent intent = new Intent(HomePage.this, SettingsActivity.class);
         startActivity(intent);
     }
@@ -465,17 +460,39 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         }
     }
 
+    public void onStartFavorites(View view) {
+        if (manager.findFragmentByTag("G") == null) {
+            StartupFragment f6 = new StartupFragment();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.add(R.id.container, f6, "G");
+            transaction.addToBackStack("addG");
+            transaction.commit();
+        } else {
+            Fragment fragment = manager.findFragmentByTag("G");
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.show(fragment);
+            transaction.commit();
+        }
+    }
+
+    public void showSelection(View view) {
+        System.out.println("Efeito: " + Bundling.EFFECT_NAME);
+    }
 
     @Override
     public void onBackPressed() {
         FragmentTransaction transaction = manager.beginTransaction();
         FragmentTransaction transaction1 = manager.beginTransaction();
         FragmentTransaction transaction2 = manager.beginTransaction();
+        FragmentTransaction transaction4 = manager.beginTransaction();
+        FragmentTransaction transaction3 = manager.beginTransaction();
+
         if (manager.findFragmentByTag("B") != null) {
             Fragment fragment = manager.findFragmentByTag("B");
             transaction.hide(fragment);
             transaction.commit();
         }
+
         if (manager.findFragmentByTag("C") != null) {
             Fragment fragment = manager.findFragmentByTag("C");
             transaction.hide(fragment);
@@ -483,6 +500,18 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         }
         if (manager.findFragmentByTag("D") != null) {
             Fragment fragment = manager.findFragmentByTag("D");
+            transaction.hide(fragment);
+            transaction3.commit();
+        }
+
+        if (manager.findFragmentByTag("Q") != null) {
+            Fragment fragment = manager.findFragmentByTag("Q");
+            transaction.hide(fragment);
+            transaction4.commit();
+        }
+
+        if (manager.findFragmentByTag("F") != null) {
+            Fragment fragment = manager.findFragmentByTag("F");
             transaction.hide(fragment);
             transaction2.commit();
         }

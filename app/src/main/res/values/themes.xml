@@ -14,7 +14,7 @@
         <!-- Customize your theme here. -->
     </style>
 
-    <style name="PreferencesTheme">
+    <style name="PreferencesTheme" parent="Theme.MaterialComponents.NoActionBar">
         <item name="android:background">#5d515e</item>
     </style>
 

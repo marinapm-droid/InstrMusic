@@ -27,12 +27,8 @@ import java.util.List;
 
 public class EffectsFragment extends Fragment {
     String name;
-    private Handler handler = new Handler();
-    private Settings settings;
+    private final Handler handler = new Handler();
     int onOff = 0;
-    public Settings getSettings() {
-        return this.settings;
-    }
 
     public EffectsFragment() {
         super();
@@ -43,7 +39,7 @@ public class EffectsFragment extends Fragment {
         StrictMode.setThreadPolicy(policy);
         HomePage startUpActivity = (HomePage) getActivity();
         startUpActivity.getSettings();
-        this.settings = startUpActivity.loadSettings();
+        startUpActivity.loadSettings();
         Bundle args = this.getArguments();
         assert args != null;
         name = args.getString(Bundling.EFFECT_NAME);
@@ -54,28 +50,25 @@ public class EffectsFragment extends Fragment {
 
         groupName.setText(name);
         Button button = v.findViewById(R.id.active);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (onOff == 0) {
-                    onOff = 1;
-                    OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
-                    communication.start();
-                    OscHandler handler = communication.getOscHandler();
-                    OscConfiguration oscConfiguration = OscConfiguration.getInstance();
-                    List<Object> args = new ArrayList<Object>(1);
-                    args.add(name);
-                    OSCPortOut sender = oscConfiguration.getOscPort();
-                    OSCMessage msg = new OSCMessage("/effect", args);
-                    try {
-                        sender.send(msg);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                } else {
-                    onOff = 0;
+        button.setOnClickListener(v1 -> {
+            if (onOff == 0) {
+                onOff = 1;
+                OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
+                communication.start();
+                communication.getOscHandler();
+                OscConfiguration oscConfiguration = OscConfiguration.getInstance();
+                List<Object> args1 = new ArrayList<>(1);
+                args1.add(name);
+                OSCPortOut sender = oscConfiguration.getOscPort();
+                OSCMessage msg = new OSCMessage("/effect", args1);
+                try {
+                    sender.send(msg);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
+
+            } else {
+                onOff = 0;
             }
         });
       return v;

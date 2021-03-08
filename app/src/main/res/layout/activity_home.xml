@@ -17,6 +17,7 @@
         android:background="@drawable/toggle_selector"
         android:textOff=" "
         android:textOn=" "
+        android:onClick="showSelection"
         app:layout_constraintBottom_toBottomOf="@+id/lottie"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -90,7 +91,7 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sensor"
+        android:text="Sensors"
         android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/profile"
         app:layout_constraintEnd_toEndOf="@+id/sensor"
@@ -169,7 +170,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:background="@drawable/round_settings_24"
-        android:onClick="onStartLSettings"
+        android:onClick="onStartSettings"
         app:layout_constraintBottom_toBottomOf="@+id/settings"
         app:layout_constraintEnd_toEndOf="@+id/settings"
         app:layout_constraintHorizontal_bias="1.0"
@@ -323,7 +324,8 @@
         app:layout_constraintHorizontal_bias="0.533"
         app:layout_constraintStart_toStartOf="@+id/favorite"
         app:layout_constraintTop_toTopOf="@+id/favorite"
-        app:layout_constraintVertical_bias="0.533" />
+        app:layout_constraintVertical_bias="0.533"
+        android:onClick="onStartFavorites"/>
 
     <TextView
         android:id="@+id/logOut"

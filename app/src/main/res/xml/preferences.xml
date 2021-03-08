@@ -2,12 +2,13 @@
 
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     >
-    <PreferenceCategory android:title="Preferences">
+    <PreferenceCategory android:title="Preferences" >
         <org.sensors2.common.preferences.ExtendedEditTextPreference
             android:defaultValue="localhost"
             android:key="pref_comm_host"
             android:persistent="true"
-            android:title="Host"/>
+            android:title="Host"
+            />
         <org.sensors2.common.preferences.ExtendedEditTextPreference
             android:defaultValue="9000"
             android:key="pref_comm_port"

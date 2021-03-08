@@ -1,14 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              xmlns:tools="http://schemas.android.com/tools"
-                android:background="#5d515e"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent"
-              android:orientation="vertical"
-              android:paddingBottom="16dp"
-              android:paddingLeft="16dp"
-              android:paddingRight="16dp"
-              android:paddingTop="16dp"
-              >
+    android:background="#5d515e"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:paddingBottom="16dp"
+    android:paddingLeft="16dp"
+    android:paddingRight="16dp">
 
     <LinearLayout
         android:layout_width="fill_parent"
@@ -19,36 +17,45 @@
             android:id="@+id/sensorsHeadline"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Available Sensors"
+            android:paddingTop="16dp"
             android:paddingBottom="16dp"
+            android:text="Your Favorites"
 
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:visibility="visible"/>
+            android:visibility="visible" />
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:paddingBottom="8dp">
 
-        <Button
-            android:id="@+id/multi_touch_button"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+        <TextView
+            android:layout_width="329dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:text="Save current selection"
+            android:textSize="20dp" />
+
+        <ToggleButton
+            android:id="@+id/active"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_gravity="right"
-            android:onClick="onStartMultiTouch"
-            android:text="Multi Touch" />
+            android:background="@drawable/toggle_fav"
+            android:textOff=" "
+            android:textOn=" " />
 
     </LinearLayout>
+
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="fill_parent">
 
         <LinearLayout
-            android:id="@+id/sensor_group"
+            android:id="@+id/fav_group"
             xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
