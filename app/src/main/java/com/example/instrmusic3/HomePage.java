@@ -44,6 +44,7 @@ import com.example.instrmusic3.fragment.HomeFragment;
 import com.example.instrmusic3.fragment.MultiTouchFragment;
 import com.example.instrmusic3.fragment.SensorFragment;
 import com.example.instrmusic3.fragment.StartUpEffectsFragment;
+import com.example.instrmusic3.fragment.StartUpFavFragment;
 import com.example.instrmusic3.fragment.StartUpSoundsFragment;
 import com.example.instrmusic3.fragment.StartupFragment;
 import com.example.instrmusic3.sensors.Settings;
@@ -462,7 +463,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
 
     public void onStartFavorites(View view) {
         if (manager.findFragmentByTag("G") == null) {
-            StartupFragment f6 = new StartupFragment();
+            StartUpFavFragment f6 = new StartUpFavFragment();
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.add(R.id.container, f6, "G");
             transaction.addToBackStack("addG");
@@ -504,8 +505,8 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
             transaction3.commit();
         }
 
-        if (manager.findFragmentByTag("Q") != null) {
-            Fragment fragment = manager.findFragmentByTag("Q");
+        if (manager.findFragmentByTag("G") != null) {
+            Fragment fragment = manager.findFragmentByTag("G");
             transaction.hide(fragment);
             transaction4.commit();
         }
