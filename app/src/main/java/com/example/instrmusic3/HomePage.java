@@ -445,7 +445,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     }
 
     public void onStartLSettings(View view) {
-        Intent intent = new Intent(HomePage.this, Settings.class);
+        Intent intent = new Intent(HomePage.this, SettingsActivity.class);
         startActivity(intent);
     }
 
