@@ -60,8 +60,7 @@ public class EffectsFragment extends Fragment {
                 communication.getOscHandler();
                 OscConfiguration oscConfiguration = OscConfiguration.getInstance();
                 List<Object> args1 = new ArrayList<>(1);
-                FavoritesParameters favoritesParameters = new FavoritesParameters();
-                favoritesParameters.setEffect(name);
+                HomePage.setEffect(name);
                 args1.add(name);
                 OSCPortOut sender = oscConfiguration.getOscPort();
                 OSCMessage msg = new OSCMessage("/effect", args1);
