@@ -12,6 +12,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.instrmusic3.Effects.ParametersEffects;
+import com.example.instrmusic3.FavoritesParameters;
 import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
 import com.example.instrmusic3.dispatch.Bundling;
@@ -58,6 +60,8 @@ public class EffectsFragment extends Fragment {
                 communication.getOscHandler();
                 OscConfiguration oscConfiguration = OscConfiguration.getInstance();
                 List<Object> args1 = new ArrayList<>(1);
+                FavoritesParameters favoritesParameters = new FavoritesParameters();
+                favoritesParameters.setEffect(name);
                 args1.add(name);
                 OSCPortOut sender = oscConfiguration.getOscPort();
                 OSCMessage msg = new OSCMessage("/effect", args1);

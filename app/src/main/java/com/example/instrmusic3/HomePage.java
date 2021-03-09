@@ -477,7 +477,8 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     }
 
     public void showSelection(View view) {
-        System.out.println("Efeito: " + Bundling.EFFECT_NAME);
+        FavoritesParameters favoritesParameters = new FavoritesParameters();
+        System.out.println("Efeito: " + favoritesParameters.getEffect());
     }
 
     @Override
