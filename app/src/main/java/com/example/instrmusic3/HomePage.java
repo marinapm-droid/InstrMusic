@@ -477,7 +477,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         }
     }
 
-    public static void setEffect(String effect) {
+    public void setEffect(String effect) {
         this.effect = effect;
     }
 
