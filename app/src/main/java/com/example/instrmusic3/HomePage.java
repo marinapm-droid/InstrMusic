@@ -509,8 +509,6 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         FragmentTransaction transaction2 = manager.beginTransaction();
         FragmentTransaction transaction4 = manager.beginTransaction();
         FragmentTransaction transaction3 = manager.beginTransaction();
-        System.out.println("e se a marina quer ser cá da malta, tem que ter o bébé até ao fim" + manager.findFragmentByTag("C"));
-        System.out.println(fragmento);
         switch (fragmento){
             case "B":
                 Fragment fragment = manager.findFragmentByTag("B");
