@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
+import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.dispatch.SensorConfiguration;
 
 import com.example.instrmusic3.R;
@@ -44,7 +45,10 @@ public class SensorFragment extends Fragment {
 		((TextView) v.findViewById(R.id.osc_prefix)).setText("/" + args.getString(Bundling.OSC_PREFIX));
 
 		CompoundButton activeButton = v.findViewById(R.id.active); // on and off sensor
-		activeButton.setOnCheckedChangeListener((compoundButton, checked) -> sensorConfiguration.setSend(checked));
+		activeButton.setOnCheckedChangeListener((compoundButton, checked) -> {
+			sensorConfiguration.setSend(checked);
+			HomePage.setSensor(name);
+		});
 		return v;
 	}
 

@@ -12,15 +12,11 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.example.instrmusic3.Effects.ParametersEffects;
-import com.example.instrmusic3.FavoritesParameters;
 import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
 import com.example.instrmusic3.dispatch.Bundling;
 import com.example.instrmusic3.dispatch.OscCommunication;
 import com.example.instrmusic3.dispatch.OscConfiguration;
-import com.example.instrmusic3.dispatch.OscHandler;
-import com.example.instrmusic3.sensors.Settings;
 import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPortOut;
 

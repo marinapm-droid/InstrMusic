@@ -48,7 +48,6 @@ public class OscHandler extends Handler {
             changes.add(stringValue);
         }
 
-        HomePage.setSensor(oscParameter);
         OSCMessage oscMessage = new OSCMessage("/"  + oscParameter, changes);
 
         try {
