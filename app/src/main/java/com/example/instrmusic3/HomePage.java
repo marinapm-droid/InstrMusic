@@ -74,6 +74,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     private NdefMessage mNdefPushMessage;
     public int count = 0;
     static String effect, sound, sensor;
+    String fragmento;
 
 
 
@@ -404,7 +405,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
             transaction.show(fragment);
             transaction.commit();
         }
-        count++;
+        fragmento = "F";
     }
 
     public void onStartSounds(View view) {
@@ -421,6 +422,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
             transaction.show(fragment);
             transaction.commit();
         }
+        fragmento = "C";
     }
 
     public void onStartEffects(View view) {
@@ -436,6 +438,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
             transaction.show(fragment);
             transaction.commit();
         }
+        fragmento = "D";
     }
 
     public void onStartLogOut(View view) {
@@ -461,6 +464,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
             transaction.show(fragment);
             transaction.commit();
         }
+        fragmento = "B";
     }
 
     public void onStartFavorites(View view) {
@@ -476,6 +480,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
             transaction.show(fragment);
             transaction.commit();
         }
+        fragmento = "G";
     }
 
     public static void setEffect(String effectSelected) {
@@ -504,18 +509,49 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         FragmentTransaction transaction2 = manager.beginTransaction();
         FragmentTransaction transaction4 = manager.beginTransaction();
         FragmentTransaction transaction3 = manager.beginTransaction();
+        System.out.println("e se a marina quer ser cá da malta, tem que ter o bébé até ao fim" + manager.findFragmentByTag("C"));
+        System.out.println(fragmento);
+        switch (fragmento){
+            case "B":
+                Fragment fragment = manager.findFragmentByTag("B");
+                transaction.hide(fragment);
+                transaction.commit();
+                break;
+            case "C":
+                Fragment fragment1 = manager.findFragmentByTag("C");
+                transaction1.hide(fragment1);
+                transaction1.commit();
+                break;
+            case "D":
+                Fragment fragment2 = manager.findFragmentByTag("D");
+                transaction2.hide(fragment2);
+                transaction2.commit();
+                break;
+            case "F":
+                Fragment fragment3 = manager.findFragmentByTag("F");
+                transaction3.hide(fragment3);
+                transaction3.commit();
+                break;
+            case "G":
+                Fragment fragment4 = manager.findFragmentByTag("G");
+                transaction4.hide(fragment4);
+                transaction4.commit();
+                break;
+            default:
+                System.out.println("a marina cheira a có có, márcia olá");
+        }
 
-        if (manager.findFragmentByTag("B") != null) {
+        /*
+        if (manager.findFragmentByTag("C") != null) {
             Fragment fragment = manager.findFragmentByTag("B");
             transaction.hide(fragment);
             transaction.commit();
-        }
-
-        if (manager.findFragmentByTag("C") != null) {
-            Fragment fragment = manager.findFragmentByTag("C");
+        } else {
+            Fragment fragment = manager.findFragmentByTag("B");
             transaction.hide(fragment);
             transaction1.commit();
         }
+        /*
         if (manager.findFragmentByTag("D") != null) {
             Fragment fragment = manager.findFragmentByTag("D");
             transaction.hide(fragment);
@@ -533,6 +569,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
             transaction.hide(fragment);
             transaction2.commit();
         }
+         */
     }
 
 
