@@ -32,12 +32,13 @@ import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import com.example.instrmusic3.activities.SettingsActivity;
-import com.example.instrmusic3.dispatch.Bundling;
+
+import com.example.instrmusic3.auth.UserHelperClass;
 import com.example.instrmusic3.dispatch.OscConfiguration;
 import com.example.instrmusic3.dispatch.OscDispatcher;
-import com.example.instrmusic3.dispatch.OscHandler;
 import com.example.instrmusic3.dispatch.OscReceiveConfig;
 import com.example.instrmusic3.dispatch.OscReceiveConfigSound;
 import com.example.instrmusic3.fragment.HomeFragment;
@@ -48,6 +49,8 @@ import com.example.instrmusic3.fragment.StartUpFavFragment;
 import com.example.instrmusic3.fragment.StartUpSoundsFragment;
 import com.example.instrmusic3.fragment.StartupFragment;
 import com.example.instrmusic3.sensors.Settings;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.sensors2.common.dispatch.DataDispatcher;
 import org.sensors2.common.dispatch.Measurement;
@@ -495,12 +498,16 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         sound = soundSelected;
     }
 
+    FirebaseDatabase mDatabase;
     public void showSelection(View view) {
+        UserHelperClass helperClass = new UserHelperClass(effect, sound, sensor);
+        mDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference myRef= mDatabase.getReference("users");
+        myRef.child("m").child("favorites").setValue(helperClass);
         System.out.println("Efeito: " + effect);
         System.out.println("Sensor: " + sensor);
         System.out.println("Sound: " + sound);
     }
-
 
     @Override
     public void onBackPressed() {
@@ -539,35 +546,6 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
                 System.out.println("a marina cheira a có có, márcia olá");
         }
 
-        /*
-        if (manager.findFragmentByTag("C") != null) {
-            Fragment fragment = manager.findFragmentByTag("B");
-            transaction.hide(fragment);
-            transaction.commit();
-        } else {
-            Fragment fragment = manager.findFragmentByTag("B");
-            transaction.hide(fragment);
-            transaction1.commit();
-        }
-        /*
-        if (manager.findFragmentByTag("D") != null) {
-            Fragment fragment = manager.findFragmentByTag("D");
-            transaction.hide(fragment);
-            transaction3.commit();
-        }
-
-        if (manager.findFragmentByTag("G") != null) {
-            Fragment fragment = manager.findFragmentByTag("G");
-            transaction.hide(fragment);
-            transaction4.commit();
-        }
-
-        if (manager.findFragmentByTag("F") != null) {
-            Fragment fragment = manager.findFragmentByTag("F");
-            transaction.hide(fragment);
-            transaction2.commit();
-        }
-         */
     }
 
 

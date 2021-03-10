@@ -2,7 +2,8 @@ package com.example.instrmusic3.auth;
 
 public class UserHelperClass {
 
-    String nome, email, password, confPassword;
+    private static String nome;
+    String email, password, confPassword, effect, sound, sensor;
 
 
     public UserHelperClass(String nome, String email, String password, String confPassword) {
@@ -12,7 +13,13 @@ public class UserHelperClass {
         this.confPassword = confPassword;
     }
 
-    public String getNome() {
+    public UserHelperClass(String effect, String sound, String sensor) {
+        this.effect = effect;
+        this.sound = sound;
+        this.sensor = sensor;
+    }
+
+    public static String getNome() {
         return nome;
     }
 
