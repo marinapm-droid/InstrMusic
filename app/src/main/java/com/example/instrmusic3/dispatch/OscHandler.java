@@ -5,6 +5,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
+import com.example.instrmusic3.HomePage;
 import com.illposed.osc.OSCMessage;
 
 import java.io.IOException;
@@ -46,6 +47,8 @@ public class OscHandler extends Handler {
         if (stringValue != null) {
             changes.add(stringValue);
         }
+
+        HomePage.setSensor(oscParameter);
         OSCMessage oscMessage = new OSCMessage("/"  + oscParameter, changes);
 
         try {

@@ -73,7 +73,8 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     private PendingIntent mPendingIntent;
     private NdefMessage mNdefPushMessage;
     public int count = 0;
-    static String effect;
+    static String effect, sound, sensor;
+
 
 
     public Settings getSettings() {
@@ -477,14 +478,24 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         }
     }
 
-    public static void setEffect(String effect1) {
-        effect = effect1;
+    public static void setEffect(String effectSelected) {
+        effect = effectSelected;
+    }
+
+    public static void setSensor(String sensorSelected) {
+        sensor = sensorSelected;
+    }
+
+    public static void setSound(String soundSelected) {
+        sound = soundSelected;
     }
 
     public void showSelection(View view) {
-        FavoritesParameters favoritesParameters = new FavoritesParameters();
         System.out.println("Efeito: " + effect);
+        System.out.println("Sensor: " + sensor);
+        System.out.println("Sound: " + sound);
     }
+
 
     @Override
     public void onBackPressed() {

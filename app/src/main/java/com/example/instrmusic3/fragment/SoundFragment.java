@@ -66,6 +66,7 @@ public class SoundFragment extends Fragment {
                     OscHandler handler = communication.getOscHandler();
                     OscConfiguration oscConfiguration = OscConfiguration.getInstance();
                     List<Object> args = new ArrayList<Object>(1);
+                    HomePage.setSound(name);
                     args.add(name);
                     OSCPortOut sender = oscConfiguration.getOscPort();
                     OSCMessage msg = new OSCMessage("/sound", args);
