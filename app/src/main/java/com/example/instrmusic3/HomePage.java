@@ -73,7 +73,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     private PendingIntent mPendingIntent;
     private NdefMessage mNdefPushMessage;
     public int count = 0;
-    String effect;
+    static String effect;
 
 
     public Settings getSettings() {
@@ -477,13 +477,13 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         }
     }
 
-    public void setEffect(String effect) {
-        this.effect = effect;
+    public static void setEffect(String effect1) {
+        effect = effect1;
     }
 
     public void showSelection(View view) {
         FavoritesParameters favoritesParameters = new FavoritesParameters();
-        System.out.println("Efeito: " + this.effect);
+        System.out.println("Efeito: " + effect);
     }
 
     @Override
