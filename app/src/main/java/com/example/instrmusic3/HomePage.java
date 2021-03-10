@@ -498,12 +498,11 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         sound = soundSelected;
     }
 
-    FirebaseDatabase mDatabase;
     public void showSelection(View view) {
+        DatabaseReference mDatabase;
         UserHelperClass helperClass = new UserHelperClass(effect, sound, sensor);
-        mDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference myRef= mDatabase.getReference("users");
-        myRef.child("m").child("favorites").setValue(helperClass);
+        mDatabase = FirebaseDatabase.getInstance().getReference("users");
+        mDatabase.child("m").child("favorites").setValue(helperClass);
         System.out.println("Efeito: " + effect);
         System.out.println("Sensor: " + sensor);
         System.out.println("Sound: " + sound);
