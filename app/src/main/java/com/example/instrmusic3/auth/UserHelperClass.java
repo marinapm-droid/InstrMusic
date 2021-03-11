@@ -12,7 +12,7 @@ public class UserHelperClass {
         this.confPassword = confPassword;
     }
 
-    public UserHelperClass(String effect, String sensor, String sound) {
+    public UserHelperClass(String sensor, String effect, String sound) {
         this.effect = effect;
         this.sensor = sensor;
         this.sound = sound;

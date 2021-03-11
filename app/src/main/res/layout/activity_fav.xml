@@ -33,12 +33,12 @@
         android:paddingBottom="8dp">
 
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="327dp"
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
             <TextView
-                android:layout_width="329dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="Save current selection"
@@ -46,26 +46,16 @@
 
 
             <TextView
-                android:id="@+id/effect"
-                android:layout_width="329dp"
-                android:layout_height="wrap_content"
+                android:id="@+id/current"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
                 android:textColor="@color/black"
-                android:textSize="20dp" />
-            <TextView
-                android:id="@+id/sensor"
-                android:layout_width="329dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:textColor="@color/black"
-                android:textSize="20dp" />
-            <TextView
-                android:id="@+id/sound"
-                android:layout_width="329dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:textColor="@color/black"
-                android:textSize="20dp" />
+                android:textSize="15dp" />
+
+
+
+
 
         </LinearLayout>
 

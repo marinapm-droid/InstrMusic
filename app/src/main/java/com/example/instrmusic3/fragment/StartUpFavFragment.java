@@ -12,18 +12,13 @@ import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
 
 public class StartUpFavFragment  extends Fragment {
-    String sensor, effect, sound;
+    String current;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_fav, container, false);
-        sound = HomePage.getSound();
-        effect = HomePage.getEffect()+"/";
-        sensor = HomePage.getSensor()+"/";
-        System.out.println(sensor);
-        ((TextView) v.findViewById(R.id.effect)).setText(effect);
-        ((TextView) v.findViewById(R.id.sensor)).setText(sensor);
-        ((TextView) v.findViewById(R.id.sound)).setText(sound);
+        current = HomePage.getSensor()+"/"+HomePage.getEffect()+"/"+HomePage.getSound();
+        ((TextView) v.findViewById(R.id.current)).setText(current);
         return v;
     }
 

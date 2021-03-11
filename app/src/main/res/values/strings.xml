@@ -54,6 +54,8 @@
     <string name="send_data">Send data</string>
     <string name="slide_menu_up">slide menu up</string>
     <string name="sensor_option">sensor_option</string>
+    <string name="your_favorites">Your Favorites</string>
+    <string name="save_current_selection">Save current selection</string>
 
 
 </resources>

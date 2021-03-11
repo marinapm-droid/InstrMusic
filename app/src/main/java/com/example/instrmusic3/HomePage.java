@@ -516,7 +516,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
 
     FirebaseDatabase mDatabase;
     public void saveFavorites(View view) {
-        UserHelperClass helperClass = new UserHelperClass(effect, sound, sensor);
+        UserHelperClass helperClass = new UserHelperClass(sensor, effect, sound);
         mDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef= mDatabase.getReference("users");
         myRef.child(username).child("favorites").setValue(helperClass);
