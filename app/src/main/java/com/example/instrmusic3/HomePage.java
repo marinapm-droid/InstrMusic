@@ -32,6 +32,7 @@ import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.instrmusic3.activities.SettingsActivity;
@@ -501,9 +502,20 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         username = usernameActive;
     }
 
+    public static String getSound() {
+        return sound;
+    }
+
+    public static String getEffect() {
+        return effect;
+    }
+
+    public static String getSensor() {
+        return sensor;
+    }
 
     FirebaseDatabase mDatabase;
-    public void showSelection(View view) {
+    public void saveFavorites(View view) {
         UserHelperClass helperClass = new UserHelperClass(effect, sound, sensor);
         mDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef= mDatabase.getReference("users");
