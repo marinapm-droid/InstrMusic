@@ -18,6 +18,7 @@
         android:paddingBottom="8dp"
         app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/sensorsHeadline"
         app:layout_constraintVertical_bias="0.0">
@@ -46,19 +47,22 @@
 
         </LinearLayout>
 
-        <ToggleButton
-            android:id="@+id/active"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="right"
-            android:background="@drawable/toggle_fav"
-            android:onClick="saveFavorites"
-            android:textOff=" "
-            android:textOn=" "
-
-            />
     </LinearLayout>
 
+    <ToggleButton
+        android:id="@+id/active"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="right"
+        android:background="@drawable/toggle_fav"
+        android:onClick="saveFavorites"
+        android:textOff=" "
+        android:textOn=" "
+
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout2"
+        app:layout_constraintTop_toTopOf="@+id/linearLayout2" />
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="373dp"
