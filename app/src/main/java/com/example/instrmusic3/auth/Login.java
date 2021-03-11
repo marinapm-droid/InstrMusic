@@ -70,9 +70,9 @@ public class Login extends AppCompatActivity {
                                 String usernameFromDB = dataSnapshot.child(userID).child("password").getValue(String.class);
                                 Intent intent = new Intent(getApplicationContext(), HomePage.class);
                                 intent.putExtra("nome", usernameFromDB);
+                                HomePage.setUsername(usernameFromDB);
                                 intent.putExtra("password", passFromDB);
                                 startActivity(intent);
-
                             } else {
 
                                 Toast.makeText(Login.this, "WRONG PASSWORD", Toast.LENGTH_LONG).show();

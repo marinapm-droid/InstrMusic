@@ -75,8 +75,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     private NfcAdapter nfcAdapter;
     private PendingIntent mPendingIntent;
     private NdefMessage mNdefPushMessage;
-    public int count = 0;
-    static String effect, sound, sensor;
+    static String effect, sound, sensor, username;
     String fragmento;
 
 
@@ -498,12 +497,17 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         sound = soundSelected;
     }
 
+    public static void setUsername(String usernameActive) {
+        username = usernameActive;
+    }
+
+
     FirebaseDatabase mDatabase;
     public void showSelection(View view) {
         UserHelperClass helperClass = new UserHelperClass(effect, sound, sensor);
         mDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef= mDatabase.getReference("users");
-        myRef.child("m").child("favorites").setValue(helperClass);
+        myRef.child(username).child("favorites").setValue(helperClass);
         System.out.println("Efeito: " + effect);
         System.out.println("Sensor: " + sensor);
         System.out.println("Sound: " + sound);
@@ -543,7 +547,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
                 transaction4.commit();
                 break;
             default:
-                System.out.println("a marina cheira a có có, márcia olá");
+                System.out.println("erro");
         }
 
     }
