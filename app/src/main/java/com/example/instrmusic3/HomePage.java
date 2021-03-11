@@ -541,6 +541,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
             case "F":
                 Fragment fragment3 = manager.findFragmentByTag("F");
                 transaction3.hide(fragment3);
+                fragmento="B";
                 transaction3.commit();
                 break;
             case "G":
