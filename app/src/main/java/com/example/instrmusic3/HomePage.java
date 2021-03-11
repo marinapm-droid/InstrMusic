@@ -511,6 +511,8 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         System.out.println("Efeito: " + effect);
         System.out.println("Sensor: " + sensor);
         System.out.println("Sound: " + sound);
+        System.out.println("Username: " + username);
+
     }
 
     @Override
