@@ -14,19 +14,6 @@ import com.example.instrmusic3.R;
 import org.sensors2.common.sensors.Parameters;
 
 public class FavoritesFragment extends Fragment {
-    String sensor, effect, sound;
-
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.activity_fav, container, false);
-        sound = HomePage.getSound();
-        effect = HomePage.getEffect()+"/";
-        sensor = HomePage.getSensor()+"/";
-        ((TextView) v.findViewById(R.id.effect)).setText(sensor);
-        ((TextView) v.findViewById(R.id.sensor)).setText(effect);
-        ((TextView) v.findViewById(R.id.sound)).setText(sound);
-        return v;
-    }
 
 }
 
