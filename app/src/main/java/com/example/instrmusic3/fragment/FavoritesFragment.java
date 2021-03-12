@@ -33,7 +33,17 @@ public class FavoritesFragment extends Fragment {
     int onOff=0;
     String effect, sensor, sound;
 
+    public FavoritesFragment() {
+        super();
+    }
+
+
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+        HomePage startUpActivity = (HomePage) getActivity();
+        startUpActivity.getSettings();
+        startUpActivity.loadSettings();
         Bundle args = this.getArguments();
         assert args != null;
         fav = args.getString(Bundling.FAV);
