@@ -29,12 +29,13 @@ import java.util.List;
 import java.util.Objects;
 
 public class StartUpFavFragment extends Fragment {
-    String current, effect, sensor, sound, favorite, userID;
+    String current, favorite, userID, currentEffect, currentSensor, currentSound;
     Long num;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_fav, container, false);
+        System.out.println("GETSENSOR:" + HomePage.getSensor());
         current = HomePage.getSensor() + "/" + HomePage.getEffect() + "/" + HomePage.getSound();
         ((TextView) v.findViewById(R.id.current)).setText(current);
         userID = Login.getUsername();
@@ -46,12 +47,12 @@ public class StartUpFavFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     num = dataSnapshot.child(userID).child("favorites").getChildrenCount();
-                    for(int i=0; i==num; i++ ) {
+                    for(int i=1; i<=num; i++ ) {
                         String num = String.valueOf(i);
-                        effect = dataSnapshot.child(userID).child("favorites").child(num).child("effect").getValue(String.class);
-                        sound = dataSnapshot.child(userID).child("favorites").child(num).child("sound").getValue(String.class);
-                        sensor = dataSnapshot.child(userID).child("favorites").child(num).child("sensor").getValue(String.class);
-                        favorite = sensor + "/" + effect + "/" + sound;
+                        currentEffect = dataSnapshot.child(userID).child("favorites").child(num).child("effect").getValue(String.class);
+                        currentSound = dataSnapshot.child(userID).child("favorites").child(num).child("sound").getValue(String.class);
+                        currentSensor = dataSnapshot.child(userID).child("favorites").child(num).child("sensor").getValue(String.class);
+                        favorite = currentSound + "/" + currentEffect + "/" + currentSensor;
                         System.out.println("VOLUME????? :" + favorite);
                         CreateEffectFragments(favorite);
 
@@ -71,18 +72,18 @@ public class StartUpFavFragment extends Fragment {
 
     public void CreateEffectFragments(String fav) {
         FragmentManager manager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
-        EffectsFragment groupFragment = (EffectsFragment) manager.findFragmentByTag(fav);
+        FavoritesFragment groupFragment = (FavoritesFragment) manager.findFragmentByTag(fav);
         groupFragment = createFragment(fav);
         FragmentTransaction transaction = manager.beginTransaction();
-        transaction.add(R.id.effects_group, groupFragment, fav);
+        transaction.add(R.id.fav_group, groupFragment, fav);
         transaction.commit();
     }
 
 
-    public EffectsFragment createFragment(String fav) {
-        EffectsFragment groupFragment = new EffectsFragment();
+    public FavoritesFragment createFragment(String fav) {
+        FavoritesFragment groupFragment = new FavoritesFragment();
         Bundle args = new Bundle();
-        args.putString(Bundling.EFFECT_NAME, fav);
+        args.putString(Bundling.FAV, fav);
         groupFragment.setArguments(args);
         return groupFragment;
     }

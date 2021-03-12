@@ -16,7 +16,6 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:paddingBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,16 +66,14 @@
         app:layout_constraintVertical_bias="0.12" />
 
     <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="373dp"
-        android:layout_height="591dp"
-        android:layout_marginTop="395dp"
+        android:layout_width="391dp"
+        android:layout_height="540dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/sensorsHeadline"
-        app:layout_constraintVertical_bias="0.96">
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2"
+        app:layout_constraintVertical_bias="0.75">
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/fav_group"
