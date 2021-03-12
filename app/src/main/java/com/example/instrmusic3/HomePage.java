@@ -530,16 +530,18 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 num = dataSnapshot.child(username).child("favorites").getChildrenCount();
                 System.out.println("NÚMERO DE PUTOS: " + num);
+                num++;
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
             }
         });
 
+        String numString = String.valueOf(num);
         UserHelperClass helperClass = new UserHelperClass(sensor, effect, sound);
         mDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef= mDatabase.getReference("users");
-        myRef.child(username).child("favorites").setValue(helperClass);
+        myRef.child(username).child("favorites").child(numString).setValue(helperClass);
         System.out.println("Efeito: " + effect);
         System.out.println("Sensor: " + sensor);
         System.out.println("Sound: " + sound);
