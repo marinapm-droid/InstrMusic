@@ -518,35 +518,40 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     public static String getSensor() {
         return sensor;
     }
+    int onOff = 0;
 
     long num=0;
     FirebaseDatabase mDatabase;
     public void saveFavorites(View view) {
+        if (onOff == 0) {
+            onOff = 1;
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
+            Query checkUser = ref.orderByChild("nome").equalTo(username);
+            checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    num = dataSnapshot.child(username).child("favorites").getChildrenCount();
+                    System.out.println("NÚMERO DE PUTOS: " + num);
+                    num++;
+                }
 
-        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
-        Query checkUser = ref.orderByChild("nome").equalTo(username);
-        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                num = dataSnapshot.child(username).child("favorites").getChildrenCount();
-                System.out.println("NÚMERO DE PUTOS: " + num);
-                num++;
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
 
-        String numString = String.valueOf(num);
-        UserHelperClass helperClass = new UserHelperClass(sensor, effect, sound);
-        mDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference myRef= mDatabase.getReference("users");
-        myRef.child(username).child("favorites").child(numString).setValue(helperClass);
-        System.out.println("Efeito: " + effect);
-        System.out.println("Sensor: " + sensor);
-        System.out.println("Sound: " + sound);
-        System.out.println("Username: " + username);
-
+            String numString = String.valueOf(num);
+            UserHelperClass helperClass = new UserHelperClass(sensor, effect, sound);
+            mDatabase = FirebaseDatabase.getInstance();
+            DatabaseReference myRef = mDatabase.getReference("users");
+            myRef.child(username).child("favorites").child(numString).setValue(helperClass);
+            System.out.println("Efeito: " + effect);
+            System.out.println("Sensor: " + sensor);
+            System.out.println("Sound: " + sound);
+            System.out.println("Username: " + username);
+        } else{
+            onOff = 0;
+        }
     }
 
     @Override
