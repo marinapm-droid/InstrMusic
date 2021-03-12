@@ -520,17 +520,16 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     }
     int onOff = 0;
 
-    long num=0;
+    long num=1;
     FirebaseDatabase mDatabase;
     public void saveFavorites(View view) {
         if (onOff == 0) {
             onOff = 1;
-            DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
-            Query checkUser = ref.orderByChild("nome").equalTo(username);
-            checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            DatabaseReference ref=FirebaseDatabase.getInstance().getReference().child(username);
+            ref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    num = dataSnapshot.child(username).child("favorites").getChildrenCount();
+                    num = dataSnapshot.child("favorites").getChildrenCount();
                     System.out.println("NÚMERO DE PUTOS: " + num);
                     num++;
                 }
