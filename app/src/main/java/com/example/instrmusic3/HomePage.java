@@ -519,30 +519,23 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         return sensor;
     }
     int onOff = 0;
-    long num=1;
+    long num;
     FirebaseDatabase mDatabase;
     public void saveFavorites(View view) {
         if (onOff == 0) {
             onOff = 1;
-            System.out.println("babaojis ");
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
             Query checkUser = ref.orderByChild("nome").equalTo(username);
             checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     num = dataSnapshot.child(username).child("favorites").getChildrenCount();
-                    System.out.println("NÚMERO DE PUTOS: " + num);
                     num++;
-
                     String numString = String.valueOf(num);
                     UserHelperClass helperClass = new UserHelperClass(sensor, effect, sound);
                     mDatabase = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = mDatabase.getReference("users");
                     myRef.child(username).child("favorites").child(numString).setValue(helperClass);
-                    System.out.println("Efeito: " + effect);
-                    System.out.println("Sensor: " + sensor);
-                    System.out.println("Sound: " + sound);
-                    System.out.println("Username: " + username);
                 }
 
                 @Override

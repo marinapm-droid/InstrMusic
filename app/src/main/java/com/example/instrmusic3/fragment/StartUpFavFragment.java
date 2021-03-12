@@ -29,8 +29,8 @@ import java.util.List;
 import java.util.Objects;
 
 public class StartUpFavFragment extends Fragment {
-    String current, effect, sensor, sound, favorite;
-    String userID;
+    String current, effect, sensor, sound, favorite, userID;
+    Long num;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -45,11 +45,17 @@ public class StartUpFavFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    effect = dataSnapshot.child(userID).child("favorites").child("effect").getValue(String.class);
-                    sound = dataSnapshot.child(userID).child("favorites").child("sound").getValue(String.class);
-                    sensor = dataSnapshot.child(userID).child("favorites").child("sensor").getValue(String.class);
-                    favorite = sensor + "/" + effect + "/" + sound;
-                    System.out.println("VOLUME????? :"+ favorite);
+                    num = dataSnapshot.child(userID).child("favorites").getChildrenCount();
+                    for(int i=0; i==num; i++ ) {
+                        String num = String.valueOf(i);
+                        effect = dataSnapshot.child(userID).child("favorites").child(num).child("effect").getValue(String.class);
+                        sound = dataSnapshot.child(userID).child("favorites").child(num).child("sound").getValue(String.class);
+                        sensor = dataSnapshot.child(userID).child("favorites").child(num).child("sensor").getValue(String.class);
+                        favorite = sensor + "/" + effect + "/" + sound;
+                        System.out.println("VOLUME????? :" + favorite);
+                        CreateEffectFragments(favorite);
+
+                    }
                 }
             }
             @Override
@@ -57,10 +63,6 @@ public class StartUpFavFragment extends Fragment {
             }
         });
 
-        //List<String> effectList = ParametersEffects.getEffects();
-        //for (String effect : effectList) {
-          //  this.CreateEffectFragments(effect);
-        //}
 
         return v;
 
