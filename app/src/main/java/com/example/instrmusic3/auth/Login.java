@@ -28,6 +28,7 @@ import java.net.SocketException;
 
 public class Login extends AppCompatActivity {
 
+    private static String correctUser;
     Button regBtnSignUp, regBtnLogin;
     TextInputLayout username, pass;
 
@@ -65,8 +66,10 @@ public class Login extends AppCompatActivity {
                         if (dataSnapshot.exists()) {
 
                             String passFromDB = dataSnapshot.child(userID).child("password").getValue(String.class);
-
                             if (passFromDB.equals(passID)) {
+
+                                setUsername(userID);
+
                                 String usernameFromDB = dataSnapshot.child(userID).child("password").getValue(String.class);
                                 Intent intent = new Intent(getApplicationContext(), HomePage.class);
                                 intent.putExtra("nome", usernameFromDB);
@@ -95,5 +98,11 @@ public class Login extends AppCompatActivity {
 
     }
 
+    public void setUsername(String username) {
+        correctUser = username;
+    }
 
+    public static String getUsername() {
+        return correctUser;
+    }
 }

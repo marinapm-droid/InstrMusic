@@ -24,11 +24,7 @@ public class StartupFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_start_up, container, false);
-
         HomePage activity = (HomePage) getActivity();
-
-
-
         assert activity != null;
         for (Parameters parameters : activity.getSensors()) {
             createSensorFragments((com.example.instrmusic3.sensors.Parameters) parameters);

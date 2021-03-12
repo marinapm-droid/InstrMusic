@@ -2,7 +2,7 @@ package com.example.instrmusic3.auth;
 
 public class UserHelperClass {
 
-    String nome,email, password, confPassword, sound, effect, sensor;
+    String nome,email, password, confPassword, sound, effect, sensor, username;
 
 
     public UserHelperClass(String nome, String email, String password, String confPassword) {

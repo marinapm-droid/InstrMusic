@@ -65,7 +65,6 @@ public class EffectsFragment extends Fragment {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             } else {
                 onOff = 0;
             }

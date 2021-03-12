@@ -1,5 +1,6 @@
 package com.example.instrmusic3;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -50,8 +51,12 @@ import com.example.instrmusic3.fragment.StartUpFavFragment;
 import com.example.instrmusic3.fragment.StartUpSoundsFragment;
 import com.example.instrmusic3.fragment.StartupFragment;
 import com.example.instrmusic3.sensors.Settings;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import org.sensors2.common.dispatch.DataDispatcher;
 import org.sensors2.common.dispatch.Measurement;
@@ -514,8 +519,23 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         return sensor;
     }
 
+    long num=0;
     FirebaseDatabase mDatabase;
     public void saveFavorites(View view) {
+
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
+        Query checkUser = ref.orderByChild("nome").equalTo(username);
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                num = dataSnapshot.child(username).child("favorites").getChildrenCount();
+                System.out.println("NÚMERO DE PUTOS: " + num);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
         UserHelperClass helperClass = new UserHelperClass(sensor, effect, sound);
         mDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef= mDatabase.getReference("users");
