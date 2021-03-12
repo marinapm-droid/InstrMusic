@@ -68,8 +68,13 @@ public class FavoritesFragment extends Fragment {
                 args1.add(effect);
                 OSCPortOut sender = oscConfiguration.getOscPort();
                 OSCMessage msg = new OSCMessage("/effect", args1);
+                List<Object> args2 = new ArrayList<>(1);
+                args2.add(sound);
+                OSCPortOut sender1 = oscConfiguration.getOscPort();
+                OSCMessage msg1 = new OSCMessage("/sound", args2);
                 try {
                     sender.send(msg);
+                    sender1.send(msg1);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
