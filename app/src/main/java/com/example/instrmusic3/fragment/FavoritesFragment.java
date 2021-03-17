@@ -69,6 +69,7 @@ public class FavoritesFragment extends Fragment {
         }
         button.setOnClickListener(v1 -> {
             SoundFragment.setSelected();
+            SensorFragment.setSelected();
             if (onOff == 0) {
                 onOff = 1;
                 FavoritesSelectedParameters.setEffectSelected(effect, sound, sensor);
