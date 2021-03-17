@@ -85,7 +85,6 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     String fragmento;
 
 
-
     public Settings getSettings() {
         return this.settings;
     }
@@ -476,18 +475,13 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     }
 
     public void onStartFavorites(View view) {
-        if (manager.findFragmentByTag("G") == null) {
-            StartUpFavFragment f6 = new StartUpFavFragment();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.add(R.id.container, f6, "G");
-            transaction.addToBackStack("addG");
-            transaction.commit();
-        } else {
-            Fragment fragment = manager.findFragmentByTag("G");
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.show(fragment);
-            transaction.commit();
-        }
+
+        StartUpFavFragment f6 = new StartUpFavFragment();
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.add(R.id.container, f6, "G");
+        transaction.addToBackStack("addG");
+        transaction.commit();
+
         fragmento = "G";
     }
 
@@ -518,9 +512,11 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     public static String getSensor() {
         return sensor;
     }
+
     int onOff = 0;
     long num;
     FirebaseDatabase mDatabase;
+
     public void saveFavorites(View view) {
         if (onOff == 0) {
             onOff = 1;
@@ -543,7 +539,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
                 }
             });
 
-        } else{
+        } else {
             onOff = 0;
         }
     }
@@ -555,7 +551,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         FragmentTransaction transaction2 = manager.beginTransaction();
         FragmentTransaction transaction4 = manager.beginTransaction();
         FragmentTransaction transaction3 = manager.beginTransaction();
-        switch (fragmento){
+        switch (fragmento) {
             case "B":
                 Fragment fragment = manager.findFragmentByTag("B");
                 transaction.hide(fragment);
@@ -574,12 +570,12 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
             case "F":
                 Fragment fragment3 = manager.findFragmentByTag("F");
                 transaction3.hide(fragment3);
-                fragmento="B";
+                fragmento = "B";
                 transaction3.commit();
                 break;
             case "G":
                 Fragment fragment4 = manager.findFragmentByTag("G");
-                transaction4.hide(fragment4);
+                transaction4.remove(fragment4);
                 transaction4.commit();
                 break;
             default:

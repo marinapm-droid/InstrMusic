@@ -6,12 +6,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.example.instrmusic3.Effects.ParametersEffects;
+import com.example.instrmusic3.FavoritesSelectedParameters;
 import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
 import com.example.instrmusic3.dispatch.Bundling;
@@ -56,10 +58,17 @@ public class FavoritesFragment extends Fragment {
         effect=favs.get(1);
         sensor=favs.get(2);
         groupName.setText(fav);
-        Button button = v.findViewById(R.id.active);
+        CompoundButton button = v.findViewById(R.id.active);
+        if(FavoritesSelectedParameters.getEffect()!=null && FavoritesSelectedParameters.getSensor()!=null && FavoritesSelectedParameters.getSound()!=null) {
+            if (FavoritesSelectedParameters.getEffect().equals(effect) && FavoritesSelectedParameters.getSensor().equals(sensor) && FavoritesSelectedParameters.getSound().equals(sound)) {
+                button.setChecked(true);
+                SoundFragment.setSelected();
+            }
+        }
         button.setOnClickListener(v1 -> {
             if (onOff == 0) {
                 onOff = 1;
+                FavoritesSelectedParameters.setEffectSelected(effect, sound, sensor);
                 OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
                 communication.start();
                 communication.getOscHandler();

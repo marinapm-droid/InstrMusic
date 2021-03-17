@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -26,14 +27,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SoundFragment extends Fragment {
-    String name;
+    static String name;
     private Handler handler = new Handler();
     private Settings settings;
-    int onOff = 0;
+    static int onOff = 0;
     public Settings getSettings() {
         return this.settings;
     }
-
+    static CompoundButton button;
 
     public SoundFragment() {
         super();
@@ -48,14 +49,13 @@ public class SoundFragment extends Fragment {
         Bundle args = this.getArguments();
         assert args != null;
         name = args.getString(Bundling.SOUND_NAME);
-        this.name = args.getString(Bundling.SOUND_NAME);
         View v = inflater.inflate(R.layout.sounds, null);
         TextView groupName = v.findViewById(R.id.group_name);
-        setName(this.name);
+        setName(name);
 
         groupName.setText(name);
 
-        Button button = v.findViewById(R.id.active);
+        button = v.findViewById(R.id.active);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,6 +84,29 @@ public class SoundFragment extends Fragment {
         return v;
     }
 
+    public static void setSelected(){
+        button.setChecked(true);
+        if (onOff == 0) {
+            onOff = 1;
+            OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
+            communication.start();
+            OscHandler handler = communication.getOscHandler();
+            OscConfiguration oscConfiguration = OscConfiguration.getInstance();
+            List<Object> args = new ArrayList<Object>(1);
+            HomePage.setSound(name);
+            args.add(name);
+            OSCPortOut sender = oscConfiguration.getOscPort();
+            OSCMessage msg = new OSCMessage("/sound", args);
+            try {
+                sender.send(msg);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            onOff = 0;
+        }
+    }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
@@ -92,11 +115,11 @@ public class SoundFragment extends Fragment {
     }
 
     public void setName(String name1) {
-        this.name = name1;
+        name = name1;
 
     }
 
     public String getName() {
-        return this.name;
+        return name;
     }
 }
