@@ -1,5 +1,6 @@
 package com.example.instrmusic3.fragment;
 
+import android.app.FragmentManager;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.LayoutInflater;
@@ -32,7 +33,7 @@ import java.util.List;
 
 public class FavoritesFragment extends Fragment {
     String fav;
-    int onOff=0;
+    int onOff = 0;
     String effect, sensor, sound;
 
     public FavoritesFragment() {
@@ -53,19 +54,21 @@ public class FavoritesFragment extends Fragment {
         View v = inflater.inflate(R.layout.favorites, null);
         TextView groupName = v.findViewById(R.id.group_name);
         setName(this.fav);
-        List<String> favs =  new ArrayList<>(Arrays.asList(fav.split("/")));
-        sound=favs.get(0);
-        effect=favs.get(1);
-        sensor=favs.get(2);
+        List<String> favs = new ArrayList<>(Arrays.asList(fav.split("/")));
+        sound = favs.get(0);
+        effect = favs.get(1);
+        sensor = favs.get(2);
         groupName.setText(fav);
+
         CompoundButton button = v.findViewById(R.id.active);
-        if(FavoritesSelectedParameters.getEffect()!=null && FavoritesSelectedParameters.getSensor()!=null && FavoritesSelectedParameters.getSound()!=null) {
+        if (FavoritesSelectedParameters.getEffect() != null && FavoritesSelectedParameters.getSensor() != null && FavoritesSelectedParameters.getSound() != null) {
             if (FavoritesSelectedParameters.getEffect().equals(effect) && FavoritesSelectedParameters.getSensor().equals(sensor) && FavoritesSelectedParameters.getSound().equals(sound)) {
                 button.setChecked(true);
                 SoundFragment.setSelected();
             }
         }
         button.setOnClickListener(v1 -> {
+            SoundFragment.setSelected();
             if (onOff == 0) {
                 onOff = 1;
                 FavoritesSelectedParameters.setEffectSelected(effect, sound, sensor);
@@ -95,7 +98,6 @@ public class FavoritesFragment extends Fragment {
     }
 
 
-
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -107,7 +109,6 @@ public class FavoritesFragment extends Fragment {
 
     }
 
-    set
 
 }
 
