@@ -107,5 +107,7 @@ public class FavoritesFragment extends Fragment {
 
     }
 
+    set
+
 }
 

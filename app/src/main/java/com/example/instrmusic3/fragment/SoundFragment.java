@@ -13,6 +13,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.example.instrmusic3.FavoritesSelectedParameters;
 import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
 import com.example.instrmusic3.dispatch.Bundling;
@@ -85,26 +86,28 @@ public class SoundFragment extends Fragment {
     }
 
     public static void setSelected(){
-        button.setChecked(true);
-        if (onOff == 0) {
-            onOff = 1;
-            OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
-            communication.start();
-            OscHandler handler = communication.getOscHandler();
-            OscConfiguration oscConfiguration = OscConfiguration.getInstance();
-            List<Object> args = new ArrayList<Object>(1);
-            HomePage.setSound(name);
-            args.add(name);
-            OSCPortOut sender = oscConfiguration.getOscPort();
-            OSCMessage msg = new OSCMessage("/sound", args);
-            try {
-                sender.send(msg);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+        if(FavoritesSelectedParameters.getSound().equals(name)) {
+            button.setChecked(true);
+            if (onOff == 0) {
+                onOff = 1;
+                OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
+                communication.start();
+                OscHandler handler = communication.getOscHandler();
+                OscConfiguration oscConfiguration = OscConfiguration.getInstance();
+                List<Object> args = new ArrayList<Object>(1);
+                HomePage.setSound(name);
+                args.add(name);
+                OSCPortOut sender = oscConfiguration.getOscPort();
+                OSCMessage msg = new OSCMessage("/sound", args);
+                try {
+                    sender.send(msg);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
-        } else {
-            onOff = 0;
+            } else {
+                onOff = 0;
+            }
         }
     }
 
