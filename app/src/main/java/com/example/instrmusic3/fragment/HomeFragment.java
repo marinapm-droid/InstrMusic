@@ -31,6 +31,7 @@ public class HomeFragment extends Fragment {
     public Settings getSettings() {
         return this.settings;
     }
+    String IP;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -40,6 +41,23 @@ public class HomeFragment extends Fragment {
         HomePage activity = (HomePage) getActivity();
         activity.getSettings();
         this.settings = activity.loadSettings();
+        IP = HomePage.getLocalIpAddress();
+        OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
+        communication.start();
+        OscHandler handler = communication.getOscHandler();
+        OscConfiguration oscConfiguration = OscConfiguration.getInstance();
+        OSCPortOut sender = oscConfiguration.getOscPort();
+        List<Object> args = new ArrayList<Object>(1);
+        args.add(IP);
+        OSCMessage msg = new OSCMessage("/ip", args);
+        try {
+            sender.send(msg);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+
+
 
         View v = inflater.inflate(R.layout.activity_home, container, false);
         CompoundButton activeButton = v.findViewById(R.id.active);
