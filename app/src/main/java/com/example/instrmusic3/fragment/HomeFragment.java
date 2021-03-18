@@ -79,6 +79,42 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        CompoundButton recordButton = v.findViewById(R.id.record);
+        recordButton.setOnCheckedChangeListener(activity);
+        recordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onOff == 0) {
+                    onOff = 1;
+                    OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
+                    communication.start();
+                    OscHandler handler = communication.getOscHandler();
+                    OscConfiguration oscConfiguration = OscConfiguration.getInstance();
+                    OSCPortOut sender = oscConfiguration.getOscPort();
+                    OSCMessage msg = new OSCMessage("/startRecord");
+                    try {
+                        sender.send(msg);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+
+                } else {
+                    OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
+                    communication.start();
+                    OscHandler handler = communication.getOscHandler();
+                    OscConfiguration oscConfiguration = OscConfiguration.getInstance();
+                    OSCPortOut sender = oscConfiguration.getOscPort();
+                    OSCMessage msg = new OSCMessage("/stopRecord");
+                    try {
+                        sender.send(msg);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    onOff = 0;
+                }
+            }
+        });
+
 
         activeButton.setOnCheckedChangeListener(activity);
         CompoundButton stopButton = v.findViewById(R.id.stop);
