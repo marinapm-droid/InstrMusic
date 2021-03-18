@@ -41,8 +41,8 @@ public class FavoritesFragment extends Fragment {
     }
 
 
-   /* public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-       /* StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+       StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         HomePage startUpActivity = (HomePage) getActivity();
         startUpActivity.getSettings();
@@ -69,7 +69,7 @@ public class FavoritesFragment extends Fragment {
         }
         button.setOnClickListener(v1 -> {
            // SoundFragment.setSelected();
-            SensorFragment.setSelected();
+            //SensorFragment.setSelected();
             if (onOff == 0) {
                 onOff = 1;
                 FavoritesSelectedParameters.setEffectSelected(effect, sound, sensor);
@@ -96,7 +96,7 @@ public class FavoritesFragment extends Fragment {
             }
         });
         return v;
-    }*/
+    }
 
 
     @Override
