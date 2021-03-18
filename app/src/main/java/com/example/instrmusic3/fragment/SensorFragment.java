@@ -31,7 +31,7 @@ import java.util.List;
 public class SensorFragment extends Fragment {
 
     private static SensorConfiguration sensorConfiguration = null;
-    CompoundButton activeButton;
+    static CompoundButton activeButton;
     static String name;
     public SensorFragment() {
         super();
@@ -64,6 +64,7 @@ public class SensorFragment extends Fragment {
     }
 
     public static void setSelected() {
+        activeButton.setChecked(true);
         new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
