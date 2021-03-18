@@ -41,24 +41,7 @@ public class HomeFragment extends Fragment {
         HomePage activity = (HomePage) getActivity();
         activity.getSettings();
         this.settings = activity.loadSettings();
-        IP = HomePage.getLocalIpAddress();
-        OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
-        communication.start();
-        OscHandler handler = communication.getOscHandler();
-        OscConfiguration oscConfiguration = OscConfiguration.getInstance();
-        OSCPortOut sender = oscConfiguration.getOscPort();
-        List<Object> args = new ArrayList<Object>(1);
-        args.add(IP);
-        OSCMessage msg = new OSCMessage("/ip", args);
-        try {
-            sender.send(msg);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-
-
+        sendIP();
         View v = inflater.inflate(R.layout.activity_home, container, false);
         CompoundButton activeButton = v.findViewById(R.id.active);
         activeButton.setOnCheckedChangeListener(activity);
@@ -122,6 +105,23 @@ public class HomeFragment extends Fragment {
             }
         });
         return v;
+    }
+
+    public void sendIP(){
+        IP = HomePage.getLocalIpAddress();
+        OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
+        communication.start();
+        OscHandler handler = communication.getOscHandler();
+        OscConfiguration oscConfiguration = OscConfiguration.getInstance();
+        OSCPortOut sender = oscConfiguration.getOscPort();
+        List<Object> args = new ArrayList<Object>(1);
+        args.add(IP);
+        OSCMessage msg = new OSCMessage("/ip", args);
+        try {
+            sender.send(msg);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
 }
