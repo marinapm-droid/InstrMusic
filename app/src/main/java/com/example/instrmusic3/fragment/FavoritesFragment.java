@@ -68,7 +68,7 @@ public class FavoritesFragment extends Fragment {
             }
         }
         button.setOnClickListener(v1 -> {
-            SoundFragment.setSelected();
+           // SoundFragment.setSelected();
             SensorFragment.setSelected();
             if (onOff == 0) {
                 onOff = 1;
