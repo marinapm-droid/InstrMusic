@@ -63,7 +63,7 @@ public class SensorFragment extends Fragment {
         return v;
     }
 
-    public static void setSelected() {
+   /* public static void setSelected() {
         activeButton.setChecked(true);
         new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -72,7 +72,7 @@ public class SensorFragment extends Fragment {
                 HomePage.setSensor(name);
             }
         };
-    }
+    }*/
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {

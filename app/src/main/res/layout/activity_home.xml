@@ -17,12 +17,27 @@
         android:background="@drawable/toggle_selector"
         android:textOff=" "
         android:textOn=" "
-        android:onClick="showSelection"
         app:layout_constraintBottom_toBottomOf="@+id/lottie"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/lottie" />
 
+
+    <ToggleButton
+        android:id="@+id/stop"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="right"
+        android:background="@drawable/outline_stop_circle_24"
+        android:onClick="showSelection"
+        android:textOff=" "
+        android:textOn=" "
+        app:layout_constraintBottom_toBottomOf="@+id/lottie"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/active"
+        app:layout_constraintVertical_bias="0.242" />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottie"
