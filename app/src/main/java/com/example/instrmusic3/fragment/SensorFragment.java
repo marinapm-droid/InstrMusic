@@ -30,12 +30,12 @@ import java.util.List;
 
 public class SensorFragment extends Fragment {
 
-    private static SensorConfiguration sensorConfiguration = null;
-    static CompoundButton activeButton;
-    static String name;
+    private SensorConfiguration sensorConfiguration = null;
+    CompoundButton activeButton;
+    String name;
     public SensorFragment() {
         super();
-        sensorConfiguration = new SensorConfiguration();
+        this.sensorConfiguration = new SensorConfiguration();
     }
 
     @SuppressLint("SetTextI18n")
@@ -46,6 +46,7 @@ public class SensorFragment extends Fragment {
         sensorConfiguration.setSensorType(args.getInt(Bundling.SENSOR_TYPE));
         sensorConfiguration.setOscParam(args.getString(Bundling.OSC_PREFIX));
         name = args.getString(Bundling.NAME);
+        this.name = args.getString(Bundling.NAME);
 
         if (sensorConfiguration.getOscParam().equals("nfc")) {
             sensorConfiguration.setSendDuplicates(true);
