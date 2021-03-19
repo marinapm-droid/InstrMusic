@@ -68,7 +68,6 @@ public class FavoritesFragment extends Fragment {
         if (FavoritesSelectedParameters.getEffect() != null && FavoritesSelectedParameters.getSensor() != null && FavoritesSelectedParameters.getSound() != null) {
             if (FavoritesSelectedParameters.getEffect().equals(effect) && FavoritesSelectedParameters.getSensor().equals(sensor) && FavoritesSelectedParameters.getSound().equals(sound)) {
                 button.setChecked(true);
-                SoundFragment.setSelected();
             }
         } else {
             button.setChecked(false);
