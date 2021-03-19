@@ -36,14 +36,15 @@ public class StartupFragment extends Fragment {
     public void createSensorFragments(com.example.instrmusic3.sensors.Parameters parameters) {
         FragmentManager manager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
         SensorFragment groupFragment = (SensorFragment) manager.findFragmentByTag(parameters.getName());
-
+        System.out.println("NOME DO SENSOR:" + parameters.getName());
+        if (parameters.getName().equals("Accelerometer") || parameters.getName().equals("Gyroscope") || parameters.getName().equals("Magnetic Field")){
             groupFragment = createFragment(parameters, manager);
 
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.add(R.id.sensor_group, groupFragment, parameters.getName());
             transaction.commit();
-
-        addSensorToDispatcher(groupFragment);
+            addSensorToDispatcher(groupFragment);
+        }
     }
 
     private void addSensorToDispatcher(SensorFragment groupFragment) {

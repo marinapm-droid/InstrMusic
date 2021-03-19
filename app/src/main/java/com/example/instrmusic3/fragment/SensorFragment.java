@@ -4,7 +4,9 @@ import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.ObservableMap;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.TextView;
 
 import com.example.instrmusic3.FavoritesSelectedParameters;
 import com.example.instrmusic3.HomePage;
+import com.example.instrmusic3.SensorsModel;
 import com.example.instrmusic3.dispatch.OscCommunication;
 import com.example.instrmusic3.dispatch.OscConfiguration;
 import com.example.instrmusic3.dispatch.OscHandler;
@@ -32,6 +35,8 @@ public class SensorFragment extends Fragment {
 
     private SensorConfiguration sensorConfiguration = null;
     String name;
+    CompoundButton activeButton;
+
     public SensorFragment() {
         super();
         this.sensorConfiguration = new SensorConfiguration();
@@ -55,7 +60,30 @@ public class SensorFragment extends Fragment {
         groupName.setText(name);
         ((TextView) v.findViewById(R.id.osc_prefix)).setText("/" + args.getString(Bundling.OSC_PREFIX));
 
+
         CompoundButton activeButton = v.findViewById(R.id.active); // on and off sensor
+        SensorsModel model = new ViewModelProvider(getActivity()).get(SensorsModel.class);
+        model.getSensorState().addOnMapChangedCallback(
+                new ObservableMap.OnMapChangedCallback<ObservableMap<String, Boolean>, String, Boolean>() {
+                    @Override
+                    public void onMapChanged(ObservableMap<String, Boolean> sender, String key) {
+
+                        if (key.equals(name)) {
+                            Boolean state = sender.get(name);
+                            if (state != null && state.booleanValue() == true) {
+                                activeButton.setChecked(true);
+                                sensorConfiguration.setSend(true);
+                                HomePage.setSensor(name);
+                            } else {
+                                activeButton.setChecked(false);
+                                sensorConfiguration.setSend(false);
+
+                            }
+                        }
+                    }
+                });
+
+
         activeButton.setOnCheckedChangeListener((compoundButton, checked) -> {
             sensorConfiguration.setSend(checked);
             HomePage.setSensor(name);
@@ -63,16 +91,6 @@ public class SensorFragment extends Fragment {
         return v;
     }
 
-   /* public static void setSelected() {
-        activeButton.setChecked(true);
-        new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton compoundButton, boolean checked) {
-                sensorConfiguration.setSend(checked);
-                HomePage.setSensor(name);
-            }
-        };
-    }*/
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {

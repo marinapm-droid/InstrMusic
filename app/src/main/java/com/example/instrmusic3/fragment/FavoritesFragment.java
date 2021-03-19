@@ -12,11 +12,13 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.instrmusic3.Effects.ParametersEffects;
 import com.example.instrmusic3.FavoritesSelectedParameters;
 import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
+import com.example.instrmusic3.SensorsModel;
 import com.example.instrmusic3.dispatch.Bundling;
 import com.example.instrmusic3.dispatch.OscCommunication;
 import com.example.instrmusic3.dispatch.OscConfiguration;
@@ -42,7 +44,7 @@ public class FavoritesFragment extends Fragment {
 
 
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-       StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
         StrictMode.setThreadPolicy(policy);
         HomePage startUpActivity = (HomePage) getActivity();
         startUpActivity.getSettings();
@@ -66,11 +68,32 @@ public class FavoritesFragment extends Fragment {
                 button.setChecked(true);
                 SoundFragment.setSelected();
             }
+        } else {
+            button.setChecked(false);
         }
         button.setOnClickListener(v1 -> {
-           // SoundFragment.setSelected();
-            //SensorFragment.setSelected();
-            if (onOff == 0) {
+            SensorsModel model = new ViewModelProvider(getActivity()).get(SensorsModel.class);
+
+            if (button.isChecked()) {
+                if (sensor.equals("Accelerometer")) {
+                    model.getSensorState().put("Accelerometer", true);
+                } else if (sensor.equals("Gyroscope")) {
+                    model.getSensorState().put("Gyroscope", true);
+                } else {
+                    model.getSensorState().put("Magnetic Field", true);
+                }
+
+            } else {
+                if (sensor.equals("Accelerometer")) {
+                    model.getSensorState().put("Accelerometer", false);
+                } else if (sensor.equals("Gyroscope")) {
+                    model.getSensorState().put("Gyroscope", false);
+                } else {
+                    model.getSensorState().put("Magnetic Field", false);
+                }
+            }
+
+            if (FavoritesSelectedParameters.getSensor()==(null)) {
                 onOff = 1;
                 FavoritesSelectedParameters.setEffectSelected(effect, sound, sensor);
                 OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
@@ -92,6 +115,7 @@ public class FavoritesFragment extends Fragment {
                     e.printStackTrace();
                 }
             } else {
+                FavoritesSelectedParameters.setEffectSelected(null, null, null);
                 onOff = 0;
             }
         });

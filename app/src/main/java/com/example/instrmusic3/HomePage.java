@@ -88,6 +88,9 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     private NdefMessage mNdefPushMessage;
     static String effect, sound, sensor, username;
     String fragmento;
+    int onOff = 0;
+    long num;
+    FirebaseDatabase mDatabase;
 
 
     public Settings getSettings() {
@@ -120,12 +123,39 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         )});
 
 
+        //HOME
         manager = getSupportFragmentManager();
         HomeFragment f1 = new HomeFragment();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.add(R.id.container, f1, "A");
         transaction.addToBackStack("addA");
         transaction.commit();
+
+        //SENSOR
+        StartupFragment f2 = new StartupFragment();
+        FragmentTransaction transaction1 = manager.beginTransaction();
+        transaction1.add(R.id.container, f2, "B");
+        transaction1.addToBackStack("addB");
+        transaction1.commit();
+        transaction1.hide(f2);
+
+        //EFFECT
+        StartUpEffectsFragment f5 = new StartUpEffectsFragment();
+        FragmentTransaction transaction2 = manager.beginTransaction();
+        transaction2.add(R.id.container, f5, "D");
+        transaction2.addToBackStack("addD");
+        transaction2.commit();
+        transaction2.hide(f5);
+
+        //SOUND
+        StartUpSoundsFragment f4 = new StartUpSoundsFragment();
+        FragmentTransaction transaction3 = manager.beginTransaction();
+        transaction3.add(R.id.container, f4, "C");
+        transaction3.addToBackStack("addC");
+        transaction3.commit();
+        transaction3.hide(f4);
+
+
     }
 
     public List<Parameters> GetSensors(SensorManager sensorManager) {
@@ -326,14 +356,6 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         return settings;
     }
 
-    // @Override
-    //public boolean onCreateOptionsMenu(Menu menu) {
-    //  // Inflate the menu; this adds items to the action bar if it is present.
-    // getMenuInflater().inflate(R.menu.start_up, menu);
-    // return true;
-    //}
-
-
     @Override
     @SuppressLint("NewApi")
     protected void onResume() {
@@ -421,35 +443,22 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     }
 
     public void onStartSounds(View view) {
-        if (manager.findFragmentByTag("C") == null) {
-            StartUpSoundsFragment f4 = new StartUpSoundsFragment();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.add(R.id.container, f4, "C");
-            transaction.addToBackStack("addC");
-            transaction.commit();
 
-        } else {
-            Fragment fragment = manager.findFragmentByTag("C");
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.show(fragment);
-            transaction.commit();
-        }
+        Fragment fragment = manager.findFragmentByTag("C");
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.show(fragment);
+        transaction.commit();
+
         fragmento = "C";
     }
 
     public void onStartEffects(View view) {
-        if (manager.findFragmentByTag("D") == null) {
-            StartUpEffectsFragment f5 = new StartUpEffectsFragment();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.add(R.id.container, f5, "D");
-            transaction.addToBackStack("addD");
-            transaction.commit();
-        } else {
-            Fragment fragment = manager.findFragmentByTag("D");
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.show(fragment);
-            transaction.commit();
-        }
+
+        Fragment fragment = manager.findFragmentByTag("D");
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.show(fragment);
+        transaction.commit();
+
         fragmento = "D";
     }
 
@@ -464,18 +473,12 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     }
 
     public void onStartSensors(View view) {
-        if (manager.findFragmentByTag("B") == null) {
-            StartupFragment f2 = new StartupFragment();
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.add(R.id.container, f2, "B");
-            transaction.addToBackStack("addB");
-            transaction.commit();
-        } else {
-            Fragment fragment = manager.findFragmentByTag("B");
-            FragmentTransaction transaction = manager.beginTransaction();
-            transaction.show(fragment);
-            transaction.commit();
-        }
+
+        Fragment fragment = manager.findFragmentByTag("B");
+        FragmentTransaction transaction = manager.beginTransaction();
+        transaction.show(fragment);
+        transaction.commit();
+
         fragmento = "B";
     }
 
@@ -518,10 +521,6 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         return sensor;
     }
 
-    int onOff = 0;
-    long num;
-    FirebaseDatabase mDatabase;
-
     public void saveFavorites(View view) {
         if (onOff == 0) {
             onOff = 1;
@@ -557,6 +556,9 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         FragmentTransaction transaction4 = manager.beginTransaction();
         FragmentTransaction transaction3 = manager.beginTransaction();
         switch (fragmento) {
+            case "A": {
+                break;
+            }
             case "B":
                 Fragment fragment = manager.findFragmentByTag("B");
                 transaction.hide(fragment);
@@ -591,9 +593,9 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
 
     public static String getLocalIpAddress() {
         try {
-            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements();) {
+            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
                 NetworkInterface intf = en.nextElement();
-                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements();) {
+                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
                     InetAddress inetAddress = enumIpAddr.nextElement();
                     if (!inetAddress.isLoopbackAddress() && inetAddress instanceof Inet4Address) {
                         return inetAddress.getHostAddress();
@@ -605,7 +607,6 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         }
         return null;
     }
-
 
     @Override
     public boolean onTouch(View v, MotionEvent event) {
