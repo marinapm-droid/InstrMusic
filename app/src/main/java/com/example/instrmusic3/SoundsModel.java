@@ -17,11 +17,14 @@ public class SoundsModel extends ViewModel {
         sensorState = new ObservableArrayMap();
         List<String> soundList = ParametersSounds.getSounds();
         for (String effect : soundList) {
+            System.out.println("effect" + effect);
             sensorState.put(effect, false);
         }
+
+
     }
 
-    public ObservableArrayMap<String, Boolean> getSensorState() {
+    public ObservableArrayMap<String, Boolean> getSoundState() {
         return sensorState;
     }
 }

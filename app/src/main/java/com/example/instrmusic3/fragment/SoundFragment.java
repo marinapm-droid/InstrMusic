@@ -32,10 +32,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SoundFragment extends Fragment {
-    static String name;
+    String name;
     private Handler handler = new Handler();
     private Settings settings;
-    static int onOff = 0;
+    int onOff = 0;
     public Settings getSettings() {
         return this.settings;
     }
@@ -54,6 +54,7 @@ public class SoundFragment extends Fragment {
         Bundle args = this.getArguments();
         assert args != null;
         name = args.getString(Bundling.SOUND_NAME);
+        this.name = args.getString(Bundling.SOUND_NAME);
         View v = inflater.inflate(R.layout.sounds, null);
         TextView groupName = v.findViewById(R.id.group_name);
         setName(name);
@@ -64,11 +65,12 @@ public class SoundFragment extends Fragment {
 
 
         SoundsModel model = new ViewModelProvider(getActivity()).get(SoundsModel.class);
-        model.getSensorState().addOnMapChangedCallback(
+        model.getSoundState().addOnMapChangedCallback(
                 new ObservableMap.OnMapChangedCallback<ObservableMap<String, Boolean>, String, Boolean>() {
                     @Override
                     public void onMapChanged(ObservableMap<String, Boolean> sender, String key) {
-
+                        System.out.println("key" + key);
+                        System.out.println(name);
                         if (key.equals(name)) {
                             Boolean state = sender.get(name);
                             if (state != null && state.booleanValue() == true) {
@@ -132,7 +134,7 @@ public class SoundFragment extends Fragment {
     }
 
     public void setName(String name1) {
-        name = name1;
+        this.name = name1;
 
     }
 

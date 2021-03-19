@@ -98,9 +98,11 @@ public class FavoritesFragment extends Fragment {
             //SOUND
             SoundsModel modelSound = new ViewModelProvider(getActivity()).get(SoundsModel.class);
             if (button.isChecked()) {
-                modelSensor.getSensorState().put(sound, true);
+                System.out.println("button");
+                modelSound.getSoundState().put(sound, true);
+
             } else {
-                modelSensor.getSensorState().put(sound, false);
+                modelSound.getSoundState().put(sound, false);
             }
 
             if (FavoritesSelectedParameters.getSensor() == (null)) {
