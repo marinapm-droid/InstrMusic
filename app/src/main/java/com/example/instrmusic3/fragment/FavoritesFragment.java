@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.instrmusic3.Effects.ParametersEffects;
+import com.example.instrmusic3.EffectsModel;
 import com.example.instrmusic3.FavoritesSelectedParameters;
 import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
@@ -104,6 +105,17 @@ public class FavoritesFragment extends Fragment {
             } else {
                 modelSound.getSoundState().put(sound, false);
             }
+
+            //EFFECT
+            EffectsModel modelEffect = new ViewModelProvider(getActivity()).get(EffectsModel.class);
+            if (button.isChecked()) {
+                modelEffect.getEffectState().put(effect, true);
+
+            } else {
+                modelEffect.getEffectState().put(effect, false);
+            }
+
+
 
             if (FavoritesSelectedParameters.getSensor() == (null)) {
                 onOff = 1;

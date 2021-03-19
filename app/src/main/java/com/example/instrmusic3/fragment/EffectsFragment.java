@@ -7,16 +7,22 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.ObservableMap;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
+import com.example.instrmusic3.EffectsModel;
 import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
+import com.example.instrmusic3.SoundsModel;
 import com.example.instrmusic3.dispatch.Bundling;
 import com.example.instrmusic3.dispatch.OscCommunication;
 import com.example.instrmusic3.dispatch.OscConfiguration;
+import com.example.instrmusic3.dispatch.OscHandler;
 import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPortOut;
 
@@ -42,12 +48,54 @@ public class EffectsFragment extends Fragment {
         assert args != null;
         name = args.getString(Bundling.EFFECT_NAME);
         this.name = args.getString(Bundling.EFFECT_NAME);
+
+        this.name = args.getString(Bundling.EFFECT_NAME);
         View v = inflater.inflate(R.layout.effects, null);
         TextView groupName = v.findViewById(R.id.group_name);
         setName(this.name);
 
         groupName.setText(name);
-        Button button = v.findViewById(R.id.active);
+        CompoundButton button = v.findViewById(R.id.active);
+
+        EffectsModel model = new ViewModelProvider(getActivity()).get(EffectsModel.class);
+        model.getEffectState().addOnMapChangedCallback(
+                new ObservableMap.OnMapChangedCallback<ObservableMap<String, Boolean>, String, Boolean>() {
+                    @Override
+                    public void onMapChanged(ObservableMap<String, Boolean> sender, String key) {
+                        if (key.equals(name)) {
+                            Boolean state = sender.get(name);
+                            if (state != null && state.booleanValue() == true) {
+                                button.setChecked(true);
+
+                                OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
+                                communication.start();
+                                communication.getOscHandler();
+                                OscConfiguration oscConfiguration = OscConfiguration.getInstance();
+                                List<Object> args1 = new ArrayList<>(1);
+                                HomePage.setEffect(name);
+                                args1.add(name);
+                                OSCPortOut sender1 = oscConfiguration.getOscPort();
+                                OSCMessage msg = new OSCMessage("/effect", args1);
+                                try {
+                                    sender1.send(msg);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            } else {
+                                button.setChecked(false);
+
+                            }
+                        }
+                    }
+                });
+
+
+
+
+
+
+
+
         button.setOnClickListener(v1 -> {
             if (onOff == 0) {
                 onOff = 1;
