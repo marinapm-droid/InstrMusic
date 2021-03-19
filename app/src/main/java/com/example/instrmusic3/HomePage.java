@@ -91,13 +91,12 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     int onOff = 0;
     long num;
     FirebaseDatabase mDatabase;
-
+    FragmentManager manager;
 
     public Settings getSettings() {
         return this.settings;
     }
 
-    FragmentManager manager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,22 +137,6 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         transaction1.addToBackStack("addB");
         transaction1.commit();
         transaction1.hide(f2);
-
-        //EFFECT
-        StartUpEffectsFragment f5 = new StartUpEffectsFragment();
-        FragmentTransaction transaction2 = manager.beginTransaction();
-        transaction2.add(R.id.container, f5, "D");
-        transaction2.addToBackStack("addD");
-        transaction2.commit();
-        transaction2.hide(f5);
-
-        //SOUND
-        StartUpSoundsFragment f4 = new StartUpSoundsFragment();
-        FragmentTransaction transaction3 = manager.beginTransaction();
-        transaction3.add(R.id.container, f4, "C");
-        transaction3.addToBackStack("addC");
-        transaction3.commit();
-        transaction3.hide(f4);
 
 
     }
@@ -444,21 +427,37 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
 
     public void onStartSounds(View view) {
 
-        Fragment fragment = manager.findFragmentByTag("C");
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.show(fragment);
-        transaction.commit();
+        if (manager.findFragmentByTag("C") == null) {
+            StartUpSoundsFragment f4 = new StartUpSoundsFragment();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.add(R.id.container, f4, "C");
+            transaction.addToBackStack("addC");
+            transaction.commit();
 
+        } else {
+            Fragment fragment = manager.findFragmentByTag("C");
+            FragmentTransaction transaction = manager.beginTransaction();
+            assert fragment != null;
+            transaction.show(fragment);
+            transaction.commit();
+        }
         fragmento = "C";
     }
 
     public void onStartEffects(View view) {
-
-        Fragment fragment = manager.findFragmentByTag("D");
-        FragmentTransaction transaction = manager.beginTransaction();
-        transaction.show(fragment);
-        transaction.commit();
-
+        if (manager.findFragmentByTag("D") == null) {
+            StartUpSoundsFragment f8 = new StartUpSoundsFragment();
+            FragmentTransaction transaction = manager.beginTransaction();
+            transaction.add(R.id.container, f8, "D");
+            transaction.addToBackStack("addD");
+            transaction.commit();
+        } else {
+            Fragment fragment = manager.findFragmentByTag("D");
+            FragmentTransaction transaction = manager.beginTransaction();
+            assert fragment != null;
+            transaction.show(fragment);
+            transaction.commit();
+        }
         fragmento = "D";
     }
 
