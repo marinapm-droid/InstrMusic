@@ -63,6 +63,7 @@ public class FavoritesFragment extends Fragment {
         groupName.setText(fav);
 
         CompoundButton button = v.findViewById(R.id.active);
+
         if (FavoritesSelectedParameters.getEffect() != null && FavoritesSelectedParameters.getSensor() != null && FavoritesSelectedParameters.getSound() != null) {
             if (FavoritesSelectedParameters.getEffect().equals(effect) && FavoritesSelectedParameters.getSensor().equals(sensor) && FavoritesSelectedParameters.getSound().equals(sound)) {
                 button.setChecked(true);
@@ -71,7 +72,10 @@ public class FavoritesFragment extends Fragment {
         } else {
             button.setChecked(false);
         }
+
         button.setOnClickListener(v1 -> {
+            SoundFragment.setSelected();
+
             SensorsModel model = new ViewModelProvider(getActivity()).get(SensorsModel.class);
 
             if (button.isChecked()) {
