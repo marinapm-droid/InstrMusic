@@ -19,6 +19,7 @@ import com.example.instrmusic3.FavoritesSelectedParameters;
 import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
 import com.example.instrmusic3.SensorsModel;
+import com.example.instrmusic3.SoundsModel;
 import com.example.instrmusic3.dispatch.Bundling;
 import com.example.instrmusic3.dispatch.OscCommunication;
 import com.example.instrmusic3.dispatch.OscConfiguration;
@@ -74,30 +75,36 @@ public class FavoritesFragment extends Fragment {
         }
 
         button.setOnClickListener(v1 -> {
-            SoundFragment.setSelected();
-
-            SensorsModel model = new ViewModelProvider(getActivity()).get(SensorsModel.class);
-
+            //SENSOR
+            SensorsModel modelSensor = new ViewModelProvider(getActivity()).get(SensorsModel.class);
             if (button.isChecked()) {
                 if (sensor.equals("Accelerometer")) {
-                    model.getSensorState().put("Accelerometer", true);
+                    modelSensor.getSensorState().put("Accelerometer", true);
                 } else if (sensor.equals("Gyroscope")) {
-                    model.getSensorState().put("Gyroscope", true);
+                    modelSensor.getSensorState().put("Gyroscope", true);
                 } else {
-                    model.getSensorState().put("Magnetic Field", true);
+                    modelSensor.getSensorState().put("Magnetic Field", true);
                 }
 
             } else {
                 if (sensor.equals("Accelerometer")) {
-                    model.getSensorState().put("Accelerometer", false);
+                    modelSensor.getSensorState().put("Accelerometer", false);
                 } else if (sensor.equals("Gyroscope")) {
-                    model.getSensorState().put("Gyroscope", false);
+                    modelSensor.getSensorState().put("Gyroscope", false);
                 } else {
-                    model.getSensorState().put("Magnetic Field", false);
+                    modelSensor.getSensorState().put("Magnetic Field", false);
                 }
             }
 
-            if (FavoritesSelectedParameters.getSensor()==(null)) {
+            //SOUND
+            SoundsModel modelSound = new ViewModelProvider(getActivity()).get(SoundsModel.class);
+            if (button.isChecked()) {
+                modelSensor.getSensorState().put(sound, true);
+            } else {
+                modelSensor.getSensorState().put(sound, false);
+            }
+
+            if (FavoritesSelectedParameters.getSensor() == (null)) {
                 onOff = 1;
                 FavoritesSelectedParameters.setEffectSelected(effect, sound, sensor);
                 OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);

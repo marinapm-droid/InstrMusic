@@ -426,7 +426,6 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     }
 
     public void onStartSounds(View view) {
-
         if (manager.findFragmentByTag("C") == null) {
             StartUpSoundsFragment f4 = new StartUpSoundsFragment();
             FragmentTransaction transaction = manager.beginTransaction();

@@ -11,11 +11,15 @@ import android.widget.CompoundButton;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.databinding.ObservableMap;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import com.example.instrmusic3.FavoritesSelectedParameters;
 import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
+import com.example.instrmusic3.SensorsModel;
+import com.example.instrmusic3.SoundsModel;
 import com.example.instrmusic3.dispatch.Bundling;
 import com.example.instrmusic3.dispatch.OscCommunication;
 import com.example.instrmusic3.dispatch.OscConfiguration;
@@ -35,7 +39,7 @@ public class SoundFragment extends Fragment {
     public Settings getSettings() {
         return this.settings;
     }
-    static CompoundButton button;
+    CompoundButton button;
 
     public SoundFragment() {
         super();
@@ -57,6 +61,41 @@ public class SoundFragment extends Fragment {
         groupName.setText(name);
 
         button = v.findViewById(R.id.active);
+
+
+        SoundsModel model = new ViewModelProvider(getActivity()).get(SoundsModel.class);
+        model.getSensorState().addOnMapChangedCallback(
+                new ObservableMap.OnMapChangedCallback<ObservableMap<String, Boolean>, String, Boolean>() {
+                    @Override
+                    public void onMapChanged(ObservableMap<String, Boolean> sender, String key) {
+
+                        if (key.equals(name)) {
+                            Boolean state = sender.get(name);
+                            if (state != null && state.booleanValue() == true) {
+                                button.setChecked(true);
+                                OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
+                                communication.start();
+                                OscHandler handler = communication.getOscHandler();
+                                OscConfiguration oscConfiguration = OscConfiguration.getInstance();
+                                List<Object> args = new ArrayList<Object>(1);
+                                HomePage.setSound(name);
+                                args.add(name);
+                                OSCPortOut sender1 = oscConfiguration.getOscPort();
+                                OSCMessage msg = new OSCMessage("/sound", args);
+                                try {
+                                    sender1.send(msg);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+                            } else {
+                                button.setChecked(false);
+
+                            }
+                        }
+                    }
+                });
+
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -85,31 +124,6 @@ public class SoundFragment extends Fragment {
         return v;
     }
 
-    public static void setSelected(){
-        if(FavoritesSelectedParameters.getSound().equals(name)) {
-            button.setChecked(true);
-            if (onOff == 0) {
-                onOff = 1;
-                OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
-                communication.start();
-                OscHandler handler = communication.getOscHandler();
-                OscConfiguration oscConfiguration = OscConfiguration.getInstance();
-                List<Object> args = new ArrayList<Object>(1);
-                HomePage.setSound(name);
-                args.add(name);
-                OSCPortOut sender = oscConfiguration.getOscPort();
-                OSCMessage msg = new OSCMessage("/sound", args);
-                try {
-                    sender.send(msg);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            } else {
-                onOff = 0;
-            }
-        }
-    }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
