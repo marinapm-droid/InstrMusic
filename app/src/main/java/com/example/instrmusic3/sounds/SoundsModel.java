@@ -1,4 +1,4 @@
-package com.example.instrmusic3;
+package com.example.instrmusic3.sounds;
 
 import androidx.databinding.ObservableArrayMap;
 import androidx.lifecycle.ViewModel;
@@ -8,21 +8,22 @@ import com.example.instrmusic3.sounds.ParametersSounds;
 
 import java.util.List;
 
-public class EffectsModel extends ViewModel {
+public class SoundsModel extends ViewModel {
 
     private final ObservableArrayMap<String, Boolean> sensorState;
 
-    public EffectsModel() {
+    public SoundsModel() {
+        ParametersSounds.getSounds();
         sensorState = new ObservableArrayMap();
-        List<String> effectList = ParametersEffects.getEffects();
-        for (String effect : effectList) {
-            sensorState.put(effect, false);
+        List<String> soundList = ParametersSounds.getSounds();
+        for (String sound : soundList) {
+            sensorState.put(sound, false);
         }
 
 
     }
 
-    public ObservableArrayMap<String, Boolean> getEffectState() {
+    public ObservableArrayMap<String, Boolean> getSoundState() {
         return sensorState;
     }
 }

@@ -16,12 +16,13 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/sensorsHeadline"
+            android:id="@+id/guideHeadline"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Available Sensors"
+            android:text="@string/available_sensors"
+            android:gravity="center"
+            android:paddingTop="30dp"
             android:paddingBottom="16dp"
-
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:visibility="visible"/>
 

@@ -14,6 +14,8 @@
         <activity android:name=".activities.GuideActivity"/>
         <activity android:name=".activities.SettingsActivity" android:theme="@style/PreferencesTheme"/>
         <activity android:name=".HomePage"/>
+        <activity android:name=".ProfileActivity"/>
+
         <activity android:name=".auth.Login" />
         <activity android:name=".auth.SignUp" />
 

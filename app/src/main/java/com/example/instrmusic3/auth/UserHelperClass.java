@@ -12,6 +12,8 @@ public class UserHelperClass {
         this.confPassword = confPassword;
     }
 
+
+
     public UserHelperClass(String sensor, String effect, String sound) {
         this.effect = effect;
         this.sensor = sensor;

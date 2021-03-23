@@ -1,12 +1,10 @@
 package com.example.instrmusic3.fragment;
 
-import android.app.FragmentManager;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
@@ -14,22 +12,17 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.instrmusic3.Effects.ParametersEffects;
-import com.example.instrmusic3.EffectsModel;
+import com.example.instrmusic3.Effects.EffectsModel;
 import com.example.instrmusic3.FavoritesSelectedParameters;
 import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
-import com.example.instrmusic3.SensorsModel;
-import com.example.instrmusic3.SoundsModel;
+import com.example.instrmusic3.sensors.SensorsModel;
+import com.example.instrmusic3.sounds.SoundsModel;
 import com.example.instrmusic3.dispatch.Bundling;
 import com.example.instrmusic3.dispatch.OscCommunication;
 import com.example.instrmusic3.dispatch.OscConfiguration;
-import com.example.instrmusic3.dispatch.OscHandler;
-import com.example.instrmusic3.dispatch.OscReceiveConfig;
 import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPortOut;
-
-import org.sensors2.common.sensors.Parameters;
 
 import java.util.ArrayList;
 import java.util.Arrays;

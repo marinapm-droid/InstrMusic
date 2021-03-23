@@ -14,21 +14,12 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import com.example.instrmusic3.FavoritesSelectedParameters;
 import com.example.instrmusic3.HomePage;
-import com.example.instrmusic3.SensorsModel;
-import com.example.instrmusic3.dispatch.OscCommunication;
-import com.example.instrmusic3.dispatch.OscConfiguration;
-import com.example.instrmusic3.dispatch.OscHandler;
+import com.example.instrmusic3.sensors.SensorsModel;
 import com.example.instrmusic3.dispatch.SensorConfiguration;
 
 import com.example.instrmusic3.R;
 import com.example.instrmusic3.dispatch.Bundling;
-import com.illposed.osc.OSCMessage;
-import com.illposed.osc.OSCPortOut;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 public class SensorFragment extends Fragment {

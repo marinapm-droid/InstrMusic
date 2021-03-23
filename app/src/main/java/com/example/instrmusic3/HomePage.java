@@ -470,6 +470,11 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         startActivity(intent);
     }
 
+    public void onStartProfile(View view) {
+        Intent intent = new Intent(HomePage.this, ProfileActivity.class);
+        startActivity(intent);
+    }
+
     public void onStartSensors(View view) {
 
         Fragment fragment = manager.findFragmentByTag("B");

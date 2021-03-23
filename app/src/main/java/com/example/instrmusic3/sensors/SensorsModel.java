@@ -1,4 +1,4 @@
-package com.example.instrmusic3;
+package com.example.instrmusic3.sensors;
 
 import androidx.databinding.ObservableArrayMap;
 import androidx.lifecycle.ViewModel;
