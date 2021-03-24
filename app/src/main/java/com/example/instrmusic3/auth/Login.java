@@ -70,7 +70,7 @@ public class Login extends AppCompatActivity {
 
                                 setUsername(userID);
 
-                                String usernameFromDB = dataSnapshot.child(userID).child("password").getValue(String.class);
+                                String usernameFromDB = dataSnapshot.child(userID).child("nome").getValue(String.class);
                                 Intent intent = new Intent(getApplicationContext(), HomePage.class);
                                 intent.putExtra("nome", usernameFromDB);
                                 HomePage.setUsername(usernameFromDB);
