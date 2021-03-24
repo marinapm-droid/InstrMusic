@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="#5d515e"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -13,12 +14,17 @@
         android:id="@+id/guideHeadline"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="@string/profile"
         android:gravity="center"
         android:paddingTop="30dp"
         android:paddingBottom="16dp"
+        android:text="@string/profile"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:visibility="visible"/>
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.024" />
 
     <LinearLayout
         android:id="@+id/text_welcoming"
@@ -30,42 +36,54 @@
         android:textColor="#917294"
         android:textSize="30sp"
         android:textStyle="bold"
-        >
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/guideHeadline"
+        app:layout_constraintVertical_bias="0.0">
 
         <TextView
             android:id="@+id/profileImg"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:background="@drawable/round_perm_identity_24"
+            android:gravity="center"
             app:layout_constraintBottom_toBottomOf="@+id/profile"
             app:layout_constraintEnd_toEndOf="@+id/profile"
             app:layout_constraintHorizontal_bias="0.533"
             app:layout_constraintStart_toStartOf="@+id/profile"
             app:layout_constraintTop_toTopOf="@+id/profile"
-            android:gravity="center"
             app:layout_constraintVertical_bias="0.533" />
     </LinearLayout>
 
+
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="20dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_welcoming"
+        app:layout_constraintVertical_bias="0.133">
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/reg_email"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/emailProfile"
             android:textSize="500sp"
-            app:boxStrokeColor="#fff">
+            app:boxStrokeColor="#fff"
+            app:hintEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:boxStrokeColor="#fff" />
+                app:boxStrokeColor="#fff"
+                />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -74,30 +92,33 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/UsernameProfile"
+            app:hintEnabled="true"
             android:textSize="500sp"
             app:boxStrokeColor="#fff">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:boxStrokeColor="#fff" />
 
         </com.google.android.material.textfield.TextInputLayout>
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/reg_password"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/PasswordProfile"
+            app:hintEnabled="true"
             android:textSize="500sp"
             app:boxStrokeColor="#fff"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="textPassword"/>
+                android:inputType="textPassword" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -106,12 +127,13 @@
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/ConfirmProfile"
+            app:hintEnabled="true"
             android:textSize="500sp"
             app:boxStrokeColor="#fff"
             app:passwordToggleEnabled="true">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_confirmpass"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:inputType="textPassword" />
@@ -124,13 +146,60 @@
         android:id="@+id/save"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="5dp"
         android:background="#917294"
         android:text="Save changes"
-        app:backgroundTint="@null" />
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.063" />
 
 
+    <Button
+        android:id="@+id/delete"
+        android:layout_width="277dp"
+        android:layout_height="wrap_content"
+        android:background="#00FF0000"
+        android:text="@string/delete_account"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/save" />
 
 
-</LinearLayout>
+    <LinearLayout
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/delete"
+        android:gravity="center_horizontal"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        >
+
+        <Button
+            android:id="@+id/yesdelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="#45917294"
+            android:text="YES"
+            app:backgroundTint="@null" />
+
+
+        <Button
+            android:id="@+id/nodelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="#79917294"
+            android:text="NO"
+            app:backgroundTint="@null" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout >

@@ -6,7 +6,7 @@
     <string name="nome">Username</string>
     <string name="conf_pass">Confirm Password</string>
     <string name="password">Password</string>
-    <string name="forget_password">Forget Password?</string>
+    <string name="forget_password">Forgot Password?</string>
     <string name="email">Email</string>
     <string name="sensor_inclination">Inclination</string>
     <string name="sensor_accelerometer">Accelerometer</string>
@@ -61,6 +61,7 @@
     <string name="UsernameProfile">Username</string>
     <string name="PasswordProfile">Password</string>
     <string name="ConfirmProfile">ConfirmProfile</string>
+    <string name="delete_account">Delete Account</string>
 
 
 </resources>

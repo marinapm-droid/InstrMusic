@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -20,11 +19,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.illposed.osc.OSCListener;
-import com.illposed.osc.OSCMessage;
-import com.illposed.osc.OSCPortIn;
-
-import java.net.SocketException;
 
 public class Login extends AppCompatActivity {
 
@@ -98,11 +92,15 @@ public class Login extends AppCompatActivity {
 
     }
 
-    public void setUsername(String username) {
+    public static void setUsername(String username) {
         correctUser = username;
     }
 
     public static String getUsername() {
         return correctUser;
+    }
+
+    public void onForgotPass(){
+
     }
 }
