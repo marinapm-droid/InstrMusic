@@ -44,6 +44,7 @@ public class HomeFragment extends Fragment {
         HomePage activity = (HomePage) getActivity();
         activity.getSettings();
         this.settings = activity.loadSettings();
+        sendGO();
         sendIP();
         View v = inflater.inflate(R.layout.activity_home, container, false);
         CompoundButton activeButton = v.findViewById(R.id.active);
@@ -158,6 +159,22 @@ public class HomeFragment extends Fragment {
         List<Object> args = new ArrayList<Object>(1);
         args.add(IP);
         OSCMessage msg = new OSCMessage("/ip", args);
+        try {
+            sender.send(msg);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+    public void sendGO(){
+        IP = HomePage.getLocalIpAddress();
+        OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
+        communication.start();
+        OscHandler handler = communication.getOscHandler();
+        OscConfiguration oscConfiguration = OscConfiguration.getInstance();
+        OSCPortOut sender = oscConfiguration.getOscPort();
+        OSCMessage msg = new OSCMessage("/GO");
         try {
             sender.send(msg);
         } catch (Exception e) {

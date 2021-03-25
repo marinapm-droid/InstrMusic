@@ -142,35 +142,6 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         transaction1.addToBackStack("addB");
         transaction1.commit();
         transaction1.hide(f2);
-
-
-
-
-
-        if (count == 0) {
-            count = 1;
-            OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
-            communication.start();
-            OscHandler handler = communication.getOscHandler();
-            OscConfiguration oscConfiguration = OscConfiguration.getInstance();
-            //List<Object> args = new ArrayList<Object>(1);
-            //args.add(name);
-            OSCPortOut sender = oscConfiguration.getOscPort();
-            OSCMessage msg = new OSCMessage("/GO");
-            try {
-                sender.send(msg);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
-        } else {
-            count = 0;
-        }
-
-
-
-
-
     }
 
     public List<Parameters> GetSensors(SensorManager sensorManager) {
