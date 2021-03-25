@@ -25,7 +25,7 @@ public class OscReceiveConfig {
          message = message1;
     }
     public static String getMessage(){
-        message = message.replace("]", "").replace("[", "");
+        message = message.replace("]", "").replace("[", "").replace("List", "");
         return message;
     }
 }
