@@ -47,8 +47,8 @@ public class OscHandler extends Handler {
         if (stringValue != null) {
             changes.add(stringValue);
         }
-
-        OSCMessage oscMessage = new OSCMessage("/"  + oscParameter, changes);
+        String IP = HomePage.getLocalIpAddress();
+        OSCMessage oscMessage = new OSCMessage("/"  + oscParameter + IP, changes);
 
         try {
             configuration.getOscPort().send(oscMessage);

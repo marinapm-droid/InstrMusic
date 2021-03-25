@@ -17,6 +17,7 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
     }
 
     buildFeatures {
@@ -49,7 +50,7 @@ dependencies {
     implementation 'com.github.SensorApps:Common:9494ac1590'
     implementation "com.github.hoijui.JavaOSC:javaosc-core:javaosc-0.4"
     //noinspection GradleCompatible
-    implementation 'com.android.support:support-v4:23.1.1'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.airbnb.android:lottie:3.4.1'
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.3.0"
     implementation "androidx.lifecycle:lifecycle-viewmodel-savedstate:2.3.0"
