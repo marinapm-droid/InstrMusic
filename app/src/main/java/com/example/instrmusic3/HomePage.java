@@ -39,8 +39,10 @@ import android.widget.Toast;
 import com.example.instrmusic3.activities.SettingsActivity;
 
 import com.example.instrmusic3.auth.UserHelperClass;
+import com.example.instrmusic3.dispatch.OscCommunication;
 import com.example.instrmusic3.dispatch.OscConfiguration;
 import com.example.instrmusic3.dispatch.OscDispatcher;
+import com.example.instrmusic3.dispatch.OscHandler;
 import com.example.instrmusic3.dispatch.OscReceiveConfig;
 import com.example.instrmusic3.dispatch.OscReceiveConfigSound;
 import com.example.instrmusic3.fragment.HomeFragment;
@@ -57,6 +59,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.illposed.osc.OSCMessage;
+import com.illposed.osc.OSCPortOut;
 
 import org.sensors2.common.dispatch.DataDispatcher;
 import org.sensors2.common.dispatch.Measurement;
@@ -89,6 +93,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     static String effect, sound, sensor, username;
     String fragmento;
     int onOff = 0;
+    int count;
     long num;
     FirebaseDatabase mDatabase;
     FragmentManager manager;
@@ -137,6 +142,33 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         transaction1.addToBackStack("addB");
         transaction1.commit();
         transaction1.hide(f2);
+
+
+
+
+
+        if (count == 0) {
+            count = 1;
+            OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
+            communication.start();
+            OscHandler handler = communication.getOscHandler();
+            OscConfiguration oscConfiguration = OscConfiguration.getInstance();
+            //List<Object> args = new ArrayList<Object>(1);
+            //args.add(name);
+            OSCPortOut sender = oscConfiguration.getOscPort();
+            OSCMessage msg = new OSCMessage("/GO");
+            try {
+                sender.send(msg);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        } else {
+            count = 0;
+        }
+
+
+
 
 
     }

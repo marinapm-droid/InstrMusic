@@ -26,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity {
 
-    private static String userID;
+    String userID;
     TextInputLayout username, email, password, confirmPass;
     TextInputEditText emailEdit, usernameEdit, passwordEdit, confirmPassEdit;
     String username1, email1, password1, confirmPass1;
