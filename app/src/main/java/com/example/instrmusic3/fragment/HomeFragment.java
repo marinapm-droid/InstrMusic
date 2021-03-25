@@ -30,6 +30,7 @@ public class HomeFragment extends Fragment {
     private Settings settings;
     int onOff = 0;
     int onOffRecord = 0;
+    int count=0;
 
     public Settings getSettings() {
         return this.settings;
@@ -59,7 +60,12 @@ public class HomeFragment extends Fragment {
                     OscHandler handler = communication.getOscHandler();
                     OscConfiguration oscConfiguration = OscConfiguration.getInstance();
                     OSCPortOut sender = oscConfiguration.getOscPort();
-                    OSCMessage msg = new OSCMessage("/play");
+                    List<Object> args = new ArrayList<Object>(1);
+                    if(count!=2){
+                        count++;
+                    }
+                    args.add(count);
+                    OSCMessage msg = new OSCMessage("/play", args);
                     try {
                         sender.send(msg);
                     } catch (Exception e) {
@@ -90,6 +96,7 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 if (onOffRecord == 0) {
                     onOffRecord = 1;
+                    count=0;
                     OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
                     communication.start();
                     OscHandler handler = communication.getOscHandler();
