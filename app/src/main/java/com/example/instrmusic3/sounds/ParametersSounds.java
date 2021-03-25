@@ -12,7 +12,7 @@ public class ParametersSounds {
         oscReceiveConfig.receive();
         System.out.println("Parameters Sounds" + OscReceiveConfigSound.getMessage());
         String soundMessage = oscReceiveConfig.getMessage();
-        return new ArrayList<>(Arrays.asList(soundMessage.split(", ")));
+        return new ArrayList<>(Arrays.asList(soundMessage.split(",")));
     }
 
 
