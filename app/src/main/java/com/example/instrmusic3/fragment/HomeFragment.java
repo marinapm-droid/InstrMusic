@@ -95,6 +95,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (onOffRecord == 0) {
+
                     onOffRecord = 1;
                     count=0;
                     OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);

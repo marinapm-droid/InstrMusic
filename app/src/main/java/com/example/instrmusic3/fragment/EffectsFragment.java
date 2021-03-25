@@ -87,12 +87,6 @@ public class EffectsFragment extends Fragment {
                 });
 
 
-
-
-
-
-
-
         button.setOnClickListener(v1 -> {
             if (onOff == 0) {
                 onOff = 1;
@@ -104,7 +98,9 @@ public class EffectsFragment extends Fragment {
                 HomePage.setEffect(name);
                 args1.add(name);
                 OSCPortOut sender = oscConfiguration.getOscPort();
-                OSCMessage msg = new OSCMessage("/effect", args1);
+                String IP = HomePage.getLocalIpAddress();
+
+                OSCMessage msg = new OSCMessage("/effect" + " " + IP, args1);
                 try {
                     sender.send(msg);
                 } catch (Exception e) {
@@ -114,7 +110,7 @@ public class EffectsFragment extends Fragment {
                 onOff = 0;
             }
         });
-      return v;
+        return v;
     }
 
 
