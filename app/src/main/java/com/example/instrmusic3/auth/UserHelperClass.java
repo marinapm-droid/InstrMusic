@@ -2,12 +2,12 @@ package com.example.instrmusic3.auth;
 
 public class UserHelperClass {
 
-    String nome,email, password, confPassword, sound, effect, sensor, username;
+    String nome,phone, password, confPassword, sound, effect, sensor, username;
 
 
-    public UserHelperClass(String nome, String email, String password, String confPassword) {
+    public UserHelperClass(String nome, String phone, String password, String confPassword) {
         this.nome = nome;
-        this.email = email;
+        this.phone = phone;
         this.password = password;
         this.confPassword = confPassword;
     }
@@ -40,12 +40,12 @@ public class UserHelperClass {
      //   this.nome = nome;
    // }
 
-    public String getEmail() {
-        return email;
+    public String getPhone() {
+        return phone;
     }
 
     //    public void setEmail(String email) {
-    //        this.email = email;
+    //        this.phone = phone;
     //    }
 
     public String getPassword() {

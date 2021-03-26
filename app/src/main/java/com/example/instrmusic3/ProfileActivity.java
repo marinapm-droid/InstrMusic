@@ -27,9 +27,9 @@ import com.google.firebase.database.ValueEventListener;
 public class ProfileActivity extends AppCompatActivity {
 
     String userID;
-    TextInputLayout username, email, password, confirmPass;
-    TextInputEditText emailEdit, usernameEdit, passwordEdit, confirmPassEdit;
-    String username1, email1, password1, confirmPass1;
+    TextInputLayout username, phone, password, confirmPass;
+    TextInputEditText phoneEdit, usernameEdit, passwordEdit, confirmPassEdit;
+    String username1, phone1, password1, confirmPass1;
     Button changeBtn, deleteBtn, yesBtn, noBtn;
 
     @Override
@@ -38,7 +38,7 @@ public class ProfileActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN); // fullscreen
         setContentView(R.layout.activity_profile);
         changeBtn = findViewById(R.id.save);
-        email = findViewById(R.id.reg_email);
+        phone = findViewById(R.id.reg_phone);
         confirmPass = findViewById(R.id.reg_conf_pass);
         username = findViewById(R.id.reg_nome);
         password = findViewById(R.id.reg_password);
@@ -47,11 +47,10 @@ public class ProfileActivity extends AppCompatActivity {
         noBtn = findViewById(R.id.nodelete);
         yesBtn.setVisibility(View.GONE);
         noBtn.setVisibility(View.GONE);
-        emailEdit = findViewById(R.id.edit_email);
+        phoneEdit = findViewById(R.id.edit_phone);
         confirmPassEdit = findViewById(R.id.edit_confirmpass);
         usernameEdit = findViewById(R.id.edit_username);
         passwordEdit = findViewById(R.id.edit_password);
-
 
 
         userID = Login.getUsername();
@@ -78,16 +77,16 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        emailEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        phoneEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (hasFocus) {
-                    email.setHint("Email");
+                    phone.setHint("Phone Number");
                 } else {
-                    if (email.getEditText().getText().toString().isEmpty()) {
-                        email.setHint(email1);
+                    if (phone.getEditText().getText().toString().isEmpty()) {
+                        phone.setHint(phone1);
                     } else {
-                        email.setHint("Email");
+                        phone.setHint("Phone Number");
                     }
                 }
             }
@@ -100,7 +99,7 @@ public class ProfileActivity extends AppCompatActivity {
                     username.setHint("Username");
                 } else {
                     if (username.getEditText().getText().toString().isEmpty()) {
-                        username.setHint(email1);
+                        username.setHint(phone1);
                     } else {
                         username.setHint("Username");
                     }
@@ -115,7 +114,7 @@ public class ProfileActivity extends AppCompatActivity {
                     password.setHint("Password");
                 } else {
                     if (password.getEditText().getText().toString().isEmpty()) {
-                        password.setHint(email1);
+                        password.setHint(phone1);
                     } else {
                         password.setHint("Password");
                     }
@@ -130,7 +129,7 @@ public class ProfileActivity extends AppCompatActivity {
                     confirmPass.setHint("Confirm Password");
                 } else {
                     if (confirmPass.getEditText().getText().toString().isEmpty()) {
-                        confirmPass.setHint(email1);
+                        confirmPass.setHint(phone1);
                     } else {
                         confirmPass.setHint("Confirm Password");
                     }
@@ -151,57 +150,52 @@ public class ProfileActivity extends AppCompatActivity {
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
         Query checkUser = ref.orderByChild("nome").equalTo(userID);
-        checkUser.addListenerForSingleValueEvent(new
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.exists()) {
+                    System.out.println("ENTRA");
+                    password1 = dataSnapshot.child(userID).child("password").getValue(String.class);
+                    username1 = dataSnapshot.child(userID).child("nome").getValue(String.class);
+                    phone1 = dataSnapshot.child(userID).child("email").getValue(String.class);
+                    confirmPass1 = dataSnapshot.child(userID).child("confPassword").getValue(String.class);
 
-                                                         ValueEventListener() {
-                                                             @Override
-                                                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                                                 if (dataSnapshot.exists()) {
-                                                                     System.out.println("ENTRA");
-                                                                     password1 = dataSnapshot.child(userID).child("password").getValue(String.class);
-                                                                     username1 = dataSnapshot.child(userID).child("nome").getValue(String.class);
-                                                                     email1 = dataSnapshot.child(userID).child("email").getValue(String.class);
-                                                                     confirmPass1 = dataSnapshot.child(userID).child("confPassword").getValue(String.class);
+                    username.setHint(username1);
+                    password.setHint(password1);
+                    phone.setHint(phone1);
+                    confirmPass.setHint(confirmPass1);
 
-                                                                     username.setHint(username1);
-                                                                     password.setHint(password1);
-                                                                     email.setHint(email1);
-                                                                     confirmPass.setHint(confirmPass1);
+                }
+            }
 
-                                                                 }
-                                                             }
-
-                                                             @Override
-                                                             public void onCancelled(@NonNull DatabaseError error) {
-                                                             }
-                                                         });
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
 
 
         changeBtn.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
                 String nome = username.getEditText().getText().toString();
-                String email1 = email.getEditText().getText().toString();
+                String phone1 = phone.getEditText().getText().toString();
                 String password1 = password.getEditText().getText().toString();
                 String confPassword = confirmPass.getEditText().getText().toString();
 
                 DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("users");
                 mDatabase.child(nome).child("nome").setValue(nome);
                 mDatabase.child(nome).child("password").setValue(password1);
-                mDatabase.child(nome).child("email").setValue(email1);
+                mDatabase.child(nome).child("phone").setValue(phone1);
                 mDatabase.child(nome).child("confPassword").setValue(confPassword);
 
                 Query checkUser = mDatabase.orderByChild("nome").equalTo(userID);
                 checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        System.out.println("OLA2222 " + userID);
                         if (dataSnapshot.exists()) {
                             long num = dataSnapshot.child(userID).child("favorites").getChildrenCount();
-                            System.out.println("OLA1111112 " + num);
                             for (int i = 1; i <= num; i++) {
                                 String num1 = String.valueOf(i);
-                                System.out.println("OLA2");
                                 String sensor = dataSnapshot.child(userID).child("favorites").child(num1).child("sensor").getValue(String.class);
                                 mDatabase.child(nome).child("favorites").child(num1).child("effect").setValue(sensor);
                                 mDatabase.child(nome).child("favorites").child(num1).child("effect").setValue(dataSnapshot.child(userID).child("favorites").child(num1).child("effect").getValue(String.class));

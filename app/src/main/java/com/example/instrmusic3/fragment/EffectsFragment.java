@@ -100,11 +100,9 @@ public class EffectsFragment extends Fragment {
                 OSCPortOut sender = oscConfiguration.getOscPort();
                 String IP = HomePage.getLocalIpAddress();
 
-                OSCMessage msg1 = new OSCMessage("/effect" + IP, args1);
-                OSCMessage msg = new OSCMessage("/effect");
+                OSCMessage msg = new OSCMessage("/effect" + " " + IP, args1);
                 try {
                     sender.send(msg);
-                    sender.send(msg1);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

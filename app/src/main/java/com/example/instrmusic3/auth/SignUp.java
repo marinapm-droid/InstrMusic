@@ -15,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 public class SignUp extends AppCompatActivity {
 
 
-    TextInputLayout regName, regEmail, regPassword, regConfPassword;
+    TextInputLayout regName, regPhone, regPassword, regConfPassword;
     Button regBtn;
 
     @Override
@@ -25,7 +25,7 @@ public class SignUp extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         regName = findViewById(R.id.reg_nome);
-        regEmail = findViewById(R.id.reg_email);
+        regPhone = findViewById(R.id.reg_phone);
         regPassword = findViewById(R.id.reg_password);
         regConfPassword = findViewById(R.id.reg_conf_pass);
         regBtn = findViewById(R.id.signUp);
@@ -37,11 +37,11 @@ public class SignUp extends AppCompatActivity {
 
                 //Get all the values
                 String nome = regName.getEditText().getText().toString();
-                String email = regEmail.getEditText().getText().toString();
+                String phone = regPhone.getEditText().getText().toString();
                 String password = regPassword.getEditText().getText().toString();
                 String confPassword = regConfPassword.getEditText().getText().toString();
 
-                UserHelperClass helperClass = new UserHelperClass(nome, email, password, confPassword);
+                UserHelperClass helperClass = new UserHelperClass(nome, phone, password, confPassword);
 
                 DatabaseReference mDatabase;
                 mDatabase = FirebaseDatabase.getInstance().getReference("users");
