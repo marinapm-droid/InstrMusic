@@ -220,4 +220,19 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    public static void sendExit(){
+        String IP = HomePage.getLocalIpAddress();
+        OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
+        communication.start();
+        OscHandler handler = communication.getOscHandler();
+        OscConfiguration oscConfiguration = OscConfiguration.getInstance();
+        OSCPortOut sender = oscConfiguration.getOscPort();
+        OSCMessage msg = new OSCMessage("/exit"+IP);
+        try {
+            sender.send(msg);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

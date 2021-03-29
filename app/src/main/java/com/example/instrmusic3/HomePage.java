@@ -460,6 +460,8 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     }
 
     public void onStartLogOut(View view) {
+        HomeFragment.sendExit();
+
         Intent intent = new Intent(HomePage.this, MainActivity.class);
         startActivity(intent);
     }
