@@ -1,4 +1,4 @@
-package com.example.instrmusic3.activities;
+package com.example.instrmusic3;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -34,8 +34,10 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
 
-import com.example.instrmusic3.R;
-
+import com.example.instrmusic3.activities.AboutActivity;
+import com.example.instrmusic3.activities.MainActivity;
+import com.example.instrmusic3.activities.ProfileActivity;
+import com.example.instrmusic3.activities.SettingsActivity;
 import com.example.instrmusic3.auth.UserHelperClass;
 import com.example.instrmusic3.dispatch.OscConfiguration;
 import com.example.instrmusic3.dispatch.OscDispatcher;

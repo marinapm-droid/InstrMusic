@@ -10,7 +10,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.instrmusic3.activities.HomePage;
+import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;

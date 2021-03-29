@@ -11,7 +11,7 @@ import android.widget.CompoundButton;
 import androidx.fragment.app.Fragment;
 
 
-import com.example.instrmusic3.activities.HomePage;
+import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
 import com.example.instrmusic3.auth.Login;
 import com.example.instrmusic3.dispatch.OscCommunication;
@@ -29,8 +29,10 @@ public class HomeFragment extends Fragment {
     private Handler handler = new Handler();
     private Settings settings;
     int onOff = 0;
+    int onOffStop = 0;
     int onOffRecord = 0;
     int count=0;
+    boolean pauseActive=false;
 
     public Settings getSettings() {
         return this.settings;
@@ -100,7 +102,6 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (onOffRecord == 0) {
-
                     onOffRecord = 1;
                     count=0;
                     OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
@@ -145,8 +146,12 @@ public class HomeFragment extends Fragment {
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (onOff == 0) {
-                    onOff = 1;
+                if (onOffStop == 0) {
+                    onOffStop = 1;
+                    if (onOff==1){
+                        activeButton.setChecked(false);
+                        onOff=0;
+                    }
                     OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
                     communication.start();
                     OscHandler handler = communication.getOscHandler();
@@ -163,7 +168,7 @@ public class HomeFragment extends Fragment {
                     }
 
                 } else {
-                    onOff = 0;
+                    onOffStop = 0;
                 }
             }
         });

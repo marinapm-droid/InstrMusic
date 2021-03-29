@@ -14,7 +14,7 @@ import androidx.databinding.ObservableMap;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.example.instrmusic3.activities.HomePage;
+import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
 import com.example.instrmusic3.sounds.SoundsModel;
 import com.example.instrmusic3.dispatch.Bundling;

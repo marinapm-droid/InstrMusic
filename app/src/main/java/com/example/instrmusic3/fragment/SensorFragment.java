@@ -14,7 +14,7 @@ import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.TextView;
 
-import com.example.instrmusic3.activities.HomePage;
+import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.sensors.SensorsModel;
 import com.example.instrmusic3.dispatch.SensorConfiguration;
 

@@ -13,7 +13,7 @@
         <activity android:name=".activities.AboutActivity"/>
         <activity android:name=".activities.GuideActivity"/>
         <activity android:name=".activities.SettingsActivity" android:theme="@style/PreferencesTheme"/>
-        <activity android:name=".activities.HomePage"/>
+        <activity android:name=".HomePage"/>
         <activity android:name=".activities.ProfileActivity"/>
 
         <activity android:name=".auth.Login" />
