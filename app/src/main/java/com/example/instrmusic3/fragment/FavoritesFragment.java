@@ -14,7 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.instrmusic3.Effects.EffectsModel;
 import com.example.instrmusic3.FavoritesSelectedParameters;
-import com.example.instrmusic3.HomePage;
+import com.example.instrmusic3.activities.HomePage;
 import com.example.instrmusic3.R;
 import com.example.instrmusic3.sensors.SensorsModel;
 import com.example.instrmusic3.sounds.SoundsModel;

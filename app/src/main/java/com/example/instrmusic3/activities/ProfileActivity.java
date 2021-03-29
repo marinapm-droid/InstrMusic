@@ -1,4 +1,4 @@
-package com.example.instrmusic3;
+package com.example.instrmusic3.activities;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -11,9 +11,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.instrmusic3.R;
 import com.example.instrmusic3.auth.Login;
-import com.example.instrmusic3.auth.SignUp;
-import com.example.instrmusic3.auth.UserHelperClass;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -158,12 +157,10 @@ public class ProfileActivity extends AppCompatActivity {
                     password1 = dataSnapshot.child(userID).child("password").getValue(String.class);
                     username1 = dataSnapshot.child(userID).child("nome").getValue(String.class);
                     phone1 = dataSnapshot.child(userID).child("email").getValue(String.class);
-                    confirmPass1 = dataSnapshot.child(userID).child("confPassword").getValue(String.class);
 
                     username.setHint(username1);
                     password.setHint(password1);
                     phone.setHint(phone1);
-                    confirmPass.setHint(confirmPass1);
 
                 }
             }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,9 +7,16 @@
     android:background="#B296B5"
     android:orientation="vertical"
     android:padding="20dp"
-    tools:context=".auth.Login">
+    tools:context=".auth.Login"
+    android:id="@+id/signUp_screen_scroll">
 
-    <ImageView
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <ImageView
         android:id="@+id/barras"
         android:layout_width="match_parent"
         android:layout_height="80dp"
@@ -41,22 +48,17 @@
         android:layout_marginBottom="20dp"
         android:orientation="vertical">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/reg_conf_pass"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            android:layout_width="match_parent"
+        <com.hbb20.CountryCodePicker
+            android:id="@+id/countryCodePicker"
             android:layout_height="wrap_content"
-            android:hint="@string/conf_pass"
-            android:textSize="500sp"
+            android:layout_width="match_parent"
+            app:ccp_autoDetectCountry="true"
+            app:ccp_showNameCode="true"
+            android:padding="7dp"
+            app:ccp_showFullName="true"
             app:boxStrokeColor="#fff"
-            app:passwordToggleEnabled="true">
+            />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword" />
-
-        </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/reg_phone"
@@ -70,7 +72,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:boxStrokeColor="#fff" />
+                app:boxStrokeColor="#fff"
+                android:inputType="number"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -86,7 +89,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:boxStrokeColor="#fff" />
+                app:boxStrokeColor="#fff"
+                android:inputType="text"/>
 
         </com.google.android.material.textfield.TextInputLayout>
         <com.google.android.material.textfield.TextInputLayout
@@ -126,14 +130,15 @@
 
     </LinearLayout>
 
-    <Button
-        android:id="@+id/signUp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="5dp"
-        android:background="#917294"
-        android:text="GO"
-        app:backgroundTint="@null" />
+        <Button
+            android:id="@+id/signUp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="5dp"
+            android:background="#917294"
+            android:text="GO"
+            app:backgroundTint="@null" />
+    </LinearLayout>
 
-</LinearLayout>
+</ScrollView>

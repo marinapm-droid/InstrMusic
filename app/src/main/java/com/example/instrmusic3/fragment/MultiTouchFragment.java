@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 
 import org.sensors2.common.dispatch.Measurement;
 
-import com.example.instrmusic3.HomePage;
+import com.example.instrmusic3.activities.HomePage;
 import com.example.instrmusic3.R;
 import com.example.instrmusic3.dispatch.OscDispatcher;
 import com.example.instrmusic3.dispatch.SensorConfiguration;

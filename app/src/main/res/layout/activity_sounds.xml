@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:text="@string/available_sounds"
         android:gravity="center"
-        android:paddingTop="30dp"
+        android:paddingTop="16dp"
         android:paddingBottom="16dp"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:visibility="visible"/>

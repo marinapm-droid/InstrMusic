@@ -10,7 +10,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.example.instrmusic3.Effects.ParametersEffects;
-import com.example.instrmusic3.HomePage;
+import com.example.instrmusic3.activities.HomePage;
 import com.example.instrmusic3.R;
 
 import com.example.instrmusic3.dispatch.Bundling;

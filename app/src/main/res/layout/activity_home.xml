@@ -273,11 +273,12 @@
         android:id="@+id/recordingsImg"
         android:layout_width="65dp"
         android:layout_height="65dp"
-        android:background="@drawable/round_settings_voice_24"
+        android:background="@drawable/outline_info_24"
         app:layout_constraintBottom_toBottomOf="@+id/recordings"
         app:layout_constraintEnd_toEndOf="@+id/recordings"
         app:layout_constraintStart_toStartOf="@+id/recordings"
-        app:layout_constraintTop_toTopOf="@+id/recordings" />
+        app:layout_constraintTop_toTopOf="@+id/recordings"
+        android:onClick="onStartInfo"/>
 
     <TextView
         android:id="@+id/sounds"

@@ -1,4 +1,4 @@
-package com.example.instrmusic3;
+package com.example.instrmusic3.activities;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -33,16 +33,12 @@ import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.example.instrmusic3.activities.SettingsActivity;
+import com.example.instrmusic3.R;
 
 import com.example.instrmusic3.auth.UserHelperClass;
-import com.example.instrmusic3.dispatch.OscCommunication;
 import com.example.instrmusic3.dispatch.OscConfiguration;
 import com.example.instrmusic3.dispatch.OscDispatcher;
-import com.example.instrmusic3.dispatch.OscHandler;
 import com.example.instrmusic3.dispatch.OscReceiveConfig;
 import com.example.instrmusic3.dispatch.OscReceiveConfigSound;
 import com.example.instrmusic3.fragment.HomeFragment;
@@ -59,8 +55,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.illposed.osc.OSCMessage;
-import com.illposed.osc.OSCPortOut;
 
 import org.sensors2.common.dispatch.DataDispatcher;
 import org.sensors2.common.dispatch.Measurement;
@@ -468,6 +462,12 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         startActivity(intent);
     }
 
+
+    public void onStartInfo(View view) {
+        Intent intent = new Intent(HomePage.this, AboutActivity.class);
+        startActivity(intent);
+    }
+
     public void onStartSettings(View view) {
         Intent intent = new Intent(HomePage.this, SettingsActivity.class);
         startActivity(intent);
@@ -538,7 +538,8 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
                     num = dataSnapshot.child(username).child("favorites").getChildrenCount();
                     num++;
                     String numString = String.valueOf(num);
-                    UserHelperClass helperClass = new UserHelperClass(sensor, effect, sound);
+                    UserHelperClass helperClass = new UserHelperClass();
+                    helperClass.UserHelperClass1(sensor,  effect, sound);
                     mDatabase = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = mDatabase.getReference("users");
                     myRef.child(username).child("favorites").child(numString).setValue(helperClass);

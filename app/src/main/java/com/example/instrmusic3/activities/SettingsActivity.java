@@ -14,9 +14,7 @@ public class SettingsActivity extends PreferenceActivity {
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		addPreferencesFromResource(com.example.instrmusic3.R.xml.preferences);
 		addPreferencesFromResource(org.sensors2.common.R.xml.common_preferences);
-		//if (android.os.Build.VERSION.SDK_INT >= 11) {
-		//	getActionBar().setDisplayHomeAsUpEnabled(true);
-		//}
+
 	}
 
 	@Override

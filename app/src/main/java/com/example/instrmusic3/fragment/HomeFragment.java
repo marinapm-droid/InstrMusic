@@ -11,7 +11,7 @@ import android.widget.CompoundButton;
 import androidx.fragment.app.Fragment;
 
 
-import com.example.instrmusic3.HomePage;
+import com.example.instrmusic3.activities.HomePage;
 import com.example.instrmusic3.R;
 import com.example.instrmusic3.auth.Login;
 import com.example.instrmusic3.dispatch.OscCommunication;

@@ -93,7 +93,7 @@
         android:paddingTop="16dp"
         android:paddingBottom="16dp"
         android:text="Your Favorites"
-
+        android:gravity="center"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"

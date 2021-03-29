@@ -31,24 +31,16 @@ public class AboutActivity extends Activity {
 		copyright.setMovementMethod(LinkMovementMethod.getInstance());
 		copyright.setText(Html.fromHtml(getResources().getString(R.string.about_copyright)));
 		TextView javaOsc = (TextView) findViewById(R.id.javaosc_links);
+		TextView sensor2OSC = (TextView) findViewById(R.id.sensors2osc_links);
 		javaOsc.setMovementMethod(LinkMovementMethod.getInstance());
+		sensor2OSC.setMovementMethod(LinkMovementMethod.getInstance());
 		javaOsc.setText(Html.fromHtml(getResources().getString(R.string.about_license_javaosc)));
+		sensor2OSC.setText(Html.fromHtml(getResources().getString(R.string.about_license_sensor2osc)));
 		TextView bugLinks = (TextView) findViewById(R.id.buglinks);
 		bugLinks.setMovementMethod(LinkMovementMethod.getInstance());
 		bugLinks.setText(Html.fromHtml(getResources().getString(R.string.about_buglinks)));
-		if (android.os.Build.VERSION.SDK_INT >= 11) {
-			getActionBar().setDisplayHomeAsUpEnabled(true);
-		}
+
 	}
 
-	@Override
-	public boolean onOptionsItemSelected(MenuItem item) {
-		// Respond to the action bar's Up/Home button
-		if (item.getItemId() == android.R.id.home) {
-			NavUtils.navigateUpFromSameTask(this);
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
-	}
 
 }

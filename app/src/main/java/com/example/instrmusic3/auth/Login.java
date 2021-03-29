@@ -10,7 +10,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.example.instrmusic3.HomePage;
+import com.example.instrmusic3.activities.HomePage;
 import com.example.instrmusic3.R;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
@@ -23,7 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 public class Login extends AppCompatActivity {
 
     private static String correctUser;
-    Button regBtnSignUp, regBtnLogin;
+    Button regBtnSignUp, regBtnLogin, regBtnForgot;
     TextInputLayout username, pass;
 
     @Override
@@ -35,10 +35,21 @@ public class Login extends AppCompatActivity {
         username = findViewById(R.id.email);
         pass = findViewById(R.id.password);
         regBtnLogin = findViewById(R.id.goToHome);
+        regBtnForgot = findViewById(R.id.goToForgot);
 
+
+        regBtnForgot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(Login.this, ForgetPassword.class);
+                startActivity(intent);
+            }
+
+
+        });
 
         regBtnSignUp.setOnClickListener(new View.OnClickListener() {
-
+            @Override
             public void onClick(View view) {
                 Intent intent = new Intent(Login.this, SignUp.class);
                 startActivity(intent);
@@ -46,6 +57,7 @@ public class Login extends AppCompatActivity {
 
 
         });
+
 
         regBtnLogin.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
@@ -70,6 +82,7 @@ public class Login extends AppCompatActivity {
                                 HomePage.setUsername(usernameFromDB);
                                 intent.putExtra("password", passFromDB);
                                 startActivity(intent);
+                                finish();
                             } else {
 
                                 Toast.makeText(Login.this, "WRONG PASSWORD", Toast.LENGTH_LONG).show();
@@ -92,6 +105,7 @@ public class Login extends AppCompatActivity {
 
     }
 
+
     public static void setUsername(String username) {
         correctUser = username;
     }
@@ -100,7 +114,4 @@ public class Login extends AppCompatActivity {
         return correctUser;
     }
 
-    public void onForgotPass(){
-
-    }
 }
