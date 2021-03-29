@@ -79,8 +79,9 @@ public class SoundFragment extends Fragment {
                                 List<Object> args = new ArrayList<Object>(1);
                                 HomePage.setSound(name);
                                 args.add(name);
+                                String IP = HomePage.getLocalIpAddress();
                                 OSCPortOut sender1 = oscConfiguration.getOscPort();
-                                OSCMessage msg = new OSCMessage("/sound", args);
+                                OSCMessage msg = new OSCMessage("/sound" + IP, args);
                                 try {
                                     sender1.send(msg);
                                 } catch (Exception e) {
@@ -107,8 +108,9 @@ public class SoundFragment extends Fragment {
                     List<Object> args = new ArrayList<Object>(1);
                     HomePage.setSound(name);
                     args.add(name);
+                    String IP = HomePage.getLocalIpAddress();
                     OSCPortOut sender = oscConfiguration.getOscPort();
-                    OSCMessage msg = new OSCMessage("/sound", args);
+                    OSCMessage msg = new OSCMessage("/sound" + IP, args);
                     try {
                         sender.send(msg);
                     } catch (Exception e) {

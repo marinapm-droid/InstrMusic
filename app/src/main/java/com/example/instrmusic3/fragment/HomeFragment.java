@@ -49,6 +49,7 @@ public class HomeFragment extends Fragment {
         this.settings = activity.loadSettings();
         sendGO();
         sendIP();
+        sendHomeMsg();
         View v = inflater.inflate(R.layout.activity_home, container, false);
         CompoundButton activeButton = v.findViewById(R.id.active);
         activeButton.setOnCheckedChangeListener(activity);
@@ -67,9 +68,9 @@ public class HomeFragment extends Fragment {
                     if(count!=2){
                         count++;
                     }
-                    args.add(IP);
+                    args.add(count);
                     System.out.println(args);
-                    OSCMessage msg = new OSCMessage("/play", args);
+                    OSCMessage msg = new OSCMessage("/play"+IP, args);
                     try {
                         sender.send(msg);
                     } catch (Exception e) {
@@ -84,8 +85,7 @@ public class HomeFragment extends Fragment {
                     OSCPortOut sender = oscConfiguration.getOscPort();
                     List<Object> args = new ArrayList<Object>(1);
                     String IP = HomePage.getLocalIpAddress();
-                    args.add(IP);
-                    OSCMessage msg = new OSCMessage("/pause", args);
+                    OSCMessage msg = new OSCMessage("/pause"+IP);
                     try {
                         sender.send(msg);
                     } catch (Exception e) {
@@ -109,10 +109,8 @@ public class HomeFragment extends Fragment {
                     OscHandler handler = communication.getOscHandler();
                     OscConfiguration oscConfiguration = OscConfiguration.getInstance();
                     OSCPortOut sender = oscConfiguration.getOscPort();
-                    List<Object> args = new ArrayList<Object>(1);
                     String IP = HomePage.getLocalIpAddress();
-                    args.add(IP);
-                    OSCMessage msg = new OSCMessage("/startRecord", args);
+                    OSCMessage msg = new OSCMessage("/startRecord"+IP);
                     try {
                         sender.send(msg);
                     } catch (Exception e) {
@@ -128,8 +126,7 @@ public class HomeFragment extends Fragment {
                     List<Object> args = new ArrayList<Object>(1);
                     String IP = HomePage.getLocalIpAddress();
                     args.add(Login.getUsername());
-                    args.add(IP);
-                    OSCMessage msg = new OSCMessage("/stopRecord", args);
+                    OSCMessage msg = new OSCMessage("/stopRecord"+IP, args);
                     try {
                         sender.send(msg);
                     } catch (Exception e) {
@@ -157,10 +154,8 @@ public class HomeFragment extends Fragment {
                     OscHandler handler = communication.getOscHandler();
                     OscConfiguration oscConfiguration = OscConfiguration.getInstance();
                     OSCPortOut sender = oscConfiguration.getOscPort();
-                    List<Object> args = new ArrayList<Object>(1);
                     String IP = HomePage.getLocalIpAddress();
-                    args.add(IP);
-                    OSCMessage msg = new OSCMessage("/stop", args);
+                    OSCMessage msg = new OSCMessage("/stop"+IP);
                     try {
                         sender.send(msg);
                     } catch (Exception e) {
@@ -185,6 +180,23 @@ public class HomeFragment extends Fragment {
         List<Object> args = new ArrayList<Object>(1);
         args.add(IP);
         OSCMessage msg = new OSCMessage("/ip", args);
+        try {
+            sender.send(msg);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendHomeMsg(){
+        IP = HomePage.getLocalIpAddress();
+        OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
+        communication.start();
+        OscHandler handler = communication.getOscHandler();
+        OscConfiguration oscConfiguration = OscConfiguration.getInstance();
+        OSCPortOut sender = oscConfiguration.getOscPort();
+        List<Object> args = new ArrayList<Object>(1);
+        args.add(IP);
+        OSCMessage msg = new OSCMessage("/home", args);
         try {
             sender.send(msg);
         } catch (Exception e) {
