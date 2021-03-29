@@ -59,8 +59,8 @@ public class SignUp extends AppCompatActivity {
                 intent.putExtra("phone", phone);
                 intent.putExtra("password", password);
                 intent.putExtra("confPassword", confPassword);
+                intent.putExtra("whatToDo", "createData");
                 startActivity(intent);
-
             }
         });
 

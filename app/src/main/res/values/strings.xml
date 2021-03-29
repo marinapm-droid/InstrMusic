@@ -1,7 +1,7 @@
 <resources>
     <string name="about_buglinks">Please report bugs on too &lt;a href=&quot;mailto:marinamartins548@gmail.com">marinamartins548@gmail.com&lt;/a>. We will take a look at it.</string>
     <string name="about_copyright" translatable="false">© Guilherme Franco &amp; Marina Martins</string>
-    <string name="app_name">InstrMusic 3</string>
+    <string name="app_name">InstrMusic</string>
     <string name="welcome_back">Sign in to continue</string>
     <string name="nome">Username</string>
     <string name="conf_pass">Confirm Password</string>

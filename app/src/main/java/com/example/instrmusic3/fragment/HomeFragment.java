@@ -61,10 +61,12 @@ public class HomeFragment extends Fragment {
                     OscConfiguration oscConfiguration = OscConfiguration.getInstance();
                     OSCPortOut sender = oscConfiguration.getOscPort();
                     List<Object> args = new ArrayList<Object>(1);
+                    String IP = HomePage.getLocalIpAddress();
                     if(count!=2){
                         count++;
                     }
-                    args.add(count);
+                    args.add(IP);
+                    System.out.println(args);
                     OSCMessage msg = new OSCMessage("/play", args);
                     try {
                         sender.send(msg);
@@ -78,7 +80,10 @@ public class HomeFragment extends Fragment {
                     OscHandler handler = communication.getOscHandler();
                     OscConfiguration oscConfiguration = OscConfiguration.getInstance();
                     OSCPortOut sender = oscConfiguration.getOscPort();
-                    OSCMessage msg = new OSCMessage("/pause");
+                    List<Object> args = new ArrayList<Object>(1);
+                    String IP = HomePage.getLocalIpAddress();
+                    args.add(IP);
+                    OSCMessage msg = new OSCMessage("/pause", args);
                     try {
                         sender.send(msg);
                     } catch (Exception e) {
@@ -103,7 +108,10 @@ public class HomeFragment extends Fragment {
                     OscHandler handler = communication.getOscHandler();
                     OscConfiguration oscConfiguration = OscConfiguration.getInstance();
                     OSCPortOut sender = oscConfiguration.getOscPort();
-                    OSCMessage msg = new OSCMessage("/startRecord");
+                    List<Object> args = new ArrayList<Object>(1);
+                    String IP = HomePage.getLocalIpAddress();
+                    args.add(IP);
+                    OSCMessage msg = new OSCMessage("/startRecord", args);
                     try {
                         sender.send(msg);
                     } catch (Exception e) {
@@ -117,7 +125,9 @@ public class HomeFragment extends Fragment {
                     OscConfiguration oscConfiguration = OscConfiguration.getInstance();
                     OSCPortOut sender = oscConfiguration.getOscPort();
                     List<Object> args = new ArrayList<Object>(1);
+                    String IP = HomePage.getLocalIpAddress();
                     args.add(Login.getUsername());
+                    args.add(IP);
                     OSCMessage msg = new OSCMessage("/stopRecord", args);
                     try {
                         sender.send(msg);
@@ -142,7 +152,10 @@ public class HomeFragment extends Fragment {
                     OscHandler handler = communication.getOscHandler();
                     OscConfiguration oscConfiguration = OscConfiguration.getInstance();
                     OSCPortOut sender = oscConfiguration.getOscPort();
-                    OSCMessage msg = new OSCMessage("/stop");
+                    List<Object> args = new ArrayList<Object>(1);
+                    String IP = HomePage.getLocalIpAddress();
+                    args.add(IP);
+                    OSCMessage msg = new OSCMessage("/stop", args);
                     try {
                         sender.send(msg);
                     } catch (Exception e) {

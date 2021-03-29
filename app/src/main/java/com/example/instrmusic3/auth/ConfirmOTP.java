@@ -112,7 +112,7 @@ public class ConfirmOTP extends AppCompatActivity {
 
                                 DatabaseReference mDatabase;
                                 mDatabase = FirebaseDatabase.getInstance().getReference("users");
-                                mDatabase.child(phone).setValue(helperClass);
+                                mDatabase.child(nome).setValue(helperClass);
 
                                 Toast.makeText(ConfirmOTP.this, "Verification successful!", Toast.LENGTH_SHORT).show();
                                 new Handler().postDelayed(new Runnable() {
