@@ -118,7 +118,7 @@ public class HomeFragment extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()) {
-                                long num = (long) dataSnapshot.child(userID).child("recordings").getValue();
+                                int num = (int) dataSnapshot.child(userID).child("recordings").getValue();
                                 num++;
                                 ref.child(userID).child("recordings").setValue(num);
                             }
