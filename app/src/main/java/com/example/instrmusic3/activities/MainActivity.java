@@ -2,6 +2,7 @@ package com.example.instrmusic3.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.fragment.app.Fragment;
 
 import android.app.ActivityOptions;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 
+import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
 import com.example.instrmusic3.auth.Login;
 
@@ -68,6 +70,7 @@ public class MainActivity extends AppCompatActivity {
         }, SPLASH_SCREEN);
 
     }
+
 
     public static String getLocalIpAddress() {
         try {

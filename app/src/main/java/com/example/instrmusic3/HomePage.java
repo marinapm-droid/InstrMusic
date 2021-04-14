@@ -38,6 +38,7 @@ import com.example.instrmusic3.activities.AboutActivity;
 import com.example.instrmusic3.activities.MainActivity;
 import com.example.instrmusic3.activities.ProfileActivity;
 import com.example.instrmusic3.activities.SettingsActivity;
+import com.example.instrmusic3.auth.Login;
 import com.example.instrmusic3.auth.UserHelperClass;
 import com.example.instrmusic3.dispatch.OscConfiguration;
 import com.example.instrmusic3.dispatch.OscDispatcher;
@@ -86,7 +87,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     private NfcAdapter nfcAdapter;
     private PendingIntent mPendingIntent;
     private NdefMessage mNdefPushMessage;
-    static String effect, sound, sensor, username;
+    static String effect, sound, sensor;
     String fragmento;
     int onOff = 0;
     int count;
@@ -463,9 +464,18 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
 
     public void onStartLogOut(View view) {
         HomeFragment.sendExit();
-
         Intent intent = new Intent(HomePage.this, MainActivity.class);
         startActivity(intent);
+        finish();
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+        sensor=null;
+        effect=null;
+        sound=null;
+        Login.setUsername(null);
+        FavoritesSelectedParameters.setEffectSelected(null, null, null);
     }
 
 
@@ -501,7 +511,6 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         transaction.add(R.id.container, f6, "G");
         transaction.addToBackStack("addG");
         transaction.commit();
-
         fragmento = "G";
     }
 
@@ -515,10 +524,6 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
 
     public static void setSound(String soundSelected) {
         sound = soundSelected;
-    }
-
-    public static void setUsername(String usernameActive) {
-        username = usernameActive;
     }
 
     public static String getSound() {
@@ -536,19 +541,20 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     public void saveFavorites(View view) {
         if (onOff == 0) {
             onOff = 1;
+            String userID = Login.getUsername();
             DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
-            Query checkUser = ref.orderByChild("nome").equalTo(username);
+            Query checkUser = ref.orderByChild("nome").equalTo(userID);
             checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    num = dataSnapshot.child(username).child("favorites").getChildrenCount();
+                    num = dataSnapshot.child(userID).child("favorites").getChildrenCount();
                     num++;
                     String numString = String.valueOf(num);
                     UserHelperClass helperClass = new UserHelperClass();
-                    helperClass.UserHelperClass1(sensor,  effect, sound);
+                    helperClass.UserHelperClass1(sensor, effect, sound);
                     mDatabase = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = mDatabase.getReference("users");
-                    myRef.child(username).child("favorites").child(numString).setValue(helperClass);
+                    myRef.child(userID).child("favorites").child(numString).setValue(helperClass);
                 }
 
                 @Override
@@ -597,6 +603,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
                 Fragment fragment4 = manager.findFragmentByTag("G");
                 transaction4.remove(fragment4);
                 transaction4.commit();
+                onOff = 0;
                 break;
             default:
                 System.out.println("erro");

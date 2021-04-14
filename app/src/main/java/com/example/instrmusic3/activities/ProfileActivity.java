@@ -165,7 +165,7 @@ public class ProfileActivity extends AppCompatActivity {
                             }
                             mDatabase.child(userID).removeValue();
                             Login.setUsername(nome);
-
+                            System.out.println("USERNAMEEEE: " + nome);
                         }
                     }
 
@@ -174,10 +174,8 @@ public class ProfileActivity extends AppCompatActivity {
 
                     }
                 });
+
                 Toast.makeText(ProfileActivity.this, "Changes saved successfully", Toast.LENGTH_SHORT).show();
-                Login.setUsername(nome);
-
-
             }
 
         });

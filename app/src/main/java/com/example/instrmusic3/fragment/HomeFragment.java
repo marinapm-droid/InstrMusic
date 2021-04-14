@@ -239,7 +239,6 @@ public class HomeFragment extends Fragment {
         }
     }
 
-
     public void sendGO() {
         IP = HomePage.getLocalIpAddress();
         OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);

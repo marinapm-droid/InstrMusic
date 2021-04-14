@@ -20,7 +20,6 @@ public class SoundsModel extends ViewModel {
             sensorState.put(sound, false);
         }
 
-
     }
 
     public ObservableArrayMap<String, Boolean> getSoundState() {

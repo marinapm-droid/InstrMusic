@@ -51,13 +51,17 @@ public class SignUp extends AppCompatActivity {
                 String nome = regName.getEditText().getText().toString();
                 String phone = countryCodePicker.getSelectedCountryCodeWithPlus() + (regPhone.getEditText().getText().toString().trim());
                 String password = regPassword.getEditText().getText().toString();
-                Intent intent = new Intent(SignUp.this, ConfirmOTP.class);
 
-                intent.putExtra("nome", nome);
-                intent.putExtra("phone", phone);
-                intent.putExtra("password", password);
-                intent.putExtra("whatToDo", "createData");
-                startActivity(intent);
+                if(nome.equals("") || phone.equals("")  || password.equals("")){
+                    Toast.makeText(SignUp.this, "COMPLETE ALL FIELDS", Toast.LENGTH_LONG).show();
+                } else {
+                    Intent intent = new Intent(SignUp.this, ConfirmOTP.class);
+                    intent.putExtra("nome", nome);
+                    intent.putExtra("phone", phone);
+                    intent.putExtra("password", password);
+                    intent.putExtra("whatToDo", "createData");
+                    startActivity(intent);
+                }
             }
         });
 

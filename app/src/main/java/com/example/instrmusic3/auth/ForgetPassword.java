@@ -40,7 +40,6 @@ public class ForgetPassword extends AppCompatActivity {
         forgotBtn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 String phone = countryCodePicker.getSelectedCountryCodeWithPlus() + (regPhone.getEditText().getText().toString().trim());
-
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
                 Query checkUser = ref.orderByChild("phone").equalTo(phone);
                 System.out.println("TLM:" + phone);
