@@ -118,7 +118,9 @@ public class HomeFragment extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()) {
-                                int num = (int) dataSnapshot.child(userID).child("recordings").getValue();
+                                if(dataSnapshot.child(userID).child("recordings").getChildrenCount()!=0){
+                                    num = (int) dataSnapshot.child(userID).child("recordings").getValue();
+                                }
                                 num++;
                                 ref.child(userID).child("recordings").setValue(num);
                             }
@@ -128,8 +130,6 @@ public class HomeFragment extends Fragment {
 
                         }
                     });
-
-
                     onOffRecord = 1;
                     count = 0;
                     OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
@@ -138,7 +138,7 @@ public class HomeFragment extends Fragment {
                     OscConfiguration oscConfiguration = OscConfiguration.getInstance();
                     OSCPortOut sender = oscConfiguration.getOscPort();
                     List<Object> args = new ArrayList<Object>(1);
-                    args.add(Login.getUsername());
+                    args.add(num);
                     String IP = HomePage.getLocalIpAddress();
                     OSCMessage msg = new OSCMessage("/startRecord" + IP, args);
                     try {
