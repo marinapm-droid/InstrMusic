@@ -27,8 +27,8 @@ public class ProfileActivity extends AppCompatActivity {
 
     String userID;
     TextInputLayout username, phone, password, confirmPass;
-    TextInputEditText phoneEdit, usernameEdit, passwordEdit, confirmPassEdit;
-    String username1, phone1, password1, confirmPass1;
+    TextInputEditText phoneEdit, usernameEdit, passwordEdit;
+    String username1, phone1;
     Button changeBtn, deleteBtn, yesBtn, noBtn;
 
     @Override
@@ -38,7 +38,6 @@ public class ProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_profile);
         changeBtn = findViewById(R.id.save);
         phone = findViewById(R.id.reg_phone);
-        confirmPass = findViewById(R.id.reg_conf_pass);
         username = findViewById(R.id.reg_nome);
         password = findViewById(R.id.reg_password);
         deleteBtn = findViewById(R.id.delete);
@@ -47,7 +46,6 @@ public class ProfileActivity extends AppCompatActivity {
         yesBtn.setVisibility(View.GONE);
         noBtn.setVisibility(View.GONE);
         phoneEdit = findViewById(R.id.edit_phone);
-        confirmPassEdit = findViewById(R.id.edit_confirmpass);
         usernameEdit = findViewById(R.id.edit_username);
         passwordEdit = findViewById(R.id.edit_password);
 
@@ -98,7 +96,7 @@ public class ProfileActivity extends AppCompatActivity {
                     username.setHint("Username");
                 } else {
                     if (username.getEditText().getText().toString().isEmpty()) {
-                        username.setHint(phone1);
+                        username.setHint(username1);
                     } else {
                         username.setHint("Username");
                     }
@@ -106,35 +104,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-        passwordEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    password.setHint("Password");
-                } else {
-                    if (password.getEditText().getText().toString().isEmpty()) {
-                        password.setHint(phone1);
-                    } else {
-                        password.setHint("Password");
-                    }
-                }
-            }
-        });
-
-        confirmPassEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if (hasFocus) {
-                    confirmPass.setHint("Confirm Password");
-                } else {
-                    if (confirmPass.getEditText().getText().toString().isEmpty()) {
-                        confirmPass.setHint(phone1);
-                    } else {
-                        confirmPass.setHint("Confirm Password");
-                    }
-                }
-            }
-        });
 
         noBtn.setOnClickListener(new View.OnClickListener() {
             @SuppressLint("SetTextI18n")
@@ -154,12 +123,9 @@ public class ProfileActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
                     System.out.println("ENTRA");
-                    password1 = dataSnapshot.child(userID).child("password").getValue(String.class);
                     username1 = dataSnapshot.child(userID).child("nome").getValue(String.class);
-                    phone1 = dataSnapshot.child(userID).child("email").getValue(String.class);
-
+                    phone1 = dataSnapshot.child(userID).child("phone").getValue(String.class);
                     username.setHint(username1);
-                    password.setHint(password1);
                     phone.setHint(phone1);
 
                 }
@@ -177,13 +143,11 @@ public class ProfileActivity extends AppCompatActivity {
                 String nome = username.getEditText().getText().toString();
                 String phone1 = phone.getEditText().getText().toString();
                 String password1 = password.getEditText().getText().toString();
-                String confPassword = confirmPass.getEditText().getText().toString();
 
                 DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference("users");
                 mDatabase.child(nome).child("nome").setValue(nome);
                 mDatabase.child(nome).child("password").setValue(password1);
                 mDatabase.child(nome).child("phone").setValue(phone1);
-                mDatabase.child(nome).child("confPassword").setValue(confPassword);
 
                 Query checkUser = mDatabase.orderByChild("nome").equalTo(userID);
                 checkUser.addListenerForSingleValueEvent(new ValueEventListener() {

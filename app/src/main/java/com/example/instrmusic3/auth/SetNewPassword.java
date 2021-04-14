@@ -33,7 +33,6 @@ public class SetNewPassword extends AppCompatActivity {
         setContentView(R.layout.activity_new_password);
 
         regPassword = findViewById(R.id.reg_password);
-        regConfPassword = findViewById(R.id.reg_conf_pass);
     }
 
 

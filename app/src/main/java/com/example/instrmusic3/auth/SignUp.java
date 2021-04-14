@@ -36,7 +36,6 @@ public class SignUp extends AppCompatActivity {
         regName = findViewById(R.id.reg_nome);
         regPhone = findViewById(R.id.reg_phone);
         regPassword = findViewById(R.id.reg_password);
-        regConfPassword = findViewById(R.id.reg_conf_pass);
         regBtn = findViewById(R.id.signUp);
         scrollView = findViewById(R.id.signUp_screen_scroll);
         countryCodePicker = findViewById(R.id.countryCodePicker);
@@ -52,13 +51,11 @@ public class SignUp extends AppCompatActivity {
                 String nome = regName.getEditText().getText().toString();
                 String phone = countryCodePicker.getSelectedCountryCodeWithPlus() + (regPhone.getEditText().getText().toString().trim());
                 String password = regPassword.getEditText().getText().toString();
-                String confPassword = regConfPassword.getEditText().getText().toString();
                 Intent intent = new Intent(SignUp.this, ConfirmOTP.class);
 
                 intent.putExtra("nome", nome);
                 intent.putExtra("phone", phone);
                 intent.putExtra("password", password);
-                intent.putExtra("confPassword", confPassword);
                 intent.putExtra("whatToDo", "createData");
                 startActivity(intent);
             }

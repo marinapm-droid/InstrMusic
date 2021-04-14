@@ -33,7 +33,7 @@ public class ConfirmOTP extends AppCompatActivity {
     PinView pinFromUser;
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
     String codeBySystem;
-    String nome, phone, password, confPassword, whatToDo;
+    String nome, phone, password, whatToDo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,8 +46,6 @@ public class ConfirmOTP extends AppCompatActivity {
         nome = getIntent().getStringExtra("nome");
         phone = getIntent().getStringExtra("phone");
         password = getIntent().getStringExtra("password");
-        confPassword = getIntent().getStringExtra("confPassword");
-        confPassword = getIntent().getStringExtra("confPassword");
         whatToDo = getIntent().getStringExtra("whatToDo");
 
         sendVerificationCodeToUser(phone);

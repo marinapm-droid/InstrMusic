@@ -134,7 +134,7 @@ public class HomeFragment extends Fragment {
                                 OscConfiguration oscConfiguration = OscConfiguration.getInstance();
                                 OSCPortOut sender = oscConfiguration.getOscPort();
                                 List<Object> args = new ArrayList<Object>(1);
-                                args.add(num);
+                                args.add(String.valueOf(num));
                                 System.out.println("HHHHHHHHHH: " + num);
                                 String IP = HomePage.getLocalIpAddress();
                                 OSCMessage msg = new OSCMessage("/startRecord" + IP, args);
