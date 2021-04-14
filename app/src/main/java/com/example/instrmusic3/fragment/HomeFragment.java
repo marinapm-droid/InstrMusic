@@ -243,7 +243,9 @@ public class HomeFragment extends Fragment {
         OscHandler handler = communication.getOscHandler();
         OscConfiguration oscConfiguration = OscConfiguration.getInstance();
         OSCPortOut sender = oscConfiguration.getOscPort();
-        OSCMessage msg = new OSCMessage("/GO");
+        List<Object> args = new ArrayList<Object>(1);
+        args.add(IP);
+        OSCMessage msg = new OSCMessage("/GO", args);
         try {
             sender.send(msg);
         } catch (Exception e) {
