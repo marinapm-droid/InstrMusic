@@ -118,8 +118,11 @@ public class HomeFragment extends Fragment {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                             if (dataSnapshot.exists()) {
-                                if(dataSnapshot.child(userID).child("recordings").getChildrenCount()!=0){
-                                    num = (int) dataSnapshot.child(userID).child("recordings").getValue();
+                                long numChild = dataSnapshot.child(userID).getChildrenCount();
+                                System.out.println("NUM CHILD: " + numChild);
+                                if(numChild == 5){
+                                    System.out.println("RECORD NUM");
+                                    num = (long) dataSnapshot.child(userID).child("recordings").getValue();
                                 }
                                 num++;
                                 ref.child(userID).child("recordings").setValue(num);
