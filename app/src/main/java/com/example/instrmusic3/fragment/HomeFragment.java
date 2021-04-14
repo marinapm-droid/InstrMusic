@@ -138,6 +138,7 @@ public class HomeFragment extends Fragment {
                                 System.out.println("HHHHHHHHHH: " + num);
                                 String IP = HomePage.getLocalIpAddress();
                                 OSCMessage msg = new OSCMessage("/startRecord" + IP, args);
+
                                 try {
                                     sender.send(msg);
                                 } catch (Exception e) {
