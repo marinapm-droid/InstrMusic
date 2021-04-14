@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_horizontal"
             android:paddingBottom="16dp"
-            android:text="Available Sensors"
+            android:text="Favorites"
             android:textAlignment="center"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/white"
@@ -33,47 +33,59 @@
     </LinearLayout>
 
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingBottom="8dp">
+        android:orientation="vertical"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:paddingBottom="16dp">
 
-        <LinearLayout
-            android:layout_width="327dp"
+        <TextView
+            android:id="@+id/group_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="7dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Save current selection"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="20dp" />
 
+        <TextView
+            android:id="@+id/current"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/group_name"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="27dp"
+            android:layout_marginTop="7dp"
+            android:layout_marginEnd="117dp"
+            android:layout_marginRight="117dp"
+            android:textColor="@color/black"
+            android:textSize="15dp" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="Save current selection"
-                    android:textSize="20dp" />
-
-
-                <TextView
-                    android:id="@+id/current"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@color/black"
-                    android:textSize="15dp" />
-
-        </LinearLayout>
-        <Button
+        <ToggleButton
             android:id="@+id/active"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="right"
+            android:layout_width="48dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
             android:background="@drawable/toggle_fav"
             android:onClick="saveFavorites"
             android:textOff=" "
             android:textOn=" " />
-    </LinearLayout>
 
+    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
