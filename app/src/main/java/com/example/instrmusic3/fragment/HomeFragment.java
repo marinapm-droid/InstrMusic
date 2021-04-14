@@ -126,6 +126,25 @@ public class HomeFragment extends Fragment {
                                 }
                                 num++;
                                 ref.child(userID).child("recordings").setValue(num);
+
+                                onOffRecord = 1;
+                                count = 0;
+                                OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
+                                communication.start();
+                                OscConfiguration oscConfiguration = OscConfiguration.getInstance();
+                                OSCPortOut sender = oscConfiguration.getOscPort();
+                                List<Object> args = new ArrayList<Object>(1);
+                                args.add(num);
+                                System.out.println("HHHHHHHHHH: " + num);
+                                String IP = HomePage.getLocalIpAddress();
+                                OSCMessage msg = new OSCMessage("/startRecord" + IP, args);
+                                try {
+                                    sender.send(msg);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                }
+
+
                             }
                         }
                         @Override
@@ -133,23 +152,6 @@ public class HomeFragment extends Fragment {
 
                         }
                     });
-                    onOffRecord = 1;
-                    count = 0;
-                    OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
-                    communication.start();
-                    OscHandler handler = communication.getOscHandler();
-                    OscConfiguration oscConfiguration = OscConfiguration.getInstance();
-                    OSCPortOut sender = oscConfiguration.getOscPort();
-                    List<Object> args = new ArrayList<Object>(1);
-                    args.add(num);
-                    System.out.println("HHHHHHHHHH: " + num);
-                    String IP = HomePage.getLocalIpAddress();
-                    OSCMessage msg = new OSCMessage("/startRecord" + IP, args);
-                    try {
-                        sender.send(msg);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
 
                 } else {
                     OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
