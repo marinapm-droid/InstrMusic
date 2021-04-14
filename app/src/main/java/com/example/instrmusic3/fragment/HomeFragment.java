@@ -8,16 +8,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 
 import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
 import com.example.instrmusic3.auth.Login;
+import com.example.instrmusic3.auth.UserHelperClass;
 import com.example.instrmusic3.dispatch.OscCommunication;
 import com.example.instrmusic3.dispatch.OscConfiguration;
 import com.example.instrmusic3.dispatch.OscHandler;
 import com.example.instrmusic3.sensors.Settings;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPortOut;
 
@@ -31,12 +39,13 @@ public class HomeFragment extends Fragment {
     int onOff = 0;
     int onOffStop = 0;
     int onOffRecord = 0;
-    int count=0;
-    boolean pauseActive=false;
+    int count = 0;
+    long num = 0;
 
     public Settings getSettings() {
         return this.settings;
     }
+
     String IP;
 
     @Override
@@ -65,12 +74,12 @@ public class HomeFragment extends Fragment {
                     OSCPortOut sender = oscConfiguration.getOscPort();
                     List<Object> args = new ArrayList<Object>(1);
                     String IP = HomePage.getLocalIpAddress();
-                    if(count!=2){
+                    if (count != 2) {
                         count++;
                     }
                     args.add(count);
                     System.out.println(args);
-                    OSCMessage msg = new OSCMessage("/play"+IP, args);
+                    OSCMessage msg = new OSCMessage("/play" + IP, args);
                     try {
                         sender.send(msg);
                     } catch (Exception e) {
@@ -85,7 +94,7 @@ public class HomeFragment extends Fragment {
                     OSCPortOut sender = oscConfiguration.getOscPort();
                     List<Object> args = new ArrayList<Object>(1);
                     String IP = HomePage.getLocalIpAddress();
-                    OSCMessage msg = new OSCMessage("/pause"+IP);
+                    OSCMessage msg = new OSCMessage("/pause" + IP);
                     try {
                         sender.send(msg);
                     } catch (Exception e) {
@@ -102,15 +111,36 @@ public class HomeFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 if (onOffRecord == 0) {
+                    String userID = Login.getUsername();
+                    DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
+                    Query checkUser = ref.orderByChild("nome").equalTo(userID);
+                    checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                long num = (long) dataSnapshot.child(userID).child("recordings").getValue();
+                                num++;
+                                ref.child(userID).child("recordings").setValue(num);
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+
                     onOffRecord = 1;
-                    count=0;
+                    count = 0;
                     OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
                     communication.start();
                     OscHandler handler = communication.getOscHandler();
                     OscConfiguration oscConfiguration = OscConfiguration.getInstance();
                     OSCPortOut sender = oscConfiguration.getOscPort();
+                    List<Object> args = new ArrayList<Object>(1);
+                    args.add(Login.getUsername());
                     String IP = HomePage.getLocalIpAddress();
-                    OSCMessage msg = new OSCMessage("/startRecord"+IP);
+                    OSCMessage msg = new OSCMessage("/startRecord" + IP, args);
                     try {
                         sender.send(msg);
                     } catch (Exception e) {
@@ -123,10 +153,8 @@ public class HomeFragment extends Fragment {
                     OscHandler handler = communication.getOscHandler();
                     OscConfiguration oscConfiguration = OscConfiguration.getInstance();
                     OSCPortOut sender = oscConfiguration.getOscPort();
-                    List<Object> args = new ArrayList<Object>(1);
                     String IP = HomePage.getLocalIpAddress();
-                    args.add(Login.getUsername());
-                    OSCMessage msg = new OSCMessage("/stopRecord"+IP, args);
+                    OSCMessage msg = new OSCMessage("/stopRecord" + IP);
                     try {
                         sender.send(msg);
                     } catch (Exception e) {
@@ -145,9 +173,9 @@ public class HomeFragment extends Fragment {
             public void onClick(View v) {
                 if (onOffStop == 0) {
                     onOffStop = 1;
-                    if (onOff==1){
+                    if (onOff == 1) {
                         activeButton.setChecked(false);
-                        onOff=0;
+                        onOff = 0;
                     }
                     OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
                     communication.start();
@@ -155,7 +183,7 @@ public class HomeFragment extends Fragment {
                     OscConfiguration oscConfiguration = OscConfiguration.getInstance();
                     OSCPortOut sender = oscConfiguration.getOscPort();
                     String IP = HomePage.getLocalIpAddress();
-                    OSCMessage msg = new OSCMessage("/stop"+IP);
+                    OSCMessage msg = new OSCMessage("/stop" + IP);
                     try {
                         sender.send(msg);
                     } catch (Exception e) {
@@ -170,7 +198,7 @@ public class HomeFragment extends Fragment {
         return v;
     }
 
-    public void sendIP(){
+    public void sendIP() {
         IP = HomePage.getLocalIpAddress();
         OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
         communication.start();
@@ -187,7 +215,7 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    public void sendHomeMsg(){
+    public void sendHomeMsg() {
         IP = HomePage.getLocalIpAddress();
         OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
         communication.start();
@@ -205,7 +233,7 @@ public class HomeFragment extends Fragment {
     }
 
 
-    public void sendGO(){
+    public void sendGO() {
         IP = HomePage.getLocalIpAddress();
         OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
         communication.start();
@@ -220,14 +248,14 @@ public class HomeFragment extends Fragment {
         }
     }
 
-    public static void sendExit(){
+    public static void sendExit() {
         String IP = HomePage.getLocalIpAddress();
         OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
         communication.start();
         OscHandler handler = communication.getOscHandler();
         OscConfiguration oscConfiguration = OscConfiguration.getInstance();
         OSCPortOut sender = oscConfiguration.getOscPort();
-        OSCMessage msg = new OSCMessage("/exit"+IP);
+        OSCMessage msg = new OSCMessage("/exit" + IP);
         try {
             sender.send(msg);
         } catch (Exception e) {
