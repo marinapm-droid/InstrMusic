@@ -397,7 +397,9 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             this.setRequestedOrientation(this.getCurrentOrientation());
         } else {
-            this.wakeLock.release();
+            if (this.wakeLock.isHeld()) {
+                this.wakeLock.release();
+            }
             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             this.setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         }
