@@ -175,6 +175,8 @@ public class ProfileActivity extends AppCompatActivity {
                     }
                 });
                 Toast.makeText(ProfileActivity.this, "Changes saved successfully", Toast.LENGTH_SHORT).show();
+                Login.setUsername(nome);
+
 
             }
 
