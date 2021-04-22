@@ -48,13 +48,17 @@ public class OscHandler extends Handler {
             changes.add(stringValue);
         }
         String IP = HomePage.getLocalIpAddress();
-        OSCMessage oscMessage = new OSCMessage("/"  + oscParameter + IP, changes);
 
+        //definir mensagem OSC a enviar
+        //nome do sensor + IP do tlm + valores do sensor
+        OSCMessage oscMessage = new OSCMessage("/"  + oscParameter + IP, changes);
         try {
+            // envia mensagem para a porta e IP disponivel na função getOscPort()
             configuration.getOscPort().send(oscMessage);
         } catch (IOException e) {
             e.printStackTrace();
         }
+
     }
 
 }

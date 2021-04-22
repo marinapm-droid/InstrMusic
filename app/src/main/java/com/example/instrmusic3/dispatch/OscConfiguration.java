@@ -37,11 +37,9 @@ public class OscConfiguration {
 	public OSCPortOut getOscPort() {
 		if (this.oscPort == null) {
 			try {
-				System.out.println("PORTA" + this.port);
 				InetAddress address = InetAddress.getByName(this.host);
 				this.oscPort = new OSCPortOut(address, this.port);
 			} catch (Exception e) {
-				System.out.println("catchPORT");
 				e.printStackTrace();
 			}
 		}

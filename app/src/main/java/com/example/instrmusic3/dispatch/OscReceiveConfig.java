@@ -9,12 +9,11 @@ public class OscReceiveConfig {
 
     public void receive() {
         try {
-            OSCPortIn testIn = new OSCPortIn(5679);
+            OSCPortIn testIn = new OSCPortIn(5679); //Abrir porta
             OSCListener listener = (time, message) -> {
-                setMessage(message.getArguments().toString());
-                System.out.println("mensagem: " + message.getArguments());
+                setMessage(message.getArguments().toString());//Guardar valor da mensagem OSC
             };
-            testIn.addListener("/effect", listener);
+            testIn.addListener("/effect", listener); //
             testIn.startListening();
         } catch (SocketException e) {
             e.printStackTrace();
