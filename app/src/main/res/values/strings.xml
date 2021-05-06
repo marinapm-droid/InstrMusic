@@ -62,6 +62,7 @@
     <string name="PasswordProfile">Password</string>
     <string name="ConfirmProfile">ConfirmProfile</string>
     <string name="delete_account">Delete Account</string>
+    <string name="add_room">Add room</string>
 
 
 </resources>

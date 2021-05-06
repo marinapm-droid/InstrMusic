@@ -44,8 +44,8 @@
 
         <ImageView
             android:id="@+id/imageView"
-            android:layout_width="189dp"
-            android:layout_height="56dp"
+            android:layout_width="36dp"
+            android:layout_height="42dp"
             android:layout_weight="1"
             android:onClick="addFriend"
             app:srcCompat="@drawable/baseline_group_add_24" />

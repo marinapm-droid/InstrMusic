@@ -54,7 +54,7 @@ public class Chat extends AppCompatActivity {
         room_name = (EditText) findViewById(R.id.room_name_edittext);
         listView = (ListView) findViewById(R.id.listView);
 
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, list_of_rooms);
+        arrayAdapter = new ArrayAdapter<String>(this, R.layout.custom_layout, list_of_rooms);
 
         listView.setAdapter(arrayAdapter);
 

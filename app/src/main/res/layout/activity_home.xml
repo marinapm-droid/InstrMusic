@@ -141,22 +141,6 @@
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/textView6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginBottom="16dp"
-        android:text="Log Out"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.937"
-        app:layout_constraintStart_toStartOf="@+id/logOut"
-        app:layout_constraintTop_toBottomOf="@+id/logOut"
-        app:layout_constraintVertical_bias="0.0" />
-
-    <TextView
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -165,6 +149,18 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/recordings"
         app:layout_constraintStart_toStartOf="@+id/recordings"
+        app:layout_constraintTop_toBottomOf="@+id/recordings"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Chat"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/chat"
+        app:layout_constraintStart_toStartOf="@+id/chat"
         app:layout_constraintTop_toBottomOf="@+id/recordings"
         app:layout_constraintVertical_bias="0.0" />
 
@@ -373,16 +369,14 @@
 
     <TextView
         android:id="@+id/chatImg"
-        android:layout_width="55dp"
-        android:layout_height="62dp"
+        android:layout_width="47dp"
+        android:layout_height="52dp"
         android:background="@drawable/round_chat_24"
         android:onClick="onStartChat"
         app:layout_constraintBottom_toBottomOf="@+id/chat"
         app:layout_constraintEnd_toEndOf="@+id/chat"
-        app:layout_constraintHorizontal_bias="0.56"
         app:layout_constraintStart_toStartOf="@+id/chat"
-        app:layout_constraintTop_toTopOf="@+id/chat"
-        app:layout_constraintVertical_bias="0.444" />
+        app:layout_constraintTop_toTopOf="@+id/chat" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

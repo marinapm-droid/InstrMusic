@@ -10,18 +10,23 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
+import com.example.instrmusic3.auth.Login;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -54,7 +59,7 @@ public class Chat_Room  extends AppCompatActivity {
 
         title.setText(" Room - "+room_name);
 
-        root = FirebaseDatabase.getInstance().getReference().child("chatrooms").child(room_name);
+        root = FirebaseDatabase.getInstance().getReference().child("chatrooms").child(room_name).child("messages");
 
         btn_send_msg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -131,7 +136,37 @@ public class Chat_Room  extends AppCompatActivity {
         builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                //name = input_field.getText().toString();
+                String name = input_field.getText().toString();
+
+                //verificar se existe user
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
+
+                Query checkUser = ref.orderByChild("nome").equalTo(name);
+                checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        if (dataSnapshot.exists()) {
+                            //adicionar ao chatroom
+                            DatabaseReference child = FirebaseDatabase.getInstance().getReference().child("chatrooms").child(room_name);
+                            Map<String, Object> map1 = new HashMap<String, Object>();
+                            map1.put(name, "");
+                            child.updateChildren(map1);
+                            Toast.makeText(Chat_Room.this, name+" joined the chat", Toast.LENGTH_LONG).show();
+
+                        } else {
+                            Toast.makeText(Chat_Room.this, "Wrong user, try again!", Toast.LENGTH_LONG).show();
+                            addFriend(null);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+
             }
         });
 
