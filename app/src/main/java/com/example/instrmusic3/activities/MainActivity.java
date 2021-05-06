@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
 import com.example.instrmusic3.auth.Login;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
         //5 sec
         int SPLASH_SCREEN = 5000;
         new Handler().postDelayed(() -> {
+
             Intent intent=new Intent(MainActivity.this, Login.class);
 
             Pair[] pairs= new Pair[2];
@@ -71,21 +74,4 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-    public static String getLocalIpAddress() {
-        try {
-            for (Enumeration<NetworkInterface> en = NetworkInterface.getNetworkInterfaces(); en.hasMoreElements(); ) {
-                NetworkInterface intf = en.nextElement();
-                for (Enumeration<InetAddress> enumIpAddr = intf.getInetAddresses(); enumIpAddr.hasMoreElements(); ) {
-                    InetAddress inetAddress = enumIpAddr.nextElement();
-                    if (!inetAddress.isLoopbackAddress() && inetAddress instanceof Inet4Address) {
-                        return inetAddress.getHostAddress();
-                    }
-                }
-            }
-        } catch (SocketException ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
 }

@@ -19,10 +19,11 @@ public class Parameters extends org.sensors2.common.sensors.Parameters {
 
     public static List<Parameters> GetSensors(SensorManager sensorManager, Context applicationContext) {
         List<Parameters> parameters = new ArrayList<>();
-        // add device sensors
+
+
+        // adicionar sensores suportados
         List<Integer> addedSensors = new ArrayList<>();
         for (Sensor sensor : sensorManager.getSensorList(Sensor.TYPE_ALL)) {
-            // Sensors may be listed twice: wake up and non wake up, see https://github.com/SensorApps/Sensors2OSC/issues/17
             int sensorType = sensor.getType();
             if (addedSensors.contains(sensorType)) {
                 continue;
@@ -30,8 +31,7 @@ public class Parameters extends org.sensors2.common.sensors.Parameters {
             addedSensors.add(sensorType);
             parameters.add(new com.example.instrmusic3.sensors.Parameters(sensor, applicationContext));
         }
-        // 3: TYPE_ORIENTATION This constant was deprecated in API level 8. use SensorManager.getOrientation() instead.
-        // We need 1 (accelerometer) and 2 (magnetic field) to use it.
+
         if (!addedSensors.contains(3) && addedSensors.contains(1) && addedSensors.contains(2)) {
             parameters.add(createFakeOrientationSensor(applicationContext));
         }

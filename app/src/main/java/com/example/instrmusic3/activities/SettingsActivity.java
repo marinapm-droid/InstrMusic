@@ -1,10 +1,13 @@
 package com.example.instrmusic3.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import androidx.core.app.NavUtils;
 import android.view.MenuItem;
 import android.view.WindowManager;
+
+import com.example.instrmusic3.HomePage;
 
 
 public class SettingsActivity extends PreferenceActivity {
@@ -26,4 +29,13 @@ public class SettingsActivity extends PreferenceActivity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
+
+	@Override
+	public void onBackPressed() {
+		super.onBackPressed();
+		Intent i=new Intent(SettingsActivity.this, HomePage.class);
+		startActivity(i);
+	}
+
+
 }

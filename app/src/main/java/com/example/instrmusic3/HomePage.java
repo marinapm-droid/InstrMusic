@@ -35,6 +35,7 @@ import android.view.WindowManager;
 import android.widget.CompoundButton;
 
 import com.example.instrmusic3.activities.AboutActivity;
+import com.example.instrmusic3.activities.Chat;
 import com.example.instrmusic3.activities.MainActivity;
 import com.example.instrmusic3.activities.ProfileActivity;
 import com.example.instrmusic3.activities.SettingsActivity;
@@ -462,12 +463,6 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         fragmento = "D";
     }
 
-    public void onStartLogOut(View view) {
-        HomeFragment.sendExit();
-        Intent intent = new Intent(HomePage.this, MainActivity.class);
-        startActivity(intent);
-        finish();
-    }
 
     public void onDestroy() {
         super.onDestroy();
@@ -494,6 +489,11 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         startActivity(intent);
     }
 
+    public void onStartChat(View view) {
+        Intent intent = new Intent(HomePage.this, Chat.class);
+        startActivity(intent);
+    }
+
     public void onStartSensors(View view) {
 
         Fragment fragment = manager.findFragmentByTag("B");
@@ -503,6 +503,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
 
         fragmento = "B";
     }
+
 
     public void onStartFavorites(View view) {
 

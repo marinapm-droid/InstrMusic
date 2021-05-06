@@ -118,6 +118,20 @@
         app:layout_constraintTop_toBottomOf="@+id/linearLayout"
         app:layout_constraintVertical_bias="0.063" />
 
+    <Button
+        android:id="@+id/logOut"
+        android:layout_width="277dp"
+        android:layout_height="wrap_content"
+        android:background="#88917294"
+        android:text="Log Out"
+        app:backgroundTint="@null"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/save"
+        app:layout_constraintVertical_bias="0.114"
+        android:onClick="onStartLogOut"/>
+
 
     <Button
         android:id="@+id/delete"

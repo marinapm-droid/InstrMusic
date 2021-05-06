@@ -12,8 +12,10 @@
         android:usesCleartextTraffic="true">
         <activity android:name=".activities.AboutActivity"  android:screenOrientation="portrait"/>
         <activity android:name=".activities.SettingsActivity" android:theme="@style/PreferencesTheme"  android:screenOrientation="portrait"/>
-        <activity android:name=".HomePage"    android:noHistory="true" android:screenOrientation="portrait"/>
+        <activity android:name=".HomePage" android:screenOrientation="portrait"/>
         <activity android:name=".activities.ProfileActivity"  android:screenOrientation="portrait"/>
+        <activity android:name=".activities.Chat_Room"  android:screenOrientation="portrait"/>
+        <activity android:name=".activities.Chat"  android:screenOrientation="portrait"/>
 
         <activity android:name=".auth.Login"  android:screenOrientation="portrait"/>
         <activity android:name=".auth.SignUp"  android:screenOrientation="portrait"/>

@@ -30,10 +30,11 @@ public class OscDispatcher implements DataDispatcher {
 
     @Override
     public void dispatch(Measurement sensorData) {
+        // iterar os sensores disponíveis
         for (SensorConfiguration sensorConfiguration : this.sensorConfigurations) {
             if (sensorConfiguration.getSensorType() == sensorData.getSensorType()) {
-                if (sensorData.getValues() != null) {
-                    trySend(sensorConfiguration, sensorData.getValues());
+                if (sensorData.getValues() != null) { //receber valores do sensor
+                    trySend(sensorConfiguration, sensorData.getValues()); //enviar nome e valor do sensor
                 } else {
                     trySend(sensorConfiguration, sensorData.getStringValue());
                 }
