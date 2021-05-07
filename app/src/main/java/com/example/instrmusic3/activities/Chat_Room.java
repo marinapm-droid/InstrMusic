@@ -3,8 +3,6 @@ package com.example.instrmusic3.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-//import android.support.annotation.Nullable;
-//import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -17,7 +15,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
 import com.example.instrmusic3.auth.Login;
 import com.google.firebase.database.ChildEventListener;
@@ -31,16 +28,16 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Objects;
 
-
-public class Chat_Room  extends AppCompatActivity {
+public class Chat_Room extends AppCompatActivity {
 
     private Button btn_send_msg;
     private EditText input_msg;
     private TextView chat_conversation;
 
-    private String user_name,room_name;
-    private DatabaseReference root ;
+    private String user_name, room_name;
+    private DatabaseReference root;
     private String temp_key;
 
     @Override
@@ -49,15 +46,15 @@ public class Chat_Room  extends AppCompatActivity {
         setContentView(R.layout.chat_room);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        btn_send_msg = (Button) findViewById(R.id.btn_send);
-        input_msg = (EditText) findViewById(R.id.msg_input);
-        chat_conversation = (TextView) findViewById(R.id.textView);
+        btn_send_msg = findViewById(R.id.btn_send);
+        input_msg = findViewById(R.id.msg_input);
+        chat_conversation = findViewById(R.id.textView);
 
         user_name = getIntent().getExtras().get("user_name").toString();
         room_name = getIntent().getExtras().get("room_name").toString();
-        TextView title = (TextView)findViewById(R.id.title_chat);
+        TextView title = findViewById(R.id.title_chat);
 
-        title.setText(" Room - "+room_name);
+        title.setText(" Room - " + room_name);
 
         root = FirebaseDatabase.getInstance().getReference().child("chatrooms").child(room_name).child("messages");
 
@@ -71,8 +68,8 @@ public class Chat_Room  extends AppCompatActivity {
 
                 DatabaseReference message_root = root.child(temp_key);
                 Map<String, Object> map2 = new HashMap<String, Object>();
-                map2.put("name",user_name);
-                map2.put("msg",input_msg.getText().toString());
+                map2.put("name", user_name);
+                map2.put("msg", input_msg.getText().toString());
 
                 message_root.updateChildren(map2);
             }
@@ -110,22 +107,23 @@ public class Chat_Room  extends AppCompatActivity {
 
     }
 
-    private String chat_msg,chat_user_name;
+    private String chat_msg, chat_user_name;
 
     private void append_chat_conversation(DataSnapshot dataSnapshot) {
 
         Iterator i = dataSnapshot.getChildren().iterator();
 
-        while (i.hasNext()){
+        while (i.hasNext()) {
 
-            chat_msg = (String) ((DataSnapshot)i.next()).getValue();
-            chat_user_name = (String) ((DataSnapshot)i.next()).getValue();
+            chat_msg = (String) ((DataSnapshot) i.next()).getValue();
+            chat_user_name = (String) ((DataSnapshot) i.next()).getValue();
 
-            chat_conversation.append(chat_user_name +" : "+chat_msg +" \n\n");
+            chat_conversation.append(chat_user_name + " : " + chat_msg + " \n\n");
         }
 
 
     }
+
     public void addFriend(View view) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle("Enter name:");
@@ -151,7 +149,7 @@ public class Chat_Room  extends AppCompatActivity {
                             Map<String, Object> map1 = new HashMap<String, Object>();
                             map1.put(name, "");
                             child.updateChildren(map1);
-                            Toast.makeText(Chat_Room.this, name+" joined the chat", Toast.LENGTH_LONG).show();
+                            Toast.makeText(Chat_Room.this, name + " joined the chat", Toast.LENGTH_LONG).show();
 
                         } else {
                             Toast.makeText(Chat_Room.this, "Wrong user, try again!", Toast.LENGTH_LONG).show();
@@ -166,7 +164,6 @@ public class Chat_Room  extends AppCompatActivity {
                 });
 
 
-
             }
         });
 
@@ -179,4 +176,54 @@ public class Chat_Room  extends AppCompatActivity {
 
         builder.show();
     }
+
+
+    public void deleteChat(View view) {
+        AlertDialog.Builder builder1 = new AlertDialog.Builder(this);
+        builder1.setTitle("Are you sure?");
+
+        builder1.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            String name = Login.getUsername();
+            DatabaseReference ref = FirebaseDatabase.getInstance().getReference().child("chatrooms").child(room_name).child(name);
+
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                ref.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        System.out.println(dataSnapshot.getValue());
+                        if (dataSnapshot.getValue().equals("admin")) {
+                            //remover na firebase a room
+                            FirebaseDatabase.getInstance().getReference().child("chatrooms").child(room_name).removeValue();
+
+                            Intent intent = new Intent(Chat_Room.this, Chat.class);
+                            startActivity(intent);
+                        } else {
+                            Toast.makeText(Chat_Room.this, "Ohoh, seems like you don't have permission!", Toast.LENGTH_LONG).show();
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+
+                    }
+                });
+
+
+            }
+
+        });
+        builder1.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+
+        builder1.show();
+
+
+    }
+
+
 }

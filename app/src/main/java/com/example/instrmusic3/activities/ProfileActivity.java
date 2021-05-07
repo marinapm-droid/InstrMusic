@@ -1,17 +1,17 @@
 package com.example.instrmusic3.activities;
 
-import android.annotation.SuppressLint;
+import android.view.View;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
 import com.example.instrmusic3.auth.Login;
 import com.example.instrmusic3.fragment.HomeFragment;
@@ -28,10 +28,10 @@ import com.google.firebase.database.ValueEventListener;
 public class ProfileActivity extends AppCompatActivity {
 
     String userID;
-    TextInputLayout username, phone, password, confirmPass;
+    TextInputLayout username, phone, password;
     TextInputEditText phoneEdit, usernameEdit, passwordEdit;
     String username1, phone1;
-    Button changeBtn, deleteBtn, yesBtn, noBtn;
+    Button changeBtn, deleteBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,10 +43,8 @@ public class ProfileActivity extends AppCompatActivity {
         username = findViewById(R.id.reg_nome);
         password = findViewById(R.id.reg_password);
         deleteBtn = findViewById(R.id.delete);
-        yesBtn = findViewById(R.id.yesdelete);
-        noBtn = findViewById(R.id.nodelete);
-        yesBtn.setVisibility(View.GONE);
-        noBtn.setVisibility(View.GONE);
+
+
         phoneEdit = findViewById(R.id.edit_phone);
         usernameEdit = findViewById(R.id.edit_username);
         passwordEdit = findViewById(R.id.edit_password);
@@ -54,27 +52,6 @@ public class ProfileActivity extends AppCompatActivity {
 
         userID = Login.getUsername();
 
-
-        deleteBtn.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onClick(View v) {
-                deleteBtn.setText("Are you sure?");
-                yesBtn.setVisibility(View.VISIBLE);
-                noBtn.setVisibility(View.VISIBLE);
-            }
-        });
-
-        yesBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
-                ref.child(userID).removeValue();
-                //Sair da conta
-                Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
-                startActivity(intent);
-            }
-        });
 
         phoneEdit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -106,16 +83,6 @@ public class ProfileActivity extends AppCompatActivity {
             }
         });
 
-
-        noBtn.setOnClickListener(new View.OnClickListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onClick(View v) {
-                deleteBtn.setText("DELETE ACCOUNT");
-                yesBtn.setVisibility(View.GONE);
-                noBtn.setVisibility(View.GONE);
-            }
-        });
 
 
         DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
@@ -190,5 +157,30 @@ public class ProfileActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+
+    public void deleteAcc (View view) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Are you sure?");
+
+        builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
+                ref.child(userID).removeValue();
+                //Sair da conta
+                Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.cancel();
+            }
+        });
+
+        builder.show();
+    }
 
 }

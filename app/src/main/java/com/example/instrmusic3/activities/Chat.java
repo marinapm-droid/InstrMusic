@@ -37,7 +37,6 @@ public class Chat extends AppCompatActivity {
 
     private Button add_room;
     private EditText room_name;
-
     private ListView listView;
     private ArrayAdapter<String> arrayAdapter;
     private ArrayList<String> list_of_rooms = new ArrayList<>();
@@ -50,9 +49,9 @@ public class Chat extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        add_room = (Button) findViewById(R.id.btn_add_room);
-        room_name = (EditText) findViewById(R.id.room_name_edittext);
-        listView = (ListView) findViewById(R.id.listView);
+        add_room = findViewById(R.id.btn_add_room);
+        room_name = findViewById(R.id.room_name_edittext);
+        listView = findViewById(R.id.listView);
 
         arrayAdapter = new ArrayAdapter<String>(this, R.layout.custom_layout, list_of_rooms);
 
@@ -64,13 +63,13 @@ public class Chat extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Map<String, Object> map = new HashMap<String, Object>();
+                Map<String, Object> map = new HashMap<>();
                 map.put(room_name.getText().toString(), "");
                 root.updateChildren(map);
 
                 DatabaseReference child = FirebaseDatabase.getInstance().getReference().child("chatrooms").child(room_name.getText().toString());
-                Map<String, Object> map1 = new HashMap<String, Object>();
-                map1.put(name, "");
+                Map<String, Object> map1 = new HashMap<>();
+                map1.put(name, "admin");
                 child.updateChildren(map1);
 
             }
@@ -79,16 +78,14 @@ public class Chat extends AppCompatActivity {
         root.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
-                Set<String> set = new HashSet<String>();
+                Set<String> set = new HashSet<>();
 
                 for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
-                    System.out.println("VALUE:" + snapshot.getValue().toString());
-                    String firebase_value = snapshot.getValue().toString().replace("=", "").replace("{", "").replace("}", "").replace(" ", "");
-                    System.out.println(firebase_value);
+                    String firebase_value = snapshot.getValue().toString().replace("admin", "").replace("=", "").replace("{", "").replace("}", "").replace(" ", "");
                     List<String> values = new ArrayList<>(Arrays.asList(firebase_value.split(",")));
+                    System.out.println(values);
                     for (String value : values) {
                         if (name.equals(value)){
-                            System.out.println("Value_2 " + value);
                             set.add(snapshot.getKey());
                         }
                     }
