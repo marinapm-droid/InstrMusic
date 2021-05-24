@@ -73,7 +73,7 @@ public class EffectsFragment extends Fragment {
                                 HomePage.setEffect(name);
                                 args1.add(name);
                                 OSCPortOut sender1 = oscConfiguration.getOscPort();
-                                String IP = Login.getUsername();
+                                String IP = HomePage.getLocalIpAddress();
                                 OSCMessage msg1 = new OSCMessage("/effect" + IP, args1);
                                 try {
                                     sender1.send(msg1);
@@ -100,7 +100,7 @@ public class EffectsFragment extends Fragment {
                 HomePage.setEffect(name);
                 args1.add(name);
                 OSCPortOut sender = oscConfiguration.getOscPort();
-                String IP = Login.getUsername();
+                String IP = HomePage.getLocalIpAddress();
 
                 OSCMessage msg1 = new OSCMessage("/effect" + IP, args1);
                 try {
