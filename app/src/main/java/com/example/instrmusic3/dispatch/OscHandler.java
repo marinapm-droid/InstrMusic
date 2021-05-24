@@ -48,7 +48,7 @@ public class OscHandler extends Handler {
         if (stringValue != null) {
             changes.add(stringValue);
         }
-        String IP = Login.getUsername();
+        String IP = HomePage.getLocalIpAddress();
 
         //definir mensagem OSC a enviar
         //nome do sensor + IP do tlm + valores do sensor
