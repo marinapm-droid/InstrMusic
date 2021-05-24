@@ -220,6 +220,23 @@ public class HomeFragment extends Fragment {
     }
 
     public void sendHomeMsg() {
+        IP = Login.getUsername();
+        OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
+        communication.start();
+        OscHandler handler = communication.getOscHandler();
+        OscConfiguration oscConfiguration = OscConfiguration.getInstance();
+        OSCPortOut sender = oscConfiguration.getOscPort();
+        List<Object> args = new ArrayList<Object>(1);
+        args.add(IP);
+        OSCMessage msg = new OSCMessage("/home", args);
+        try {
+            sender.send(msg);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void sendGO() {
         String username = Login.getUsername();
         IP = HomePage.getLocalIpAddress();
         OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
@@ -230,23 +247,6 @@ public class HomeFragment extends Fragment {
         List<Object> args = new ArrayList<Object>(1);
         args.add(IP);
         args.add(username);
-        OSCMessage msg = new OSCMessage("/home", args);
-        try {
-            sender.send(msg);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    public void sendGO() {
-        IP = Login.getUsername();
-        OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
-        communication.start();
-        OscHandler handler = communication.getOscHandler();
-        OscConfiguration oscConfiguration = OscConfiguration.getInstance();
-        OSCPortOut sender = oscConfiguration.getOscPort();
-        List<Object> args = new ArrayList<Object>(1);
-        args.add(IP);
         OSCMessage msg = new OSCMessage("/GO", args);
         try {
             sender.send(msg);
