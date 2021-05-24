@@ -6,6 +6,7 @@ import android.os.Looper;
 import android.os.Message;
 
 import com.example.instrmusic3.HomePage;
+import com.example.instrmusic3.auth.Login;
 import com.illposed.osc.OSCMessage;
 
 import java.io.IOException;
@@ -47,7 +48,7 @@ public class OscHandler extends Handler {
         if (stringValue != null) {
             changes.add(stringValue);
         }
-        String IP = HomePage.getLocalIpAddress();
+        String IP = Login.getUsername();
 
         //definir mensagem OSC a enviar
         //nome do sensor + IP do tlm + valores do sensor

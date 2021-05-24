@@ -1,4 +1,4 @@
-package com.example.instrmusic3.auth;
+ package com.example.instrmusic3.auth;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;

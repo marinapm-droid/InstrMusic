@@ -16,6 +16,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
+import com.example.instrmusic3.auth.Login;
 import com.example.instrmusic3.sounds.SoundsModel;
 import com.example.instrmusic3.dispatch.Bundling;
 import com.example.instrmusic3.dispatch.OscCommunication;
@@ -79,7 +80,7 @@ public class SoundFragment extends Fragment {
                                 List<Object> args = new ArrayList<Object>(1);
                                 HomePage.setSound(name);
                                 args.add(name);
-                                String IP = HomePage.getLocalIpAddress();
+                                String IP = Login.getUsername();
                                 OSCPortOut sender1 = oscConfiguration.getOscPort();
                                 OSCMessage msg = new OSCMessage("/sound" + IP, args);
                                 try {
@@ -108,7 +109,7 @@ public class SoundFragment extends Fragment {
                     List<Object> args = new ArrayList<Object>(1);
                     HomePage.setSound(name);
                     args.add(name);
-                    String IP = HomePage.getLocalIpAddress();
+                    String IP = Login.getUsername();
                     OSCPortOut sender = oscConfiguration.getOscPort();
                     OSCMessage msg = new OSCMessage("/sound" + IP, args);
                     try {

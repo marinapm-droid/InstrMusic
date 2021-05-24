@@ -17,6 +17,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.instrmusic3.Effects.EffectsModel;
 import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
+import com.example.instrmusic3.auth.Login;
 import com.example.instrmusic3.dispatch.Bundling;
 import com.example.instrmusic3.dispatch.OscCommunication;
 import com.example.instrmusic3.dispatch.OscConfiguration;
@@ -72,7 +73,7 @@ public class EffectsFragment extends Fragment {
                                 HomePage.setEffect(name);
                                 args1.add(name);
                                 OSCPortOut sender1 = oscConfiguration.getOscPort();
-                                String IP = HomePage.getLocalIpAddress();
+                                String IP = Login.getUsername();
                                 OSCMessage msg1 = new OSCMessage("/effect" + IP, args1);
                                 try {
                                     sender1.send(msg1);
@@ -99,7 +100,7 @@ public class EffectsFragment extends Fragment {
                 HomePage.setEffect(name);
                 args1.add(name);
                 OSCPortOut sender = oscConfiguration.getOscPort();
-                String IP = HomePage.getLocalIpAddress();
+                String IP = Login.getUsername();
 
                 OSCMessage msg1 = new OSCMessage("/effect" + IP, args1);
                 try {
