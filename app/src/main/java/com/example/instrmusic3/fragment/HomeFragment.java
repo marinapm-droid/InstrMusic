@@ -220,7 +220,8 @@ public class HomeFragment extends Fragment {
     }
 
     public void sendHomeMsg() {
-        IP = Login.getUsername();
+        String username = Login.getUsername();
+        IP = HomePage.getLocalIpAddress();
         OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
         communication.start();
         OscHandler handler = communication.getOscHandler();
@@ -228,6 +229,7 @@ public class HomeFragment extends Fragment {
         OSCPortOut sender = oscConfiguration.getOscPort();
         List<Object> args = new ArrayList<Object>(1);
         args.add(IP);
+        args.add(username);
         OSCMessage msg = new OSCMessage("/home", args);
         try {
             sender.send(msg);
