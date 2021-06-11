@@ -166,7 +166,7 @@ public class ProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
-                ref.child(userID).child("favorites").child(num1).removeValue();
+                ref.child(userID).removeValue();
                 //Sair da conta
                 Intent intent = new Intent(ProfileActivity.this, MainActivity.class);
                 startActivity(intent);
