@@ -1,6 +1,7 @@
 package com.example.instrmusic3;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentManager;
@@ -9,6 +10,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -33,9 +35,11 @@ import android.view.Surface;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 
 import com.example.instrmusic3.activities.AboutActivity;
 import com.example.instrmusic3.activities.Chat;
+import com.example.instrmusic3.activities.Chat_Room;
 import com.example.instrmusic3.activities.MainActivity;
 import com.example.instrmusic3.activities.ProfileActivity;
 import com.example.instrmusic3.activities.SettingsActivity;
@@ -140,6 +144,31 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         transaction1.addToBackStack("addB");
         transaction1.commit();
         transaction1.hide(f2);
+
+
+        String userID = Login.getUsername();
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference("users");
+        Query checkUser = ref.orderByChild("nome").equalTo(userID);
+        checkUser.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                num = dataSnapshot.child(userID).child("favorites").getChildrenCount();
+                if (num==0){
+                    String numString = String.valueOf(num);
+                    UserHelperClass helperClass = new UserHelperClass();
+                    helperClass.UserHelperClass1("Accelerometer", "Tremolo", "Cello");
+                    mDatabase = FirebaseDatabase.getInstance();
+                    DatabaseReference myRef = mDatabase.getReference("users");
+                    myRef.child(userID).child("favorites").child(numString).setValue(helperClass);
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+            }
+        });
+
     }
 
     public List<Parameters> GetSensors(SensorManager sensorManager) {
@@ -567,6 +596,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
             onOff = 0;
         }
     }
+
 
     @Override
     public void onBackPressed() {
