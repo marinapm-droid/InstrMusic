@@ -100,6 +100,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     FirebaseDatabase mDatabase;
     FragmentManager manager;
 
+
     public Settings getSettings() {
         return this.settings;
     }
@@ -524,7 +525,6 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     }
 
     public void onStartSensors(View view) {
-
         Fragment fragment = manager.findFragmentByTag("B");
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.show(fragment);
@@ -534,8 +534,16 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     }
 
 
-    public void onStartFavorites(View view) {
+    public static void Sounds() {
+        FragmentManager manager1 = new FragmentActivity().getSupportFragmentManager();
+        Fragment fragment9 = manager1.findFragmentByTag("C");
+        FragmentTransaction transaction5 = manager1.beginTransaction();
+        transaction5.remove(fragment9);
+        transaction5.commit();
+    }
 
+
+    public void onStartFavorites(View view) {
         StartUpFavFragment f6 = new StartUpFavFragment();
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.add(R.id.container, f6, "G");

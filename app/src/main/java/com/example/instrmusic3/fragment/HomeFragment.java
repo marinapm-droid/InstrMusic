@@ -1,8 +1,10 @@
 package com.example.instrmusic3.fragment;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.StrictMode;
+import android.preference.PreferenceManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +20,9 @@ import com.example.instrmusic3.auth.Login;
 import com.example.instrmusic3.auth.UserHelperClass;
 import com.example.instrmusic3.dispatch.OscCommunication;
 import com.example.instrmusic3.dispatch.OscConfiguration;
+import com.example.instrmusic3.dispatch.OscDispatcher;
 import com.example.instrmusic3.dispatch.OscHandler;
+import com.example.instrmusic3.dispatch.OscReceiveConfigSound;
 import com.example.instrmusic3.sensors.Settings;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -28,6 +32,8 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.illposed.osc.OSCMessage;
 import com.illposed.osc.OSCPortOut;
+
+import org.sensors2.common.sensors.SensorCommunication;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -158,6 +164,7 @@ public class HomeFragment extends Fragment {
                     OscConfiguration oscConfiguration = OscConfiguration.getInstance();
                     OSCPortOut sender = oscConfiguration.getOscPort();
                     IP = HomePage.getLocalIpAddress();
+                    HomePage.Sounds();
                     OSCMessage msg = new OSCMessage("/stopRecord" + IP);
                     try {
                         sender.send(msg);
