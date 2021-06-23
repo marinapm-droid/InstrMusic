@@ -164,7 +164,7 @@ public class HomeFragment extends Fragment {
                     OscConfiguration oscConfiguration = OscConfiguration.getInstance();
                     OSCPortOut sender = oscConfiguration.getOscPort();
                     IP = HomePage.getLocalIpAddress();
-                    HomePage.setRecordOff();
+                    HomePage.Sounds();
                     OSCMessage msg = new OSCMessage("/stopRecord" + IP);
                     try {
                         sender.send(msg);
