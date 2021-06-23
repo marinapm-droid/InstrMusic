@@ -99,7 +99,6 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     long num;
     FirebaseDatabase mDatabase;
     static FragmentManager manager;
-    static int recordOff = 0;
 
 
     public Settings getSettings() {
