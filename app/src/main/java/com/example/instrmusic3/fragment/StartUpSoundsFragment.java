@@ -1,4 +1,4 @@
-package com.example.instrmusic3.fragment;
+ package com.example.instrmusic3.fragment;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -33,22 +33,25 @@ public class StartUpSoundsFragment extends Fragment {
         HomePage activity = (HomePage) getActivity();
         assert activity != null;
         List<String> soundList = ParametersSounds.getSounds();
+        System.out.println(soundList);
         for (String sound : soundList) {
+            System.out.println(sound);
             this.CreateSoundFragments(sound);
         }
+        HomePage.setCount1(0);
         return v;
     }
 
     public void CreateSoundFragments(String sounds) {
-        FragmentManager manager = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
-        SoundFragment groupFragment = (SoundFragment) manager.findFragmentByTag(sounds);
-        if (groupFragment == null) {
+        FragmentManager manager1 = Objects.requireNonNull(getActivity()).getSupportFragmentManager();
+        SoundFragment groupFragment = (SoundFragment) manager1.findFragmentByTag(sounds);
+        System.out.println("count" + HomePage.getCount1());
+        if (groupFragment == null || HomePage.getCount1() == 1) {
+            System.out.println("sons" + sounds);
             groupFragment = createFragment(sounds);
-
-            FragmentTransaction transaction = manager.beginTransaction();
+            FragmentTransaction transaction = manager1.beginTransaction();
             transaction.add(R.id.sounds_group, groupFragment, sounds);
             transaction.commit();
-
         }
     }
 

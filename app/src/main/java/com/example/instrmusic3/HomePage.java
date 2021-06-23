@@ -95,7 +95,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     static String effect, sound, sensor;
     String fragmento;
     int onOff = 0;
-    int count;
+    static int count;
     long num;
     FirebaseDatabase mDatabase;
     static FragmentManager manager;
@@ -457,16 +457,27 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         }
         fragmento = "F";
     }
-
+    static int count1 = 0;
+    public static int getCount1() {
+        return count1;
+    }
+    public static void setCount1(int count) {
+        count1 = count;
+    }
     public void onStartSounds(View view) {
-        if (manager.findFragmentByTag("C") == null) {
+        System.out.println("entrei aqui");
+        if (manager.findFragmentByTag("C") == null || count == 1) {
+            setCount1(1);
+            System.out.println("entrou no if");
             StartUpSoundsFragment f4 = new StartUpSoundsFragment();
+            System.out.println("getCount" + getCount());
             FragmentTransaction transaction = manager.beginTransaction();
             transaction.add(R.id.container, f4, "C");
             transaction.addToBackStack("addC");
             transaction.commit();
-
+            count = 0;
         } else {
+            System.out.println("Entrou no else");
             Fragment fragment = manager.findFragmentByTag("C");
             FragmentTransaction transaction = manager.beginTransaction();
             assert fragment != null;
@@ -539,6 +550,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         FragmentTransaction transaction5 = manager.beginTransaction();
         transaction5.remove(fragment9);
         transaction5.commit();
+        count = 1;
     }
 
 
@@ -565,6 +577,9 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
 
     public static String getSound() {
         return sound;
+    }
+    public static int getCount() {
+        return count;
     }
 
     public static String getEffect() {
