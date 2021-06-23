@@ -13,8 +13,14 @@ import com.example.instrmusic3.HomePage;
 import com.example.instrmusic3.R;
 
 import com.example.instrmusic3.dispatch.Bundling;
+import com.example.instrmusic3.dispatch.OscCommunication;
+import com.example.instrmusic3.dispatch.OscConfiguration;
+import com.example.instrmusic3.dispatch.OscHandler;
 import com.example.instrmusic3.sounds.ParametersSounds;
+import com.illposed.osc.OSCMessage;
+import com.illposed.osc.OSCPortOut;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,6 +31,7 @@ public class StartUpSoundsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.activity_sounds, container, false);
         HomePage activity = (HomePage) getActivity();
+        sendHomeMsg();
         assert activity != null;
         //ParametersEffects parametersEffects = new ParametersEffects();
         List<String> soundList = ParametersSounds.getSounds();
@@ -55,5 +62,24 @@ public class StartUpSoundsFragment extends Fragment {
         groupFragment.setArguments(args);
         return groupFragment;
     }
+
+    public void sendHomeMsg() {
+        String IP = HomePage.getLocalIpAddress();
+        OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
+        communication.start();
+        OscHandler handler = communication.getOscHandler();
+        OscConfiguration oscConfiguration = OscConfiguration.getInstance();
+        OSCPortOut sender = oscConfiguration.getOscPort();
+        List<Object> args = new ArrayList<Object>(1);
+        args.add(IP);
+        OSCMessage msg = new OSCMessage("/home", args);
+        try {
+            sender.send(msg);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 }

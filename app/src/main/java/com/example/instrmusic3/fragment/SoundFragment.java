@@ -56,7 +56,6 @@ public class SoundFragment extends Fragment {
         View v = inflater.inflate(R.layout.sounds, null);
         TextView groupName = v.findViewById(R.id.group_name);
         setName(name);
-        sendHomeMsg();
 
         groupName.setText(name);
 
@@ -131,23 +130,6 @@ public class SoundFragment extends Fragment {
         return v;
     }
 
-
-    public void sendHomeMsg() {
-        String IP = HomePage.getLocalIpAddress();
-        OscCommunication communication = new OscCommunication("OSC dispatcher thread", Thread.MIN_PRIORITY);
-        communication.start();
-        OscHandler handler = communication.getOscHandler();
-        OscConfiguration oscConfiguration = OscConfiguration.getInstance();
-        OSCPortOut sender = oscConfiguration.getOscPort();
-        List<Object> args = new ArrayList<Object>(1);
-        args.add(IP);
-        OSCMessage msg = new OSCMessage("/home", args);
-        try {
-            sender.send(msg);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 
 
     @Override
