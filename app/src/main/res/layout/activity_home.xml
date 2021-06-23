@@ -46,12 +46,14 @@
         android:background="@drawable/outline_radio_button_checked_24"
         android:textOff=" "
         android:textOn=" "
+        android:onClick="Sounds"
         app:layout_constraintBottom_toBottomOf="@+id/active"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.078"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/active"
-        app:layout_constraintVertical_bias="0.431" />
+        app:layout_constraintVertical_bias="0.431"
+        />
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/lottie"

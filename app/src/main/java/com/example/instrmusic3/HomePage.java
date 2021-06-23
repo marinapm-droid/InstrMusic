@@ -99,6 +99,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
     long num;
     FirebaseDatabase mDatabase;
     FragmentManager manager;
+    static int recordOff = 0;
 
 
     public Settings getSettings() {
@@ -154,7 +155,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 num = dataSnapshot.child(userID).child("favorites").getChildrenCount();
-                if (num==0){
+                if (num == 0) {
                     String numString = String.valueOf(num);
                     UserHelperClass helperClass = new UserHelperClass();
                     helperClass.UserHelperClass1("Accelerometer", "Tremolo", "Cello");
@@ -496,9 +497,9 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
 
     public void onDestroy() {
         super.onDestroy();
-        sensor=null;
-        effect=null;
-        sound=null;
+        sensor = null;
+        effect = null;
+        sound = null;
         Login.setUsername(null);
         FavoritesSelectedParameters.setEffectSelected(null, null, null);
     }
@@ -533,13 +534,18 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
         fragmento = "B";
     }
 
+    public static void setRecordOff(){
+        recordOff=1;
+    }
 
-    public static void Sounds() {
-        FragmentManager manager1 = new FragmentActivity().getSupportFragmentManager();
-        Fragment fragment9 = manager1.findFragmentByTag("C");
-        FragmentTransaction transaction5 = manager1.beginTransaction();
-        transaction5.remove(fragment9);
-        transaction5.commit();
+    public void Sounds(View view) {
+        if (recordOff==1) {
+            Fragment fragment9 = manager.findFragmentByTag("C");
+            FragmentTransaction transaction5 = manager.beginTransaction();
+            transaction5.remove(fragment9);
+            transaction5.commit();
+            recordOff=0;
+        }
     }
 
 
