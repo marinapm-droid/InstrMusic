@@ -26,7 +26,7 @@ public class OscReceiveConfigSound {
         message = message1;
     }
     public static String getMessage(){
-        message = message.replace("]", "").replace("[", "").replace("List", "").replace(" ", "");
+        message = message.replace("]", "").replace("[", "").replace("List", "").replace(" ", "").replace("\"", "");
         return message;
     }
 }
