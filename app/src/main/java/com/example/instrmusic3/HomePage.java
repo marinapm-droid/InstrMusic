@@ -160,7 +160,7 @@ public class HomePage extends FragmentActivity implements SensorActivity, NfcAct
                     helperClass.UserHelperClass1("Accelerometer", "Tremolo", "Cello");
                     mDatabase = FirebaseDatabase.getInstance();
                     DatabaseReference myRef = mDatabase.getReference("users");
-                    myRef.child(userID).child("favorites").child(numString).setValue(helperClass);
+                    myRef.child(userID).child("favorites").child("1").setValue(helperClass);
                 }
 
             }
